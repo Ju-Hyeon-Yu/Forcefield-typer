@@ -83,6 +83,22 @@ and all rule tables are embedded, about 4.5 MB).
    charges. Without a file, a 3D starting structure is built in the browser — minimize it before MD.
 3. Press **타입 할당**. The 3D viewer labels every atom, the type cards show the count, atoms and description of each
    type (click to highlight), and the `.lt` text can be copied or downloaded.
+4. Click a type card, an atom in the 3D viewer or a row of the atom list to open the **type explanation** panel, which
+   helps check whether an assigned type is right.
+   - **Meaning**: the original description from the force-field file (gaff2.lt, oplsaa2024.lt) plus a Korean
+     explanation. DREIDING labels are decoded part by part (hybridization, `_b1`/`_b2` bond-order flags, `_dN`,
+     `_hd`/`_ha`, equilibrium angle).
+   - **Basis**: the rule that chose the type. GAFF2 shows the first matching ATOMTYPE_GFF2.DEF line with a decoding,
+     the earlier rules of the same element that did not match, and the conjugation-pair (cc/cd …) and c5/c6
+     adjustments. OPLS-AA shows the foyer SMARTS pattern as a tree, the overriding rules, the oplsaa2024.lt number
+     mapping and the OPLS/2020 pairs. DREIDING states the branches the typer took (neighbor count, aromaticity,
+     conjugation, hydrogen-bond flag).
+   - **Actual environment**: for each atom, its neighbors (bond order and neighbor type), attached H count, formal
+     charge and smallest ring size. DREIDING compares each bond's SMILES order with the order moltemplate gives the
+     label pair (✓/✗); GAFF2 shows antechamber's ring (AR1–AR5) and bond-type perception; OPLS-AA shows the foyer
+     rules that matched or were overridden and foyer's ring perception. Clicking a neighbor jumps to that atom.
+   - Re-running the same SMILES with another force field keeps explaining the same atom. The atom list has a
+     neighbor (type) column.
 
 The JavaScript typers are ports of the Python ones; tests confirm identical types, warnings, charges and errors for
 the reference molecule sets below, and identical `.lt` files for mol2 inputs with shuffled atom order.

@@ -67,6 +67,9 @@
       this.colorMode = "type";      // type | element
       this.selected = new Set();    // 강조할 타입
       this.hover = -1;
+      this.picked = -1;             // 눌러서 설명을 보고 있는 원자
+      this.onPick = null;           // 원자를 눌렀을 때 부를 함수 (원자 번호)
+      this.describe = null;         // 마우스 정보에 넣을 타입 설명 (라벨 → 글)
       this.typeColor = new Map();
       this._bind();
       new ResizeObserver(() => this.resize()).observe(canvas.parentElement);
@@ -80,7 +83,14 @@
       mol.bonds.forEach(([i, j]) => { this.nbrs[i].push(j); this.nbrs[j].push(i); });
       this.typeColor = new Map(typeOrder.map((t, k) => [t, TYPE_PALETTE[k % TYPE_PALETTE.length]]));
       this.selected.clear();
+      this.picked = -1;
       this.resetView();
+    }
+
+    setPicked(i) {
+      if (i === this.picked) return;
+      this.picked = i;
+      this.draw();
     }
 
     colorOf(i) {
@@ -175,6 +185,12 @@
           ctx.strokeStyle = "#FFFFFF"; ctx.lineWidth = 2;
           ctx.beginPath(); ctx.arc(P[i][0], P[i][1], r + 2, 0, 2 * Math.PI); ctx.stroke();
         }
+        if (i === this.picked) {
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = "#7FE6EE"; ctx.lineWidth = 2.5; ctx.setLineDash([5, 3]);
+          ctx.beginPath(); ctx.arc(P[i][0], P[i][1], r + 7, 0, 2 * Math.PI); ctx.stroke();
+          ctx.setLineDash([]);
+        }
       }
       ctx.globalAlpha = 1;
 
@@ -221,12 +237,13 @@
 
     _bind() {
       const cv = this.canvas, pts = new Map();
-      let last = null, pinch = null;
+      let last = null, pinch = null, tap = null;   // tap: 거의 움직이지 않은 한 번 누름 → 원자 고르기
       cv.addEventListener("contextmenu", e => e.preventDefault());
       cv.addEventListener("pointerdown", e => {
         cv.setPointerCapture(e.pointerId);
         pts.set(e.pointerId, [e.offsetX, e.offsetY]);
         last = { x: e.offsetX, y: e.offsetY, pan: e.shiftKey || e.button === 1 || e.button === 2 };
+        tap = pts.size === 1 && e.button === 0 && !e.shiftKey ? { id: e.pointerId, x: e.offsetX, y: e.offsetY } : null;
         if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch = { d: Math.hypot(a[0] - b[0], a[1] - b[1]), z: this.zoom }; }
       });
       cv.addEventListener("pointermove", e => {
@@ -238,6 +255,7 @@
           this.draw();
           return;
         }
+        if (tap && Math.hypot(e.offsetX - tap.x, e.offsetY - tap.y) > 4) tap = null;
         if (last && pts.size === 1) {
           const dx = e.offsetX - last.x, dy = e.offsetY - last.y;
           if (last.pan) { this.pan[0] += dx; this.pan[1] += dy; }
@@ -250,8 +268,15 @@
         this._setHover(this._pick(e.offsetX, e.offsetY), e.offsetX, e.offsetY);
       });
       const end = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) last = null; };
-      cv.addEventListener("pointerup", end);
-      cv.addEventListener("pointercancel", end);
+      cv.addEventListener("pointerup", e => {
+        const t = tap && tap.id === e.pointerId && pts.size === 1 ? tap : null;
+        tap = null;
+        end(e);
+        if (!t || !this.mol) return;
+        const i = this._pick(e.offsetX, e.offsetY);
+        if (i >= 0 && this.onPick) this.onPick(i);
+      });
+      cv.addEventListener("pointercancel", e => { tap = null; end(e); });
       cv.addEventListener("pointerleave", () => this._setHover(-1));
       cv.addEventListener("wheel", e => {
         if (!this.mol) return;
@@ -280,10 +305,22 @@
       const meta = document.createElement("span");
       meta.textContent = `원자 ${i + 1} (${a.name}), 조각 ${a.frag}, 전하 ${a.q.toFixed(4)}`;
       this.tip.append(head, meta);
+      const desc = this.describe ? this.describe(a.label) : "";
+      if (desc) {
+        const d = document.createElement("span");
+        d.className = "d";
+        d.textContent = desc;
+        this.tip.append(d);
+      }
       if (this.mol.flagged.has(i)) {
         const w = document.createElement("em");
         w.textContent = "경고 대상 원자";
         this.tip.append(w);
+      }
+      if (this.onPick) {
+        const h = document.createElement("small");
+        h.textContent = "눌러서 타입 설명 보기";
+        this.tip.append(h);
       }
       this.tip.hidden = false;
       const tw = this.tip.offsetWidth, th = this.tip.offsetHeight;

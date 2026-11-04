@@ -63,6 +63,7 @@ def main():
         "/*LTRULES_JS*/": src("ltrules.js"),
         "/*GAFF2_JS*/": src("gaff2.js"),
         "/*FOYER_JS*/": src("foyer.js"),
+        "/*EXPLAIN_JS*/": src("explain.js"),
         "/*IO_JS*/": src("io.js"),
         "/*GEOM_JS*/": src("geom.js"),
         "/*PIPELINE_JS*/": src("pipeline.js"),

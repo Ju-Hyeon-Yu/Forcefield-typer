@@ -145,6 +145,68 @@ const body = s => s.split("\n").slice(1).join("\n").replace(/^# 전하: .*$/m, "
     assert.strictEqual(fs.readFileSync(await dl.path(), "utf8"), await page.inputValue("#lt"));
   });
 
+  await test("타입 설명: 카드·원자 목록·이웃·3D 보기에서 열고, 역장을 바꿔도 같은 원자를 설명, 닫기", async () => {
+    const head = () => page.textContent("#typeDetailIn h2");
+    const panel = () => page.textContent("#typeDetailIn");
+    await page.locator(".ffsel label", { hasText: "DREIDING" }).click();
+    if (await page.locator("#fileChip").isVisible()) await page.click("#clearFile");
+    await page.fill("#smiles", "CC(=O)Nc1ccccc1");
+    await page.click("#run");
+    assert.ok(await page.locator("#typeDetail").isHidden(), "처음에는 닫혀 있음");
+    await page.click('.tcard[data-type="N_2_b1_d2_hd"]');
+    assert.strictEqual(await head(), "N_2_b1_d2_hd");
+    let t = await panel();
+    assert.ok(t.includes("_hd: 수소결합 주개") && t.includes("판정 근거") && t.includes("아마이드·아닐린형"), t);
+    assert.strictEqual(await page.locator(".main.inspect").count(), 1);
+    assert.strictEqual(await page.locator(".tcard.current").count(), 1);
+    // 원자 목록: 이웃 칸, 줄을 누르면 그 원자
+    if (!(await page.$eval("#atomDetails", d => d.open))) await page.click("#atomSummary");
+    assert.strictEqual(await page.textContent("#atomRows tr:nth-child(2) td.nbs"), "–C1 C_3, =O3 O_2_ha, –N4 N_2_b1_d2_hd");
+    await page.click("#atomRows tr:nth-child(3)");
+    assert.strictEqual(await head(), "O_2_ha");
+    assert.strictEqual(await page.textContent(".td-atom.picked .td-aname"), "O3");
+    assert.strictEqual(await page.locator("#atomRows tr.picked").count(), 1);
+    // 이웃 단추로 넘어가기
+    await page.locator(".td-atom.picked .nb", { hasText: "C2" }).click();
+    assert.strictEqual(await head(), "C_2_b1");
+    assert.ok((await panel()).includes("C2=O3 이중 ✓"));
+    // 역장을 바꾸면 같은 원자(C2)의 새 타입
+    await page.locator(".ffsel label", { hasText: "GAFF2" }).click();
+    assert.strictEqual(await head(), "c");
+    t = await panel();
+    assert.ok(t.includes("ATD c * 6 3 * * [1DB,0DL] (XA1)") && t.includes("카보닐(C=O)의 sp2 C") && t.includes("Sp2 C carbonyl group"), t);
+    assert.strictEqual(await page.textContent(".td-atom.picked .td-aname"), "C2");
+    await page.locator(".ffsel label", { hasText: "OPLS-AA" }).click();
+    assert.strictEqual(await head(), "235");
+    t = await panel();
+    assert.ok(t.includes("[C;X3]([O;X1])[N;X3]") && t.includes("└ [2] O, 이웃 1개"), t);
+    // 3D 보기에서 원자 누르기
+    const box = await page.locator("#view").boundingBox();
+    let hit = null;
+    for (let gy = 0.15; gy <= 0.85 && !hit; gy += 0.03) {
+      for (let gx = 0.05; gx <= 0.95 && !hit; gx += 0.015) {
+        const x = box.x + box.width * gx, y = box.y + box.height * gy;
+        await page.mouse.move(x, y);
+        if (await page.locator("#tip").isVisible()) hit = [x, y, await page.textContent("#tip strong")];
+      }
+    }
+    assert.ok(hit, "원자를 찾지 못함");
+    assert.ok((await page.textContent("#tip")).includes("눌러서 타입 설명 보기"));
+    await page.mouse.click(hit[0], hit[1]);
+    assert.strictEqual(await head(), hit[2]);
+    assert.strictEqual(await page.locator(".td-atom.picked").count(), 1);
+    // 닫기
+    await page.click(".td-close");
+    assert.ok(await page.locator("#typeDetail").isHidden());
+    assert.strictEqual(await page.locator(".main.inspect").count(), 0);
+    // 모바일 폭 확인용으로 긴 설명(패턴 나무)을 열어 둠
+    await page.fill("#smiles", "c1ccncc1");
+    await page.click("#run");
+    await page.click('.tcard[data-type="520"]');
+    assert.ok((await panel()).includes("고리 닫기: [1] 과 [6] 도 결합"));
+    await page.locator(".ffsel label", { hasText: "DREIDING" }).click();
+  });
+
   await test("모바일 폭에서 가로 스크롤 없음", async () => {
     await page.setViewportSize({ width: 390, height: 900 });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth) <= 390);

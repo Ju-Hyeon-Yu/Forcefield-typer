@@ -9,6 +9,7 @@ const IO = require("../src/io.js");
 const P = require("../src/pipeline.js");
 const G2 = require("../src/gaff2.js");
 const FY = require("../src/foyer.js");
+const E = require("../src/explain.js");
 const initRDKit = require("@rdkit/rdkit");
 
 const HERE = __dirname;
@@ -214,6 +215,88 @@ const test = async (name, fn) => {
       }
     }
     assert.ok(/\$mol:f3/.test(r.lt));
+  });
+
+  // ---------------------------------------------------------------- 타입 설명 (뜻·판정 근거·실제 환경)
+  const allSmiles = [GAFF2_SMILES, path.join(HERE, "smiles_set.txt")].flatMap(f => fs.readFileSync(f, "utf8").split("\n"))
+    .map(l => l.trim().split(/\s+/)[0]).filter(x => x && !x.startsWith("#"));
+
+  await test("타입 설명: 세 역장·분자 500여 개에서 오류 없이 만들고, 모든 원자를 판정 근거·실제 환경에 한 번씩 담음", () => {
+    let n = 0;
+    for (const name of ["dreiding", "gaff2", "oplsaa"]) {
+      for (const smi of allSmiles) {
+        let r;
+        try { r = P.run(R, ffs, { smiles: smi, ff: name }); } catch (e) {
+          if (e instanceof T.TypingError || e instanceof IO.InputError) continue;
+          throw e;
+        }
+        const inGroups = new Array(r.labels.length).fill(0), inAtoms = new Array(r.labels.length).fill(0);
+        for (const t of new Set(r.labels)) {
+          const x = E.explainType(r, t);
+          x.groups.forEach(g => g.atoms.forEach(i => { inGroups[i] += 1; }));
+          x.atoms.forEach(a => { inAtoms[a.i] += 1; assert.strictEqual(r.labels[a.i], t); });
+          const text = E.toText(x).join("\n");
+          assert.ok(!/undefined|NaN|\[object/.test(text), `${name} ${smi} ${t}: ${text.slice(0, 200)}`);
+        }
+        assert.ok(inGroups.every(c => c === 1) && inAtoms.every(c => c === 1), `${name} ${smi}`);
+        n += 1;
+      }
+    }
+    assert.ok(n > 1100, `설명을 만든 분자 ${n}개`);
+  });
+
+  await test("타입 설명: DREIDING 이유가 타이퍼 갈림길과 같고, GAFF2 근거가 실제로 처음 맞은 DEF 규칙", () => {
+    const PAIR = { cc: "cd", ce: "cf", cg: "ch", pc: "pd", pe: "pf", nc: "nd", ne: "nf", cp: "cq" };
+    for (const smi of allSmiles) {
+      let r;
+      try { r = P.run(R, ffs, { smiles: smi }); } catch (e) { if (!(e instanceof T.TypingError)) throw e; }
+      if (r) {
+        const [g] = T.dearomatizeExocyclic(r.graph);
+        for (const t of new Set(r.labels)) {
+          for (const gr of E.explainType(r, t).groups) {
+            const text = gr.lines.join(" | ");
+            for (const i of gr.atoms) {
+              const eh = T.baseLabel(g, i, [])[0], hf = T.hFlag(g, i);
+              assert.ok(text.includes(eh) || (eh === "H" && text.includes("H_HB")), `${smi} 원자 ${i + 1}: ${text}`);
+              assert.ok(hf ? text.includes(hf) : !/→ _h[ad]/.test(text), `${smi} 원자 ${i + 1} 수소결합 플래그: ${text}`);
+            }
+          }
+        }
+      }
+      try { r = P.run(R, ffs, { smiles: smi, ff: "gaff2" }); } catch (e) { if (!(e instanceof T.TypingError)) throw e; continue; }
+      r.labels.forEach((t, i) => {
+        const pre = r.info.preTypes[i], rule = ffs.gaff2.def.rules[r.info.ruleIdx[i]];
+        assert.strictEqual(rule.type, pre, `${smi} 원자 ${i + 1}`);
+        assert.ok(t === pre || PAIR[pre] === t || (r.info.c56.includes(i) && t === "c3"), `${smi} 원자 ${i + 1}: ${pre}→${t}`);
+      });
+    }
+  });
+
+  await test("타입 설명: 대표 분자의 내용 (결합 차수 점검·DEF 규칙 풀이·c5/c6·공액 짝·foyer 패턴·OPLS/2020 짝)", () => {
+    const txt = (smi, ff, t) => E.toText(E.explainType(P.run(R, ffs, { smiles: smi, ff }), t)).join("\n");
+    let x = txt("CC(=O)Nc1ccccc1", "dreiding", "C_2_b1");
+    assert.ok(x.includes("C2=O3 이중 ✓") && x.includes("C2–N4 단일 ✓"), x);
+    assert.ok(x.includes("C_2 계열과 결합할 때 moltemplate 가 쓰는 차수: C_2 → 이중, C_2_b1 → 단일, C_2_b2 → 단일"), x);
+    x = txt("CC(=O)Nc1ccccc1", "dreiding", "N_2_b1_d2_hd");
+    assert.ok(x.includes("아마이드·아닐린형") && x.includes("_d2: 이웃 3개용 라벨") && x.includes("→ _hd"), x);
+    const r = P.run(R, ffs, { smiles: "CC(=O)Nc1ccccc1", ff: "gaff2" });
+    const c = E.explainType(r, "c");
+    assert.strictEqual(c.groups[0].code, "ATD c * 6 3 * * [1DB,0DL] (XA1)");
+    assert.strictEqual(c.meaning.original, "Sp2 C carbonyl group");
+    x = E.toText(c).join("\n");
+    assert.ok(x.includes("이중결합(방향족 제외) 1개, 비편재 결합 없음") && x.includes("이 원자 → XA(O·S 중 하나), 이웃 1개"), x);
+    assert.ok(E.envText(E.environment(r, 4)).join(" ").includes("가장 작은 고리 6원, 방향족"));
+    x = txt("C1CCCCC1", "gaff2", "c3");
+    assert.ok(x.includes("규칙 결과는 c6 이지만") && x.includes("ATD c6 * 6 4 * * [RG6]"), x);
+    x = txt("C=CC=CC(=O)O", "gaff2", "cf");
+    assert.ok(x.includes("ce/cf 는 같은 원자의 두 이름") && x.includes("→ 그래서 cf"), x);
+    x = txt("c1ccncc1", "oplsaa", "520");
+    assert.ok(x.includes("[1] 이 원자: N, 이웃 2개, 6원 고리 원자") && x.includes("고리 닫기: [1] 과 [6] 도 결합"), x);
+    x = txt("CC(C)(C)O", "oplsaa", "160");
+    assert.ok(x.includes("OPLS/2020 짝: 이웃에 159 타입이 있어 154 대신 160") && x.includes("all-atom O: mono tert. alcohols"), x);
+    x = txt("CC(C)C(=O)OC", "oplsaa", "469");
+    assert.ok(x.includes("맞은 foyer 규칙: opls_469 (최종), opls_140 (opls_185·opls_469 에 밀림), opls_185 (opls_469 에 밀림)"), x);
+    assert.strictEqual(E.neighborText(r, 1), "–C1 c3, =O3 o, –N4 ns");
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

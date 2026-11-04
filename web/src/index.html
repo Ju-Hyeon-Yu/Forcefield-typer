@@ -78,7 +78,7 @@ input[type=text] { border: 1px solid var(--line); background: var(--bg); border-
 .msg.warn { background: var(--warn-bg); border-color: #D69A1E; color: var(--warn); }
 .msg.err { background: var(--err-bg); border-color: var(--err); color: var(--err); font-weight: 600; }
 
-.main { display: grid; grid-template-rows: minmax(380px, 58vh) auto; gap: 14px; min-width: 0; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(380px, 58vh) auto; gap: 14px; min-width: 0; }
 .stage { position: relative; background: var(--stage); border: 1px solid var(--stage-line); border-radius: 6px;
   overflow: hidden; min-height: 380px; }
 .stage canvas { display: block; touch-action: none; cursor: grab; }
@@ -99,6 +99,8 @@ input[type=text] { border: 1px solid var(--line); background: var(--bg); border-
   box-shadow: 0 4px 14px rgba(0,0,0,.35); pointer-events: none; display: flex; flex-direction: column; max-width: 280px; }
 .tip strong { font-family: var(--mono); font-size: 14px; }
 .tip em { color: #9A5B00; font-style: normal; font-weight: 600; }
+.tip .d { color: #3C4A56; font-size: 12px; }
+.tip small { color: #6A7884; font-size: 11px; }
 
 .types h2, .output h2 { font-size: 15px; margin: 0 0 4px; }
 .types .head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -108,6 +110,7 @@ input[type=text] { border: 1px solid var(--line); background: var(--bg); border-
   border: 1px solid var(--line); background: var(--surface); border-radius: 5px; padding: 8px 10px; cursor: pointer; }
 .tcard:hover { border-color: var(--muted); }
 .tcard[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.tcard.current { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
 .tcard .sw { width: 12px; height: 12px; border-radius: 50%; }
 .tcard .name { font-family: var(--mono); font-weight: 700; font-size: 13.5px; }
 .tcard .count { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
@@ -122,7 +125,59 @@ th, td { padding: 4px 8px; text-align: left; border-bottom: 1px solid var(--line
 th { position: sticky; top: 0; background: var(--surface); color: var(--muted); font-weight: 600; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); }
 td.lab { font-family: var(--mono); font-weight: 600; }
+td.nbs { font-family: var(--mono); font-size: 12px; color: var(--muted); }
 tr.flag td { background: var(--warn-bg); }
+#atomRows tr { cursor: pointer; }
+#atomRows tr:hover td { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+#atomRows tr.picked td { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+
+/* 원자 타입 설명 — 넓은 화면에서는 3D 보기 옆에 붙어 따라오고, 좁은 화면에서는 타입 목록 아래에 놓임 */
+.tdetail-in { display: flex; flex-direction: column; gap: 14px; }
+.td-head { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 2px 9px; align-items: center; }
+.td-head .sw { width: 12px; height: 12px; border-radius: 50%; }
+.td-head h2 { font: 700 16px/1.3 var(--mono); margin: 0; overflow-wrap: anywhere; outline: none; }
+.td-head .sub { grid-column: 2 / -1; margin: 0; color: var(--muted); font-size: 12.5px; }
+.td-close { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; width: 28px; height: 28px;
+  font-size: 17px; line-height: 1; cursor: pointer; color: var(--muted); }
+.td-close:hover { color: var(--ink); border-color: var(--muted); }
+.td-sec h3 { font-size: 12.5px; margin: 0 0 6px; color: var(--muted); font-weight: 700; letter-spacing: .02em; }
+.td-sec h3 span { font-weight: 400; }
+.td-orig { margin: 0 0 6px; padding: 6px 10px; border-left: 3px solid var(--accent); background: var(--bg);
+  border-radius: 0 4px 4px 0; font-size: 13px; }
+.td-orig small { display: block; color: var(--muted); font-size: 11px; }
+.td-lines { margin: 0; padding-left: 17px; font-size: 13px; }
+.td-lines li { margin: 2px 0; overflow-wrap: anywhere; }
+.td-lines li.bad { color: var(--err); }
+.td-lines li.tree { list-style: none; margin-left: -17px; }
+.td-tree { margin: 2px 0; padding: 6px 8px; background: var(--bg); border-radius: 4px; font: 12px/1.55 var(--mono);
+  white-space: pre-wrap; overflow-wrap: anywhere; }
+.td-group { border: 1px solid var(--line); border-radius: 5px; padding: 8px 10px; }
+.td-group + .td-group { margin-top: 8px; }
+.td-gtitle { font-size: 12.5px; font-weight: 600; }
+.td-gtitle span { color: var(--muted); font-weight: 400; }
+.td-code { display: block; margin: 6px 0; padding: 5px 8px; background: var(--bg); border-radius: 4px;
+  font: 12px/1.45 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+.td-atom { border-top: 1px solid var(--line); padding: 8px 0; font-size: 13px; }
+.td-atom.picked { background: color-mix(in srgb, var(--accent) 10%, transparent); margin: 0 -8px; padding: 8px;
+  border-radius: 4px; border-top-color: transparent; }
+.td-ahead { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.td-aname { font: 700 13px var(--mono); background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px; }
+.td-flag { color: var(--warn); background: var(--warn-bg); font-size: 11.5px; padding: 0 6px; border-radius: 3px; }
+.td-nbrs { line-height: 1.9; }
+.nb { font: 12px var(--mono); border: 1px solid var(--line); background: var(--surface); border-radius: 3px;
+  padding: 0 5px; cursor: pointer; margin-right: 3px; white-space: nowrap; }
+.nb:hover { border-color: var(--accent); }
+.nb b { color: var(--muted); font-weight: 600; }
+.td-env { color: var(--muted); font-size: 12.5px; }
+.td-more { margin-top: 8px; }
+@media (min-width: 1100px) {
+  .main.inspect { grid-template-columns: minmax(0, 1fr) clamp(320px, 28vw, 430px); }
+  .main.inspect > .stage { grid-column: 1; grid-row: 1; }
+  .main.inspect > .types { grid-column: 1; grid-row: 2; }
+  .main.inspect > .tdetail { grid-column: 2; grid-row: 1 / span 2; contain: size; }
+  .main.inspect .tdetail-in { position: sticky; top: 12px; max-height: min(calc(100vh - 24px), 100%); overflow: auto; }
+}
 
 .output { grid-column: 1 / -1; }
 .output .head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
@@ -186,7 +241,7 @@ footer p { margin: 2px 0; }
 
   <div class="main">
     <section class="stage" aria-label="3D 분자 보기">
-      <canvas id="view" tabindex="0" aria-label="분자 3D 보기. 끌어서 회전, 휠로 확대, Shift+끌기로 이동, 두 번 눌러 처음 보기"></canvas>
+      <canvas id="view" tabindex="0" aria-label="분자 3D 보기. 끌어서 회전, 휠로 확대, Shift+끌기로 이동, 원자를 누르면 타입 설명, 두 번 눌러 처음 보기"></canvas>
       <div class="empty" id="empty">SMILES를 넣고 타입 할당을 누르면 여기에 분자와 원자 타입이 나타납니다.</div>
       <div class="toolbar" id="toolbar" hidden>
         <div class="seg" role="group" aria-label="라벨"><span class="cap">라벨</span>
@@ -199,18 +254,22 @@ footer p { margin: 2px 0; }
         <span class="spacer"></span>
         <div class="seg"><button type="button" id="resetView">처음 보기</button><button type="button" id="png">PNG 저장</button></div>
       </div>
-      <div class="legend" id="legend" hidden>끌어서 회전, 휠로 확대, Shift+끌기로 이동합니다. <b>주황 테두리</b>는 경고가 난 원자입니다.</div>
+      <div class="legend" id="legend" hidden>끌어서 회전, 휠로 확대, Shift+끌기로 이동하고, 원자를 누르면 타입 설명이 나옵니다. <b>주황 테두리</b>는 경고가 난 원자입니다.</div>
       <div class="tip" id="tip" hidden></div>
     </section>
 
     <section class="panel types" aria-label="원자 타입">
-      <div class="head"><h2>원자 타입</h2><p id="typeSummary">타입을 누르면 해당 원자만 강조합니다.</p>
+      <div class="head"><h2>원자 타입</h2><p id="typeSummary">타입을 누르면 해당 원자를 강조하고 타입 설명을 보여 줍니다.</p>
         <button class="link" type="button" id="clearSel" hidden>강조 해제</button></div>
       <div class="type-grid" id="typeGrid"><p class="hint">아직 결과가 없습니다.</p></div>
       <details class="atom-list" id="atomDetails" hidden><summary id="atomSummary">원자별 목록</summary>
-        <div class="tablewrap"><table><thead><tr><th>#</th><th>이름</th><th>타입</th><th>전하</th><th>조각</th><th>x</th><th>y</th><th>z</th></tr></thead>
+        <div class="tablewrap"><table><thead><tr><th>#</th><th>이름</th><th>타입</th><th>이웃 (타입)</th><th>전하</th><th>조각</th><th>x</th><th>y</th><th>z</th></tr></thead>
         <tbody id="atomRows"></tbody></table></div></details>
     </section>
+
+    <aside class="tdetail" id="typeDetail" aria-label="원자 타입 설명" hidden>
+      <div class="panel tdetail-in" id="typeDetailIn"></div>
+    </aside>
   </div>
 
   <section class="panel output" aria-label=".lt 출력">
@@ -235,6 +294,7 @@ footer p { margin: 2px 0; }
 <script>/*LTRULES_JS*/</script>
 <script>/*GAFF2_JS*/</script>
 <script>/*FOYER_JS*/</script>
+<script>/*EXPLAIN_JS*/</script>
 <script>/*IO_JS*/</script>
 <script>/*GEOM_JS*/</script>
 <script>/*PIPELINE_JS*/</script>
