@@ -394,5 +394,7 @@
     LT_OBJECT: "DREIDING", TYPE_CHARGES: false });
 
   return { SYMBOLS, TypingError, DreidingFF, graphFromRDKit, finishGraph, renumber, fragments, formalCharge,
-    assignLabels, sp2Class, geometryLabels };
+    assignLabels, sp2Class, geometryLabels,
+    // 타입 설명(explain.js)에서 판정 이유를 다시 보여 주려고 내보냄
+    baseLabel, hFlag, dearomatizeExocyclic, isSp2Atom };
 });

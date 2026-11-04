@@ -124,7 +124,7 @@ def parse_def(text):
                 fields.append(f)
                 if f == "&":
                     break
-            rule = {"type": t[0], "res": fields[0]}
+            rule = {"type": t[0], "res": fields[0], "line": " ".join(["ATD", t[0]] + [f for f in fields if f != "&"])}
             keys = ("z", "connum", "nh", "new", "ap", "ces")
             for k, f in zip(keys, fields[1:]):
                 if f == "&":

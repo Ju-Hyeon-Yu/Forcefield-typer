@@ -84,8 +84,8 @@ def oplsaa_tables(path):
         "source": os.path.basename(path),
         "moltemplate": _mt_version(),
         "foyer": data["meta"],
-        "rules": [{"name": r["name"], "overrides": r["overrides"], "pat": parse(r["def"]), "desc": r.get("desc", "")}
-                  for r in data["rules"]],
+        "rules": [{"name": r["name"], "overrides": r["overrides"], "pat": parse(r["def"]), "def": r["def"],
+                   "desc": r.get("desc", "")} for r in data["rules"]],
         "no2024": oplsaa.NO_2024,
         "pairs": oplsaa.OPLS2020_PAIRS,
         "lt": {"masses": rules.masses, "rules": rules.rules, "coeffs": {k: {} for k in rules.coeffs},

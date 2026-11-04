@@ -325,11 +325,14 @@
 
     run() {
       const types = [];
+      this.ruleIdx = [];                    // 원자별로 맞은 규칙 번호 (타입 설명용)
       for (let a = 0; a < this.m.n; a++) {
-        let t = null;
-        for (const rule of this.rules.rules) if (this.match(a, rule)) { t = rule.type; break; }
+        let t = null, k = -1;
+        this.rules.rules.some((rule, i) => (this.match(a, rule) ? ((t = rule.type), (k = i), true) : false));
         types.push(t);
+        this.ruleIdx.push(k);
       }
+      this.preTypes = types.slice();        // 공액 짝 조정 전 타입
       this.atadjust(types);
       this.cpadjust(types);
       return types;
@@ -412,7 +415,7 @@
   function assignTypes(z, bonds, rules) {
     const t = new Typer(new Mol(z, bonds), rules);
     const types = t.run();
-    return [types, t.consistencyWarnings(types)];
+    return [types, t.consistencyWarnings(types), t];
   }
 
   // ---------------------------------------------------------------- 대응 타입 파라미터 (parmchk2 EQUA)
@@ -525,7 +528,7 @@
     /** graph → {labels, warnings, flagged, extra} */
     assign(g) {
       const [z, bonds] = kekuleGraph(g);
-      const [types, warnings] = assignTypes(z, bonds, this.def);
+      const [types, warnings, typer] = assignTypes(z, bonds, this.def);
       const masses = this.rules.masses;
       const old = [];
       types.forEach((t, i) => { if ((t === "c5" || t === "c6") && !(t in masses)) old.push(i); });
@@ -550,7 +553,9 @@
       for (const [kind, key] of adds) (covered[kind] = covered[kind] || new Set()).add(key.join("\u0000"));
       const miss = L.missingTerms(g, types, this.rules, covered);
       warnings.push(...miss.warnings);
-      return { labels: types, warnings, flagged: miss.atoms, extra: equaBlock(this.rules, adds, this.LT_OBJECT) };
+      const info = { ruleIdx: typer.ruleIdx, preTypes: typer.preTypes, c56: old, rg: typer.rg, ar: typer.ar,
+        nr: typer.nr, gbonds: typer.m.bonds.map(b => b.slice()), adds };
+      return { labels: types, warnings, flagged: miss.atoms, extra: equaBlock(this.rules, adds, this.LT_OBJECT), info };
     }
 
     describe(label) {

@@ -120,6 +120,11 @@
 
   /** foyer find_atomtypes 와 같은 순서 → 원자별 남은 후보 (정렬된 배열). */
   function findAtomtypes(g, rules, maxIter = 10) {
+    return findAtomtypesDetailed(g, rules, maxIter).cands;
+  }
+
+  /** findAtomtypes + 원자별 맞은 규칙(white)·덮어써진 타입(black) — 타입 설명용. */
+  function findAtomtypesDetailed(g, rules, maxIter = 10) {
     const present = new Set(g.z.filter(z => z > 0).map(z => SYMBOLS[z]));
     const rs = rules.filter(r => r.pat.element === null || present.has(r.pat.element));
     const white = Array.from({ length: g.n }, () => new Set());
@@ -137,7 +142,7 @@
       }
       if (!found) break;
     }
-    return white.map((w, a) => [...w].filter(x => !black[a].has(x)).sort());
+    return { cands: white.map((w, a) => [...w].filter(x => !black[a].has(x)).sort()), white, black };
   }
 
   // ---------------------------------------------------------------- OPLS-AA (Python OplsTyper)
@@ -148,6 +153,7 @@
       this.source = tables.source;
       this.moltemplate = tables.moltemplate;
       this.foyerRules = tables.rules.map(r => ({ name: r.name, overrides: r.overrides, pat: r.pat }));
+      this.foyerDef = Object.fromEntries(tables.rules.map(r => [r.name, r.def || ""]));
       this.foyerDesc = Object.fromEntries(tables.rules.map(r => [r.name, r.desc || ""]));
       this.no2024 = tables.no2024;
       this.pairs = tables.pairs;
@@ -161,9 +167,10 @@
       return num;
     }
 
-    foyerTypes(g) {
+    foyerTypes(g, detail = null) {
       const fg = new Graph(g.atoms.map(a => SYMBOLS.indexOf(a.sym)), g.bonds.map(b => [b.a, b.b]));
-      const cands = findAtomtypes(fg, this.foyerRules);
+      const res = findAtomtypesDetailed(fg, this.foyerRules), cands = res.cands;
+      if (detail) Object.assign(detail, { white: res.white, black: res.black, cycles: fg.ringInfo() });
       const none = [], many = [];
       cands.forEach((c, i) => { if (!c.length) none.push(i); else if (c.length > 1) many.push(i); });
       if (none.length || many.length) {
@@ -177,7 +184,8 @@
 
     /** graph → {labels, warnings, flagged, extra} (Python OplsTyper.assign 과 같은 라벨·문장) */
     assign(g) {
-      const names = this.foyerTypes(g);
+      const detail = {};
+      const names = this.foyerTypes(g, detail);
       const labels = [], bad = new Map();
       names.forEach((nm, i) => {
         const num = this.to2024(nm);
@@ -201,7 +209,9 @@
           .join("; "));
       }
       const miss = L.missingTerms(g, labels, this.rules);
-      return { labels, warnings: miss.warnings, flagged: miss.atoms, extra: "" };
+      const mapped = names.map(nm => this.to2024(nm));
+      return { labels, warnings: miss.warnings, flagged: miss.atoms, extra: "",
+        info: { foyer: names, mapped, white: detail.white, black: detail.black, cycles: detail.cycles } };
     }
 
     charges(labels) { return labels.map(t => this.rules.charges[t]); }
@@ -220,5 +230,5 @@
     }
   }
 
-  return { Graph, chordlessCycles, findAtomtypes, matchesAt, Opls };
+  return { Graph, chordlessCycles, findAtomtypes, findAtomtypesDetailed, matchesAt, Opls };
 });

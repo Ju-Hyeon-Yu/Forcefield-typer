@@ -100,7 +100,7 @@
       .sort((u, v) => u[0] - v[0] || u[1] - v[1]);
     const lt = IO.writeLt(name, smiles, rows, bonds, chargeNote, ff, typed.extra);
     return { name, rows, bonds, labels: typed.labels, warnings: [...new Set(warnings)], flagged: typed.flagged,
-      lt, graph, source, nFrags: frags.length, ff };
+      lt, graph, source, nFrags: frags.length, ff, info: typed.info || null };
   }
 
   return { run };
