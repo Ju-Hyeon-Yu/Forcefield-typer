@@ -57,6 +57,32 @@ const body = s => s.split("\n").slice(1).join("\n").replace(/^# 전하: .*$/m, "
     }
   });
 
+  await test("GAFF2 선택: mol2 입력 .lt(보충 블록 포함)가 Python CLI 와 같음, 선택을 기억", async () => {
+    await page.locator(".ffsel label", { hasText: "GAFF2" }).click();
+    for (const c of cases.filter(x => x.lt_gaff2)) {
+      await page.fill("#smiles", c.smiles);
+      await load(c.mol2);
+      await page.click("#run");
+      assert.strictEqual(body(await page.inputValue("#lt")), body(fs.readFileSync(c.lt_gaff2, "utf8")), c.smiles);
+      await page.click("#clearFile");
+    }
+    await page.fill("#smiles", "CC(N)=O");
+    await page.click("#run");
+    const lt = await page.inputValue("#lt");
+    assert.ok(lt.includes('import "gaff2.lt"') && lt.includes("\nGAFF2 {\n") && lt.includes("MOL inherits GAFF2 {"));
+    assert.ok((await page.locator(".tcard", { hasText: "nt" }).getAttribute("title")).includes("질량 14.01"));
+    await page.reload();
+    await page.waitForFunction(() => document.getElementById("status").classList.contains("ready"), null, { timeout: 60000 });
+    assert.ok(await page.isChecked("input[name=ff][value=gaff2]"), "새로 열어도 GAFF2");
+    await page.fill("#smiles", "F[B-](F)(F)F");
+    await page.click("#run");
+    assert.ok((await page.locator(".msg.err").textContent()).includes("gaff2.lt 에 없는 GAFF2 타입"));
+    await page.locator(".ffsel label", { hasText: "DREIDING" }).click();
+    await page.fill("#smiles", "CC(=O)Nc1ccccc1");
+    await page.click("#run");
+    assert.ok((await page.inputValue("#lt")).includes('import "dreiding.lt"'));
+  });
+
   await test("pdb·xyz 입력과 전하 경고", async () => {
     for (const key of ["pdb", "pdb_noconect", "xyz"]) {
       await page.fill("#smiles", cases[0].smiles);

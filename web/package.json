@@ -1,7 +1,7 @@
 {
-  "name": "dreiding-typer-web",
+  "name": "forcefield-typer-web",
   "private": true,
-  "description": "오프라인 단일 HTML DREIDING 타이퍼 빌드·테스트용",
+  "description": "오프라인 단일 HTML 역장 타이퍼(DREIDING·GAFF2) 빌드·테스트용",
   "scripts": {
     "test": "node tests/test_web.js",
     "test:browser": "node tests/test_browser.js",

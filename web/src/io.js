@@ -228,11 +228,15 @@
   };
 
   /** rows: [{name, frag, label, q, xyz}], bonds: [[i,j]] (i<j, 정렬됨). */
-  function writeLt(name, smiles, rows, bonds, chargeNote, tool = "forcefield_typer.html") {
+  const DREIDING_LT = { LABEL: "DREIDING", LT_FILE: "dreiding.lt", LT_OBJECT: "DREIDING" };
+
+  /** Python molio.write_lt 와 같은 꼴 (첫 줄의 만든 도구 이름만 다름). extra: 분자 정의 앞에 쓸 역장 보충. */
+  function writeLt(name, smiles, rows, bonds, chargeNote, ff = DREIDING_LT, extra = "", tool = "forcefield_typer.html") {
     const out = [];
-    out.push(`# ${tool} 생성 — SMILES: ${smiles}\n# 전하: ${chargeNote}\n\n`);
-    out.push('import "dreiding.lt"\n\n');
-    out.push(`${name} inherits DREIDING {\n\n`);
+    out.push(`# ${tool} (${ff.LABEL}) 생성 — SMILES: ${smiles}\n# 전하: ${chargeNote}\n\n`);
+    out.push(`import "${ff.LT_FILE}"\n\n`);
+    if (extra) out.push(extra + "\n");
+    out.push(`${name} inherits ${ff.LT_OBJECT} {\n\n`);
     out.push('  write("Data Atoms") {\n');
     for (const r of rows) {
       out.push(`    $atom:${pad(r.name, 6)} $mol:f${r.frag} @atom:${pad(r.label, 14)} ${fix(r.q, 6, 10)} ` +

@@ -4,11 +4,36 @@
   const $ = id => document.getElementById(id);
   const T = window.DreidingTyper, P = window.DreidingPipeline;
   const tables = JSON.parse($("dreiding-tables").textContent);
-  const ff = new T.DreidingFF(tables);
+  const ffs = {
+    dreiding: new T.DreidingFF(tables),
+    gaff2: new window.Gaff2Typer.Gaff2(JSON.parse($("gaff2-tables").textContent)),
+  };
+  const HINT = {
+    dreiding: "moltemplate dreiding.lt 의 라벨 규칙(결합 차수·이면각 플래그)에 맞춥니다. 전하는 mol2 의 값을 씁니다.",
+    gaff2: "AmberTools antechamber(-at gaff2) 와 같은 타입을 붙입니다. gaff2.lt 에 없는 결합 파라미터는 " +
+      "parmchk2 대응 타입 값으로 .lt 에 함께 씁니다. 전하는 mol2 의 값을 씁니다.",
+  };
   const viewer = new window.MolViewer($("view"), $("tip"));
   let R = null, file = null, result = null;
 
-  $("srcInfo").textContent = `moltemplate ${tables.moltemplate || ""}, ${Object.keys(tables.labels).length}개 라벨`.replace("  ", " ");
+  $("srcInfo").textContent = `moltemplate ${tables.moltemplate || ""} — dreiding.lt ${Object.keys(tables.labels).length}개 라벨, ` +
+    `gaff2.lt ${Object.keys(ffs.gaff2.rules.masses).length}개 타입`;
+
+  // ------------------------------------------------------------ 역장 선택 (브라우저에 기억)
+  const ffRadios = [...document.querySelectorAll("input[name=ff]")];
+  const currentFF = () => (ffRadios.find(r => r.checked) || ffRadios[0]).value;
+  try {
+    const saved = localStorage.getItem("fftyper.ff");
+    const r = ffRadios.find(x => x.value === saved);
+    if (r) r.checked = true;
+  } catch (e) { /* 저장소를 못 쓰는 환경 */ }
+  const showHint = () => { $("ffHint").textContent = HINT[currentFF()]; };
+  showHint();
+  ffRadios.forEach(r => r.addEventListener("change", () => {
+    try { localStorage.setItem("fftyper.ff", currentFF()); } catch (e) { /* 무시 */ }
+    showHint();
+    if (R && result) run();
+  }));
 
   // ------------------------------------------------------------ RDKit.js 준비 (압축 wasm 풀기)
   async function loadRDKit() {
@@ -68,7 +93,7 @@
   function run() {
     if (!R) return;
     try {
-      result = P.run(R, ff, { smiles: $("smiles").value, name: $("molName").value, file });
+      result = P.run(R, ffs, { smiles: $("smiles").value, name: $("molName").value, file, ff: currentFF() });
     } catch (e) {
       if (!(e instanceof T.TypingError) && !(e instanceof window.DreidingIO.InputError)) console.error(e);
       result = null;
@@ -145,7 +170,7 @@
       at.className = "atoms";
       at.textContent = `원자 ${ranges(idx)}`;
       b.append(sw, nm, ct, at);
-      b.title = `질량 ${tables.labels[t]} — 눌러서 이 타입만 강조`;
+      b.title = `${r.ff.describe(t)} — 눌러서 이 타입만 강조`;
       b.addEventListener("click", () => toggleType(t, b));
       grid.append(b);
     }
@@ -166,7 +191,7 @@
     $("atomDetails").hidden = false;
 
     $("lt").value = r.lt;
-    $("ltTitle").textContent = `${outName()} (${r.name})`;
+    $("ltTitle").textContent = `${outName()} (${r.name}, ${r.ff.LABEL})`;
     $("copy").disabled = false;
     $("download").disabled = false;
     $("copied").textContent = "";

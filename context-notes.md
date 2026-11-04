@@ -57,3 +57,14 @@
   중심 X-X-ca-ha), 20 개는 카복실산 C 에서 moltemplate X-X-c-o(10.5) vs parmchk2 CORR(1.1). moltemplate 에만
   있는 improper 는 없음. 결합 타입이 없어 moltemplate 가 멈추는 분자 4개(다이사이안아마이드, 트라이사이아노메타나이드,
   FSI, P–H)는 경고로 알림.
+
+## 웹 GAFF2 (2026-11-04)
+- web/src/gaff2.js 는 gaff2.py 를 반복 순서까지 그대로 옮겼다. 규칙은 build_tables.py --ff gaff2 가 Python 의
+  해석 결과(DEF 규칙, gaff2.lt 규칙·계수 줄, EQUA 표, 타입 설명)를 그대로 JSON 으로 넣는다(약 0.5 MB).
+- RDKit 케쿨레 구조는 원자 순서에 따라 달라질 수 있다(391 분자 중 82 개가 번호를 섞으면 달라지고 3 개는 ce/cf·ne/nf
+  짝이 바뀜). 웹은 SMILES 순서의 케쿨레 구조를 원자 번호만 바꿔 쓰므로, Python CLI 도 번호를 바꾸기 전에
+  stamp_kekule 로 결합 속성 "kek" 에 적어 두고 GAFF2 가 그것을 쓰게 했다. ce/cf 같은 짝은 antechamber 에서도
+  원자 순서에 따라 정해지며 둘 다 맞는 배정이다.
+- SMILES 만 줄 때 3D 시작 구조는 역장과 상관없이 DREIDING 결합 길이·각 표로 만든다. DREIDING 라벨을 붙일 수
+  없는 분자(CO2, 알렌, PF6⁻, ClO4⁻, 아이오도늄 등 18/391)는 원소·혼성으로 가까운 라벨을 골라 쓴다. 5·6배위 중심은
+  각 대신 리간드끼리 반발(√2 r)을 넣어 PF6⁻·SF6 가 정팔면체가 되게 했다.

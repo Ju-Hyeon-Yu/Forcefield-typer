@@ -16,8 +16,10 @@
 - [x] AMBER(tleap+sander)와 항별 대조 — 차이는 경고된 누락·gaff2.lt 중복 이면각·CORR improper 뿐
 
 ## 3단계 — GAFF2 (JS) + HTML
-- [ ] JS 이식, Python 대조
-- [ ] 역장 선택 메뉴, 재빌드, 브라우저 테스트
+- [x] JS 이식(web/src/gaff2.js, ltrules.js), Python 대조 — 391 분자 타입·경고·보충 블록 모두 같음
+- [x] 케쿨레 구조를 SMILES 순서로 고정(stamp_kekule) — mol2 입력에서도 Python·웹 결과가 같게
+- [x] 역장 선택 메뉴(브라우저에 기억), 3D 시작 구조는 DREIDING 표 + 라벨 못 붙는 분자용 대체, 5·6배위 리간드 반발
+- [x] 재빌드, Node 10개·브라우저 9개 테스트
 
 ## 4단계 — OPLS-AA
 - [ ] foyer SMARTS 문법 엔진 (Python·JS 같은 결과)

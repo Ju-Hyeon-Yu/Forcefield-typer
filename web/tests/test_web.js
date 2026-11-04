@@ -7,10 +7,13 @@ const { execFileSync } = require("child_process");
 const T = require("../src/typer.js");
 const IO = require("../src/io.js");
 const P = require("../src/pipeline.js");
+const G2 = require("../src/gaff2.js");
 const initRDKit = require("@rdkit/rdkit");
 
 const HERE = __dirname;
 const TABLES = path.join(HERE, "../build/tables.json");
+const GAFF2_TABLES = path.join(HERE, "../build/gaff2_tables.json");
+const GAFF2_SMILES = path.join(HERE, "../../tests/data/gaff2_smiles.txt");
 const results = [];
 const test = async (name, fn) => {
   try { await fn(); results.push([true, name]); console.log("ok   ", name); }
@@ -22,13 +25,26 @@ const test = async (name, fn) => {
     fs.mkdirSync(path.dirname(TABLES), { recursive: true });
     fs.writeFileSync(TABLES, execFileSync("python3", [path.join(HERE, "../build_tables.py")]));
   }
+  if (!fs.existsSync(GAFF2_TABLES)) {
+    fs.writeFileSync(GAFF2_TABLES, execFileSync("python3", [path.join(HERE, "../build_tables.py"), "--ff", "gaff2"]));
+  }
   const R = await initRDKit();
   const ff = new T.DreidingFF(JSON.parse(fs.readFileSync(TABLES)));
+  const ffs = { dreiding: ff, gaff2: new G2.Gaff2(JSON.parse(fs.readFileSync(GAFF2_TABLES))) };
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "dreiding-web-"));
 
   await test("라벨·경고·오류가 Python 타이퍼와 같음 (SMILES 142개)", () => {
     const py = JSON.parse(execFileSync("python3", [path.join(HERE, "py_labels.py"), path.join(HERE, "smiles_set.txt")]));
     const js = JSON.parse(execFileSync("node", [path.join(HERE, "js_labels.js"), path.join(HERE, "smiles_set.txt")]));
+    const diff = Object.keys(py).filter(k => JSON.stringify(py[k]) !== JSON.stringify(js[k]));
+    assert.strictEqual(diff.length, 0, "다른 SMILES: " + diff.join(" "));
+  });
+
+  await test("GAFF2 타입·경고·보충 블록·오류가 Python 과 같음 (antechamber 정답 분자 391개)", () => {
+    const py = JSON.parse(execFileSync("python3", [path.join(HERE, "py_gaff2.py"), GAFF2_SMILES],
+      { maxBuffer: 1 << 26, stdio: ["ignore", "pipe", "ignore"] }));
+    const js = JSON.parse(execFileSync("node", [path.join(HERE, "js_gaff2.js"), GAFF2_SMILES], { maxBuffer: 1 << 26 }));
+    assert.ok(Object.keys(py).length > 380);
     const diff = Object.keys(py).filter(k => JSON.stringify(py[k]) !== JSON.stringify(js[k]));
     assert.strictEqual(diff.length, 0, "다른 SMILES: " + diff.join(" "));
   });
@@ -43,6 +59,20 @@ const test = async (name, fn) => {
       const r = P.run(R, ff, { smiles: c.smiles, name: "MOL", file: read(c.mol2) });
       assert.strictEqual(body(r.lt), body(fs.readFileSync(c.lt, "utf8")), c.smiles);
     }
+  });
+
+  await test("GAFF2: mol2 입력 .lt(보충 블록 포함)가 Python CLI 와 같음", () => {
+    let n = 0;
+    for (const c of cases) {
+      if (!c.lt_gaff2) {
+        assert.throws(() => P.run(R, ffs, { smiles: c.smiles, name: "MOL", file: read(c.mol2), ff: "gaff2" }), T.TypingError);
+        continue;
+      }
+      const r = P.run(R, ffs, { smiles: c.smiles, name: "MOL", file: read(c.mol2), ff: "gaff2" });
+      assert.strictEqual(body(r.lt), body(fs.readFileSync(c.lt_gaff2, "utf8")), c.smiles);
+      n++;
+    }
+    assert.ok(n >= cases.length - 2 && cases.some(c => /\nGAFF2 \{\n/.test(fs.readFileSync(c.lt_gaff2 || c.lt, "utf8"))));
   });
 
   await test("pdb(CONECT 있음/없음)·xyz 입력이 mol2 와 같은 라벨·좌표 (전하 0)", () => {
@@ -111,6 +141,24 @@ const test = async (name, fn) => {
     assert.ok(worstBond < 0.05, "결합 길이");
     assert.ok(worstAng < 10, "사면체 각");
     assert.ok(minNb > 1.7, "원자 겹침");
+  });
+
+  await test("GAFF2: SMILES 만일 때도 3D 좌표를 만듦 (DREIDING 라벨이 안 되는 CO2·PF6⁻·아이오도늄 포함)", () => {
+    const smis = ["O=C=O", "C=C=C", "F[P-](F)(F)(F)(F)F", "c1ccc(cc1)[I+]c1ccccc1", "[O-]Cl(=O)(=O)=O",
+      "CN=C=O", "CC(=O)C=[N+]=[N-]", "c1ccc-2c(c1)-c1ccccc-21"];
+    for (const smi of smis) {
+      assert.throws(() => P.run(R, ffs, { smiles: smi }), T.TypingError, "DREIDING 은 실패해야 함 " + smi);
+    }
+    for (const smi of smis.concat(["CC(N)=O", "c1ccccc1"])) {
+      const r = P.run(R, ffs, { smiles: smi, ff: "gaff2" });
+      const X = r.rows.map(x => x.xyz);
+      assert.ok(X.every(p => p.every(Number.isFinite)), "NaN " + smi);
+      for (let i = 0; i < X.length; i++) for (let j = i + 1; j < X.length; j++) {
+        const d = Math.hypot(X[i][0] - X[j][0], X[i][1] - X[j][1], X[i][2] - X[j][2]);
+        assert.ok(d > 0.85, `원자 겹침 ${smi} ${i + 1}-${j + 1} ${d.toFixed(2)}`);
+      }
+      assert.ok(r.lt.includes('import "gaff2.lt"') && r.lt.includes("MOL inherits GAFF2"));
+    }
   });
 
   await test("SMILES 만일 때 이온 조각 사이가 3 Å 이상", () => {

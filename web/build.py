@@ -3,7 +3,7 @@
     cd web && npm install && cd ..
     python3 web/build.py                 # → forcefield_typer.html
 
-dreiding.lt 는 설치된 moltemplate 의 것을 읽는다(--dreiding-lt 로 바꿀 수 있음).
+dreiding.lt·gaff2.lt 는 설치된 moltemplate 의 것을 읽는다(--dreiding-lt, --gaff2-lt 로 바꿀 수 있음).
 """
 import argparse
 import base64
@@ -20,6 +20,7 @@ def main():
     ap = argparse.ArgumentParser(description="오프라인 단일 HTML 빌드")
     ap.add_argument("-o", "--out", default=os.path.join(ROOT, "forcefield_typer.html"))
     ap.add_argument("--dreiding-lt", default=None, help="규칙을 읽을 dreiding.lt (기본: 설치된 moltemplate)")
+    ap.add_argument("--gaff2-lt", default=None, help="규칙을 읽을 gaff2.lt (기본: 설치된 moltemplate)")
     ap.add_argument("--rdkit-dist", default=os.path.join(WEB, "node_modules", "@rdkit", "rdkit", "dist"))
     args = ap.parse_args()
 
@@ -30,6 +31,12 @@ def main():
 
     cmd = [sys.executable, os.path.join(WEB, "build_tables.py")] + ([args.dreiding_lt] if args.dreiding_lt else [])
     tables = subprocess.run(cmd, check=True, capture_output=True, text=True).stdout
+    cmd = [sys.executable, os.path.join(WEB, "build_tables.py"), "--ff", "gaff2"] + \
+        ([args.gaff2_lt] if args.gaff2_lt else [])
+    gaff2_tables = subprocess.run(cmd, check=True, capture_output=True, text=True).stdout
+    for name, text in (("dreiding", tables), ("gaff2", gaff2_tables)):
+        if "</script" in text.lower() or "<!--" in text:
+            sys.exit(f"{name} 규칙표에 HTML 안에 넣을 수 없는 문자열이 있습니다")
     with open(wasm_path, "rb") as f:
         wasm_b64 = base64.b64encode(gzip.compress(f.read(), 9, mtime=0)).decode("ascii")
 
@@ -44,9 +51,12 @@ def main():
         rdkit_js = f.read()
     parts = {
         "/*TABLES*/": tables,
+        "/*GAFF2_TABLES*/": gaff2_tables,
         "/*RDKIT_WASM_GZ_B64*/": wasm_b64,
         "/*RDKIT_JS*/": rdkit_js,
         "/*TYPER_JS*/": src("typer.js"),
+        "/*LTRULES_JS*/": src("ltrules.js"),
+        "/*GAFF2_JS*/": src("gaff2.js"),
         "/*IO_JS*/": src("io.js"),
         "/*GEOM_JS*/": src("geom.js"),
         "/*PIPELINE_JS*/": src("pipeline.js"),

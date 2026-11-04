@@ -1,7 +1,8 @@
 # JS 대조용 입력(원자 순서를 섞은 mol2·pdb·xyz)과 Python CLI 의 .lt 정답을 만드는 스크립트
 """사용: python3 web/tests/make_cases.py OUTDIR
 
-OUTDIR/cases.json 에 [{smiles, mol2, pdb, pdb_noconect, xyz, lt}] 경로 목록을 쓴다.
+OUTDIR/cases.json 에 [{smiles, mol2, pdb, pdb_noconect, xyz, lt, lt_gaff2}] 경로 목록을 쓴다.
+lt_gaff2 는 GAFF2 로 타이핑할 수 없는 계(BF4⁻ 등)면 null 이다.
 """
 import json
 import os
@@ -30,6 +31,9 @@ SMILES = [
     "Cn1cnc2c1c(=O)n(C)c(=O)n2C",
     "NC(N)=[NH2+].CC(=O)[O-]",
     "F[B-](F)(F)F.CCn1cc[n+](C)c1",
+    "C(=Cc1ccccc1)c1ccccc1",              # GAFF2 ce/cf 짝 — 케쿨레 구조·원자 순서에 따라 정해짐
+    "CCOC(=O)C=Cc1ccccc1",
+    "CNC(C)=O.NC(N)=O",                   # GAFF2 ns·nt — 대응 타입(EQUA) 보충 블록
 ]
 
 
@@ -72,6 +76,12 @@ def write_files(smi, base, seed):
             x, y, z = xyz[old]
             f.write(f"{m.GetAtomWithIdx(old).GetSymbol()} {x:.4f} {y:.4f} {z:.4f}\n")
     cli.main(["--ff", "dreiding", "--smiles", smi, "--mol2", base + ".mol2", "-o", base + ".lt", "--name", "MOL"])
+    try:
+        cli.main(["--ff", "gaff2", "--smiles", smi, "--mol2", base + ".mol2", "-o", base + "_gaff2.lt",
+                  "--name", "MOL"])
+        return base + "_gaff2.lt"
+    except SystemExit:
+        return None
 
 
 def main():
@@ -83,9 +93,10 @@ def main():
     try:
         for k, smi in enumerate(SMILES):
             base = os.path.join(out, f"case{k}")
-            write_files(smi, base, seed=k + 3)
+            lt_gaff2 = write_files(smi, base, seed=k + 3)
             cases.append({"smiles": smi, "mol2": base + ".mol2", "pdb": base + ".pdb",
-                          "pdb_noconect": base + "_noconect.pdb", "xyz": base + ".xyz", "lt": base + ".lt"})
+                          "pdb_noconect": base + "_noconect.pdb", "xyz": base + ".xyz", "lt": base + ".lt",
+                          "lt_gaff2": lt_gaff2})
     finally:
         sys.stdout.close()
         sys.stdout, sys.stderr = saved

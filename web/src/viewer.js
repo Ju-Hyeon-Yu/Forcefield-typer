@@ -188,7 +188,7 @@
         for (const i of order.slice().reverse()) {
           const a = atoms[i];
           if (dim(i)) continue;
-          if (this.labelMode === "main" && a.sym === "H" && a.label !== "H_HB") continue;
+          if (this.labelMode === "main" && a.main === false) continue;
           const r = radius(i), tw = ctx.measureText(a.label).width + 6, th = fs * 1.24;
           const cx = P[i][0], cy = P[i][1], o = r * 0.7 + 3;
           const spots = [[cx + o, cy - o - th], [cx + o, cy + o], [cx - o - tw, cy - o - th], [cx - o - tw, cy + o],

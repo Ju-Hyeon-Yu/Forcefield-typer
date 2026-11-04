@@ -372,6 +372,27 @@
     return { labels: chosen, warnings, flagged: [...flagged].sort((x, y) => x - y) };
   }
 
+  /**
+   * 3D 좌표 생성(최소화)에만 쓰는 라벨. 다른 역장을 고른 경우에도 결합 길이·각 목표값을 DREIDING 표에서
+   * 가져오는데, DREIDING 라벨을 붙일 수 없는 분자(CO2, PF6⁻, 아이오도늄 등)는 원소·혼성으로 가까운 라벨을 고른다.
+   */
+  function geometryLabels(g, ff) {
+    try { return assignLabels(g, ff).labels; } catch (e) { if (!(e instanceof TypingError)) throw e; }
+    const [gg] = dearomatizeExocyclic(g);
+    const all = Object.keys(ff.labels).sort();
+    return gg.atoms.map((a, i) => {
+      let eh;
+      try { eh = baseLabel(gg, i, [])[0]; } catch (e) { if (!(e instanceof TypingError)) throw e; eh = a.sym; }
+      return all.find(l => l === eh) || all.find(l => l.startsWith(eh + "_")) || eh;
+    });
+  }
+
+  /** DREIDING 라벨 표시 정보 (화면용). */
+  DreidingFF.prototype.describe = function (label) { return `질량 ${this.labels[label]}`; };
+  DreidingFF.prototype.isMainLabel = function (label, sym) { return sym !== "H" || label === "H_HB"; };
+  Object.assign(DreidingFF.prototype, { NAME: "dreiding", LABEL: "DREIDING", LT_FILE: "dreiding.lt",
+    LT_OBJECT: "DREIDING", TYPE_CHARGES: false });
+
   return { SYMBOLS, TypingError, DreidingFF, graphFromRDKit, finishGraph, renumber, fragments, formalCharge,
-    assignLabels, sp2Class };
+    assignLabels, sp2Class, geometryLabels };
 });

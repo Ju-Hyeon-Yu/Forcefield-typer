@@ -69,6 +69,7 @@
     }
     for (let c = 0; c < n; c++) {
       const nb = adj[c], lab = labels[idx[c]];
+      if (nb.length >= 5) continue;            // 5·6배위(PF6⁻, SF6 …)는 각 대신 아래의 리간드 반발로 펼침
       const cos0 = Math.cos(targetAngle(lab, nb.length, ff) * DEG);
       for (let p = 0; p < nb.length; p++) for (let q = p + 1; q < nb.length; q++) angles.push([nb[p], c, nb[q], cos0]);
       if (nb.length === 3 && T.sp2Class(lab)) planes.push([c, nb[0], nb[1], nb[2]]);
@@ -79,6 +80,13 @@
       while (q.length) { const u = q.shift(); if (d[u] >= 3) continue; for (const v of adj[u]) if (d[v] === 99) { d[v] = d[u] + 1; q.push(v); } }
       return d;
     });
+    for (let c = 0; c < n; c++) {
+      if (adj[c].length < 5) continue;
+      const r = bonds.filter(([i, j]) => i === c || j === c).reduce((s, b) => s + b[2], 0) / adj[c].length;
+      for (let p = 0; p < adj[c].length; p++) {
+        for (let q = p + 1; q < adj[c].length; q++) pairs.push([adj[c][p], adj[c][q], Math.SQRT2 * r]);
+      }
+    }
     for (let i = 0; i < n; i++) {
       for (let j = i + 1; j < n; j++) {
         if (topo[i][j] <= 2) continue;

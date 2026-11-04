@@ -1,4 +1,4 @@
-// SMILES(+좌표 파일) → 라벨·좌표·전하·.lt 까지 한 번에 만드는 처리 흐름 (dreiding_lt.py main 대응)
+// SMILES(+좌표 파일) → 역장 라벨·좌표·전하·.lt 까지 한 번에 만드는 처리 흐름 (fftyper.cli main 대응)
 (function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory(require("./typer.js"), require("./io.js"), require("./geom.js"));
@@ -8,12 +8,23 @@
 
   const STEREO = /[@\\/]/;
 
+  /** 고른 역장으로 라벨링: {labels, warnings, flagged, extra(분자 앞에 쓸 역장 보충)} */
+  function typeWith(ff, dreiding, graph) {
+    if (ff === dreiding) return Object.assign({ extra: "" }, T.assignLabels(graph, ff));
+    return ff.assign(graph);
+  }
+
   /**
-   * opts: {smiles, name, file: {name, text} | null, seed}
-   * 반환: {name, rows, bonds, labels, warnings, flagged, lt, graph, source}
+   * ffs: {dreiding: DreidingFF, gaff2?: Gaff2} (DreidingFF 하나만 줘도 됨)
+   * opts: {smiles, name, file: {name, text} | null, seed, ff: "dreiding" | "gaff2"}
+   * 반환: {name, rows, bonds, labels, warnings, flagged, lt, graph, source, ff}
    * 실패하면 T.TypingError 또는 IO.InputError 를 던진다.
    */
-  function run(R, ff, opts) {
+  function run(R, ffs, opts) {
+    if (ffs instanceof T.DreidingFF) ffs = { dreiding: ffs };
+    const dreiding = ffs.dreiding;
+    const ff = ffs[opts.ff || "dreiding"];
+    if (!ff) throw new IO.InputError(`역장 '${opts.ff}' 규칙표가 없습니다`);
     const smiles = (opts.smiles || "").trim();
     if (!smiles) throw new IO.InputError("SMILES 를 입력하십시오");
     if (/\s/.test(smiles)) throw new IO.InputError("SMILES 에 공백이 있습니다 (이온쌍은 '.' 으로 연결)");
@@ -58,10 +69,12 @@
       mol.delete();
     }
 
-    const typed = T.assignLabels(graph, ff);
+    const typed = typeWith(ff, dreiding, graph);
     warnings.push(...typed.warnings);
     if (source === "smiles") {
-      xyz = G.embed3D(graph, typed.labels, ff, xy, opts.seed || 1);
+      // 3D 시작 구조는 역장과 상관없이 DREIDING 결합 길이·각 표로 만든다
+      const geo = ff === dreiding ? typed.labels : T.geometryLabels(graph, dreiding);
+      xyz = G.embed3D(graph, geo, dreiding, xy, opts.seed || 1);
       warnings.push("3D 좌표는 간이 최소화로 만든 시작 구조입니다 — MD 전에 에너지 최소화를 하십시오");
       if (STEREO.test(smiles)) warnings.push("SMILES 의 입체 정보(@, /, \\)는 3D 좌표 생성에 반영되지 않습니다");
     }
@@ -70,10 +83,10 @@
     const fragOf = new Array(graph.atoms.length);
     frags.forEach((fr, k) => fr.forEach(i => { fragOf[i] = k + 1; }));
     const rows = graph.atoms.map((a, i) => ({ name: `${a.sym}${i + 1}`, frag: fragOf[i], label: typed.labels[i],
-      q: q[i], xyz: xyz[i], sym: a.sym }));
+      q: q[i], xyz: xyz[i], sym: a.sym, main: ff.isMainLabel(typed.labels[i], a.sym) }));
     const bonds = graph.bonds.map(b => [Math.min(b.a, b.b), Math.max(b.a, b.b)])
       .sort((u, v) => u[0] - v[0] || u[1] - v[1]);
-    const lt = IO.writeLt(name, smiles, rows, bonds, chargeNote);
+    const lt = IO.writeLt(name, smiles, rows, bonds, chargeNote, ff, typed.extra);
     return { name, rows, bonds, labels: typed.labels, warnings: [...new Set(warnings)], flagged: typed.flagged,
       lt, graph, source, nFrags: frags.length, ff };
   }

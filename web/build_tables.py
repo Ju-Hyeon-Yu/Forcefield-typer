@@ -1,8 +1,10 @@
-# dreiding.lt 에서 브라우저용 DREIDING 규칙표(라벨·결합 차수·r0·이면각·평형각)를 JSON 으로 추출
-"""사용: python3 web/build_tables.py [dreiding.lt 경로] > web/build/tables.json
+# 역장 .lt 에서 브라우저용 규칙표를 JSON 으로 추출 (DREIDING 라벨표, GAFF2 판정 규칙·gaff2.lt 규칙표)
+"""사용: python3 web/build_tables.py [--ff dreiding|gaff2] [역장 .lt 경로] > web/build/<역장>_tables.json
 
-라벨 쌍별 결합 차수와 이면각 규칙 존재 여부는 fftyper.dreiding.DreidingFF 로 계산하므로
+DREIDING: 라벨 쌍별 결합 차수와 이면각 규칙 존재 여부는 fftyper.dreiding.DreidingFF 로 계산하므로
 Python 타이퍼와 판정이 같다. r0 와 평형각은 3D 좌표 생성(최소화)에만 쓴다.
+GAFF2: ATOMTYPE_GFF2.DEF 해석 결과, gaff2.lt 의 질량·By Type 규칙·계수 줄, 대응 타입(EQUA) 표,
+타입 설명을 fftyper 의 것 그대로 담는다.
 """
 import fnmatch
 import json
@@ -43,8 +45,44 @@ def last_match(rules, names):
     return hit
 
 
+def gaff2_tables(path):
+    from fftyper import gaff2, moltemplate_ff_path
+    from fftyper.ltrules import LtRules
+    path = path or moltemplate_ff_path("gaff2.lt")
+    rules = LtRules(path)
+    desc = {}
+    for line in open(path):
+        m = re.match(r"\s*#\s+@atom:(\S+)\s+(.*\S)", line)
+        if m:
+            desc.setdefault(m.group(1), m.group(2))
+    return {
+        "source": os.path.basename(path),
+        "moltemplate": _mt_version(),
+        "def": gaff2.default_def(),
+        "equa": gaff2.EQUA,
+        "lt": {"masses": rules.masses, "rules": rules.rules, "coeffs": rules.coeffs,
+               "sections": rules.sections, "improperCenter": rules.improper_center},
+        "desc": {t: desc.get(t, "") for t in rules.masses},
+    }
+
+
+def _mt_version():
+    try:
+        from importlib.metadata import version
+        return version("moltemplate")
+    except Exception:
+        return "unknown"
+
+
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else None
+    args = sys.argv[1:]
+    ffname = "dreiding"
+    if args[:1] == ["--ff"]:
+        ffname, args = args[1], args[2:]
+    path = args[0] if args else None
+    if ffname == "gaff2":
+        json.dump(gaff2_tables(path), sys.stdout, separators=(",", ":"), ensure_ascii=False)
+        return
     ff = DreidingFF(path)
     secs = read_sections(ff.path)
     settings = [t for k, v in secs.items() if k == "In Settings" for t in v]
@@ -69,14 +107,9 @@ def main():
         rule = last_match(angle_rules, ["X", c, "X"])
         if rule:
             theta0[c] = angle_t0[rule]
-    try:
-        from importlib.metadata import version
-        mt = version("moltemplate")
-    except Exception:
-        mt = "unknown"
     out = {
         "source": os.path.basename(ff.path),
-        "moltemplate": mt,
+        "moltemplate": _mt_version(),
         "labels": {k: ff.labels[k] for k in labels},
         "pairs": pairs,          # "A|B" (A<=B) → [결합 차수, r0, 이면각 규칙 유무]
         "theta0": theta0,        # 중심 라벨 → 평형각(도)
