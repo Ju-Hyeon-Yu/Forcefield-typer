@@ -30,5 +30,6 @@
 - [x] moltemplate·LAMMPS 통합 테스트
 
 ## 5단계 — 문서·배포
-- [ ] README·README_kor
-- [ ] 커밋·push
+- [x] README·README_kor (역장별 기준·검증 결과·라이선스)
+- [x] 깨끗한 가상환경에 pip 설치 후 세 역장 모두 fftyper 실행 확인
+- [x] 커밋·push

@@ -21,9 +21,9 @@ SMILES(필수)와 mol2(선택)로부터 moltemplate 배포본 역장 파일의 �
 - `web/` — 같은 타이퍼의 JS 이식과 역장 선택 메뉴가 있는 단일 HTML 빌드
 - `tests/` — 역장별 단위 테스트, 정답지 대조, moltemplate 통합 테스트
 
-## 진행 순서
+## 진행 순서 (2026-11-04 모두 완료 — checklist.md, context-notes.md 참고)
 1. 저장소 골격 + DREIDING 이전
-2. GAFF2 (Python) — antechamber 대조
+2. GAFF2 (Python) — antechamber 대조, parmchk2 대응 타입 보충
 3. GAFF2 (JS) + HTML 역장 선택
 4. OPLS-AA (Python·JS) — foyer·참조 분자 대조
 5. 문서·테스트·배포
