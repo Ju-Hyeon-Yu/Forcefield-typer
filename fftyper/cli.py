@@ -16,7 +16,7 @@ import sys
 from rdkit import Chem
 
 from . import FORCE_FIELDS, TypingError, get_typer
-from .molio import embed, match_mol2, read_mol2, write_lt
+from .molio import embed, match_mol2, read_mol2, stamp_kekule, write_lt
 
 
 def main(argv=None):
@@ -41,6 +41,7 @@ def main(argv=None):
     except TypingError as e:
         sys.exit(f"역장 파일을 읽지 못했습니다: {e}")
     template = Chem.AddHs(mol0)
+    stamp_kekule(template)                      # 번호를 바꿔도 같은 케쿨레 구조를 쓰도록
     n = template.GetNumAtoms()
     warnings = []
 

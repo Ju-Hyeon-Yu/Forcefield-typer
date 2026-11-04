@@ -77,6 +77,19 @@ def match_mol2(template, atoms, bonds):
     return list(match)
 
 
+def stamp_kekule(mol):
+    """케쿨레 결합 차수를 결합 속성 "kek" 로 적어 둔다.
+
+    RDKit 의 케쿨레 구조는 원자 순서에 따라 달라질 수 있어서, mol2 순서로 번호를 바꾸기 전에
+    SMILES 순서로 한 번 정해 둔다(웹 도구도 같은 구조를 씀). GAFF2 처럼 이중결합 위치를 보는
+    타이퍼가 이 값을 쓴다.
+    """
+    kek = Chem.Mol(mol)
+    Chem.Kekulize(kek, clearAromaticFlags=True)
+    for b, k in zip(mol.GetBonds(), kek.GetBonds()):
+        b.SetIntProp("kek", int(k.GetBondTypeAsDouble()))
+
+
 def embed(template, seed, gap=4.0):
     """조각(이온)마다 따로 3D 구조를 만들고 x 축으로 gap Å 씩 떨어뜨려 놓는다."""
     xyz = [None] * template.GetNumAtoms()

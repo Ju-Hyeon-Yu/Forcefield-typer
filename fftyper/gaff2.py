@@ -625,10 +625,15 @@ class _Typer:
 
 
 def kekule_graph(mol):
-    """RDKit 분자(명시적 H) → (원자번호 목록, [(i, j, 케쿨레 차수)]) — 결합 순서 그대로."""
+    """RDKit 분자(명시적 H) → (원자번호 목록, [(i, j, 케쿨레 차수)]) — 결합 순서 그대로.
+
+    결합에 "kek" 속성(molio.stamp_kekule)이 있으면 그 차수를 쓴다.
+    """
+    z = [a.GetAtomicNum() for a in mol.GetAtoms()]
+    if all(b.HasProp("kek") for b in mol.GetBonds()):
+        return z, [(b.GetBeginAtomIdx(), b.GetEndAtomIdx(), b.GetIntProp("kek")) for b in mol.GetBonds()]
     kek = Chem.Mol(mol)
     Chem.Kekulize(kek, clearAromaticFlags=True)
-    z = [a.GetAtomicNum() for a in kek.GetAtoms()]
     bonds = [(b.GetBeginAtomIdx(), b.GetEndAtomIdx(), int(b.GetBondTypeAsDouble())) for b in kek.GetBonds()]
     return z, bonds
 
