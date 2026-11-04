@@ -1,0 +1,2175 @@
+{
+"meta": {
+"source": "foyer 1.2.0 forcefields/xml/oplsaa.xml (역장 판 0.1.0)",
+"name": "OPLS-AA",
+"license": "MIT, Copyright (c) 2015 Vanderbilt University"
+},
+"rules": [
+{
+"name": "opls_135",
+"def": "[C;X4](C)(H)(H)H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "alkane CH3"
+},
+{
+"name": "opls_136",
+"def": "[C;X4](C)(C)(H)H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "alkane CH2"
+},
+{
+"name": "opls_137",
+"def": "[C;X4](C)(C)(C)H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "alkane CH"
+},
+{
+"name": "opls_138",
+"def": "[C;X4](H)(H)(H)H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "alkane CH4"
+},
+{
+"name": "opls_139",
+"def": "[C;X4](C)(C)(C)C",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "alkane C"
+},
+{
+"name": "opls_140",
+"def": "H[C;X4]",
+"overrides": [],
+"element": "H",
+"class": "HC",
+"desc": "alkane H"
+},
+{
+"name": "opls_141",
+"def": "[C;X3;!r6](C)(C)C",
+"overrides": [],
+"element": "C",
+"class": "CM",
+"desc": "alkene C (R2-C=)"
+},
+{
+"name": "opls_142",
+"def": "[C;X3](C)(C)H",
+"overrides": [],
+"element": "C",
+"class": "CM",
+"desc": "alkene C (RH-C=)"
+},
+{
+"name": "opls_143",
+"def": "[C;X3](C)(H)H",
+"overrides": [],
+"element": "C",
+"class": "CM",
+"desc": "alkene C (H2-C=)"
+},
+{
+"name": "opls_144",
+"def": "[H][C;X3]",
+"overrides": [],
+"element": "H",
+"class": "HC",
+"desc": "alkene H"
+},
+{
+"name": "opls_145",
+"def": "[C;X3;r6]1[C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6]1",
+"overrides": [
+"opls_141",
+"opls_142"
+],
+"element": "C",
+"class": "CA",
+"desc": ""
+},
+{
+"name": "opls_146",
+"def": "[H][C;%opls_145]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "benzene H"
+},
+{
+"name": "opls_147",
+"def": "[C;R2;X3]([C,%opls_263])([C;R2;X3])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Naphthalene ring fusion C"
+},
+{
+"name": "opls_148",
+"def": "[C;X4]([C;%opls_145])(H)(H)H",
+"overrides": [
+"opls_149",
+"opls_135"
+],
+"element": "C",
+"class": "CT",
+"desc": "toluene CH3"
+},
+{
+"name": "opls_149",
+"def": "[C;X4]([C;%opls_145])(H)(H)*",
+"overrides": [
+"opls_136"
+],
+"element": "C",
+"class": "CT",
+"desc": "ethyl benzene CH2"
+},
+{
+"name": "opls_151",
+"def": "[Cl][C;X4](C)(H)(H)",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "Cl in singly-substituted alkyl chlorides"
+},
+{
+"name": "opls_151a",
+"def": "[Cl][C;X4]([Cl])([C,H])(H)",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "Cl in double-substituted alkyl chlorides"
+},
+{
+"name": "opls_151b",
+"def": "[Cl][C;X4]([Cl])([Cl])([C,H])",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "Cl in triple-substituted alkyl chlorides"
+},
+{
+"name": "opls_151c",
+"def": "[Cl][C;X4]([Cl])([F])([C,H])",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "Cl in chloro-fluoro alkyl"
+},
+{
+"name": "opls_152",
+"def": "[C;X4]([Cl])([C,H])(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "RCH2Cl in singly-substituted alkyl chlorides"
+},
+{
+"name": "opls_152a",
+"def": "[C;X4]([I])(C)([C,H])H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "R-CH2-I in singly-substituted alkyl iodides"
+},
+{
+"name": "opls_152b",
+"def": "[C;X4]([Cl])([Cl])([C,H])(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "RCHCl2 in double-substituted alkyl chlorides"
+},
+{
+"name": "opls_152c",
+"def": "[C;X4]([Cl])([Cl])([Cl])([C,H])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "RCHCl3 in triple-substituted alkyl chlorides"
+},
+{
+"name": "opls_152d",
+"def": "[C;X4]([Br])([C,H])(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "RCH2Br in singly-substituted alkyl bromides"
+},
+{
+"name": "opls_152e",
+"def": "[C;X4]([Br])([Br])([C,H])(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "RCHBr2 in double-substituted alkyl bromides"
+},
+{
+"name": "opls_153",
+"def": "[H][C;%opls_152,%opls_152d]",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H in singly-substituted alkyl chlorides and bromides"
+},
+{
+"name": "opls_153a",
+"def": "[H]([C;X4;%opls_152a])",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H in alkyl iodides"
+},
+{
+"name": "opls_153b",
+"def": "[H]([C;X4;%opls_152b,%opls_152e,%opls_959])",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H in double-substituded alkyl chlorides and bromides"
+},
+{
+"name": "opls_153c",
+"def": "[H]([C;X4;%opls_152c])",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H in triple-substituded alkyl chlorides"
+},
+{
+"name": "opls_154",
+"def": "[O;X2](H)([C])",
+"overrides": [],
+"element": "O",
+"class": "OH",
+"desc": "all-atom O: mono alcohols"
+},
+{
+"name": "opls_155",
+"def": "H[O;%opls_154]",
+"overrides": [],
+"element": "H",
+"class": "HO",
+"desc": "all-atom H(O): mono alcohols, OP(=O)2"
+},
+{
+"name": "opls_156",
+"def": "HC(H)(H)OH",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "all-atom H(C): methanol"
+},
+{
+"name": "opls_157",
+"def": "[C;X4]([H])([H])([*])[O;%opls_154]",
+"overrides": [
+"opls_136",
+"opls_159",
+"opls_158"
+],
+"element": "C",
+"class": "CT",
+"desc": "all-atom C: CH3 and CH2, alcohols"
+},
+{
+"name": "opls_158",
+"def": "[C;X4]([H])[O;%opls_154]",
+"overrides": [
+"opls_136",
+"opls_159"
+],
+"element": "C",
+"class": "CT",
+"desc": "Carbon in 2R-C(H)-OH"
+},
+{
+"name": "opls_159",
+"def": "[C;X4][O;%opls_154]",
+"overrides": [
+"opls_136"
+],
+"element": "C",
+"class": "CT",
+"desc": "Carbon in 3R-C-OH"
+},
+{
+"name": "opls_166",
+"def": "[C;X3;r6]1(OH)[C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6]1",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": ""
+},
+{
+"name": "opls_167",
+"def": "O(H)[C;%opls_166]",
+"overrides": [
+"opls_154"
+],
+"element": "O",
+"class": "OH",
+"desc": ""
+},
+{
+"name": "opls_168",
+"def": "H[O;%opls_167]",
+"overrides": [
+"opls_155"
+],
+"element": "H",
+"class": "HO",
+"desc": ""
+},
+{
+"name": "opls_171",
+"def": "[O;X2]([%opls_173,%opls_174])(H)",
+"overrides": [
+"opls_154"
+],
+"element": "O",
+"class": "OH",
+"desc": "O in triols"
+},
+{
+"name": "opls_172",
+"def": "[H;X1]([O;%opls_171])",
+"overrides": [
+"opls_155"
+],
+"element": "H",
+"class": "HO",
+"desc": "H(O) in triols"
+},
+{
+"name": "opls_173",
+"def": "[C;X4]([H])([H])([O;X2]([H]))([C;X4]([O;X2]([H]))([C;X4]([O;X2]([H]))))",
+"overrides": [
+"opls_157",
+"opls_158"
+],
+"element": "C",
+"class": "CT",
+"desc": "C(H2)(OH) in propane triols"
+},
+{
+"name": "opls_174",
+"def": "[C;X4]([H])([O;X2]([H]))([C;X4]([O;X2]))([C;X4]([O;X2]))",
+"overrides": [
+"opls_158"
+],
+"element": "C",
+"class": "CT",
+"desc": "C(HROH) in triols (central C in glycerol)"
+},
+{
+"name": "opls_176",
+"def": "[H][%opls_173,%opls_174]",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H(CXOH): triols"
+},
+{
+"name": "opls_179",
+"def": "[O;X2]([C;X3;r6])([C;X4])",
+"overrides": [
+"opls_180"
+],
+"element": "O",
+"class": "OS",
+"desc": "ether oxygen bonded to an alkyl and aryl group (anisole)"
+},
+{
+"name": "opls_180",
+"def": "[O;X2](C)C",
+"overrides": [],
+"element": "O",
+"class": "OS",
+"desc": "O, dialkyl ether"
+},
+{
+"name": "opls_181",
+"def": "[C;X4]([O;%opls_180])(H)(H)H",
+"overrides": [
+"opls_182"
+],
+"element": "C",
+"class": "CT",
+"desc": "C(H3OR), methyl ether"
+},
+{
+"name": "opls_182",
+"def": "[C;X4]([O;%opls_180])(H)(H)C",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "C(H2OR), methyl ether"
+},
+{
+"name": "opls_183",
+"def": "[C;X4]([O;%opls_180])(C)(C)H",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "Central Carbon in Isopropyl group attached to Oxygen in ether"
+},
+{
+"name": "opls_184",
+"def": "[C;X4]([O;%opls_180])(C)(C)(C)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "Central Carbon in t-butyl group attached to Oxygen in ether"
+},
+{
+"name": "opls_185",
+"def": "HC[O;%opls_180]",
+"overrides": [
+"opls_144",
+"opls_176",
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H(COR), alpha H ether"
+},
+{
+"name": "opls_186",
+"def": "[O;X2][C;%opls_193](O)(C)H",
+"overrides": [
+"opls_180"
+],
+"element": "O",
+"class": "OS",
+"desc": "O: acetal ether"
+},
+{
+"name": "opls_189",
+"def": "[C;X4]([O;%opls_180])([O;%opls_180])(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CO",
+"desc": "Central carbon in dimethoxymethane"
+},
+{
+"name": "opls_190",
+"def": "H([%opls_189])",
+"overrides": [
+"opls_185"
+],
+"element": "H",
+"class": "HC",
+"desc": "H bonded to opls_189 in dimethoxymethane"
+},
+{
+"name": "opls_193",
+"def": "[C;X4](O)(O)(C)H",
+"overrides": [],
+"element": "C",
+"class": "CO",
+"desc": "C(HCO2), acetal OCHRO"
+},
+{
+"name": "opls_194",
+"def": "H[C;%opls_193][O;%opls_186]",
+"overrides": [
+"opls_185"
+],
+"element": "H",
+"class": "HC",
+"desc": "H(CHO2), acetal OCHRO"
+},
+{
+"name": "opls_199",
+"def": "[C;X3;r6]([O;X2]([C;X4](H)(H)(H)))([C;X3;r6])([C;X3;r6])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Aromatic C bonded to O-Me in anisole"
+},
+{
+"name": "opls_200",
+"def": "[S;X2]H",
+"overrides": [
+"opls_202"
+],
+"element": "S",
+"class": "SH",
+"desc": "S in any Thiol"
+},
+{
+"name": "opls_201",
+"def": "[S;X2](H)(H)",
+"overrides": [
+"opls_200",
+"opls_202"
+],
+"element": "S",
+"class": "SH",
+"desc": "S in H2S"
+},
+{
+"name": "opls_202",
+"def": "[S;X2]",
+"overrides": [],
+"element": "S",
+"class": "S",
+"desc": "S in any sulfide"
+},
+{
+"name": "opls_203",
+"def": "[S;X2](S)",
+"overrides": [
+"opls_200",
+"opls_202"
+],
+"element": "S",
+"class": "S",
+"desc": "S in Disulfide"
+},
+{
+"name": "opls_204",
+"def": "[H;X1]([S;%opls_200])",
+"overrides": [],
+"element": "H",
+"class": "HS",
+"desc": "H in any Thiol"
+},
+{
+"name": "opls_205",
+"def": "[H;X1]([S;%opls_201])",
+"overrides": [
+"opls_204"
+],
+"element": "H",
+"class": "HS",
+"desc": "H in H2S"
+},
+{
+"name": "opls_206",
+"def": "[C;X4]([S;%opls_200])(H)(H)",
+"overrides": [
+"opls_207",
+"opls_208",
+"opls_210"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in R-CH2-S-H"
+},
+{
+"name": "opls_207",
+"def": "[C;X4]([S;%opls_200])(H)([!H])([!H])",
+"overrides": [
+"opls_208",
+"opls_211"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in 2R-CH-S-H"
+},
+{
+"name": "opls_208",
+"def": "[C;X4]([S;%opls_200])",
+"overrides": [
+"opls_212"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in 3R-C-S-H"
+},
+{
+"name": "opls_209",
+"def": "[C;X4]([S;%opls_202])(H)(H)(H)",
+"overrides": [
+"opls_210",
+"opls_211",
+"opls_212"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in CH3-S-*"
+},
+{
+"name": "opls_210",
+"def": "[C;X4]([S;%opls_202])(H)(H)",
+"overrides": [
+"opls_211",
+"opls_212"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in R-CH2-S-*"
+},
+{
+"name": "opls_211",
+"def": "[C;X4]([S;%opls_202])(H)",
+"overrides": [
+"opls_212"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in 2R-CH-S-*"
+},
+{
+"name": "opls_212",
+"def": "[C;X4]([S;%opls_202])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "C in 3R-C-S-*"
+},
+{
+"name": "opls_213",
+"def": "[C;X4]([S;%opls_203])(H)(H)(H)",
+"overrides": [
+"opls_214",
+"opls_215",
+"opls_216",
+"opls_209"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in CH3-S-S-*"
+},
+{
+"name": "opls_214",
+"def": "[C;X4]([S;%opls_203])(H)(H)",
+"overrides": [
+"opls_215",
+"opls_216",
+"opls_210"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in R-CH2-S-S-*"
+},
+{
+"name": "opls_215",
+"def": "[C;X4]([S;%opls_203])(H)",
+"overrides": [
+"opls_216",
+"opls_211"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in 2R-CH-S-S-*"
+},
+{
+"name": "opls_216",
+"def": "[C;X4][S;%opls_203]",
+"overrides": [
+"opls_212"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in 3R-C-S-S-*"
+},
+{
+"name": "opls_217",
+"def": "[C;X4]([S;%opls_200])(H)(H)(H)",
+"overrides": [
+"opls_211",
+"opls_207",
+"opls_209",
+"opls_206"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in CH3-S-H (methanethiol)"
+},
+{
+"name": "opls_218",
+"def": "[C;X4]([C;%opls_221])(O)(H)(H)",
+"overrides": [
+"opls_149",
+"opls_157",
+"opls_158"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in CH2OH in benzyl alcohols"
+},
+{
+"name": "opls_221",
+"def": "[C;X3;r6]([C;X3;r6])([C;X3;r6])([C;X4](O)(H)(H))",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Aromatic C(CH2OH) in benzyl alcohols"
+},
+{
+"name": "opls_226",
+"def": "[Cl;X1]([C;%opls_227])",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "chloroalkene Cl"
+},
+{
+"name": "opls_227",
+"def": "[C;X3;!r6;!r5]([C;X3;!r6;!r5](H)(H))(Cl)(Cl)",
+"overrides": [],
+"element": "C",
+"class": "CM",
+"desc": "chloroalkene C (ClH-C=)"
+},
+{
+"name": "opls_232",
+"def": "[C;X3]([O;X1])([C;X3;r6])[H]",
+"overrides": [
+"opls_277"
+],
+"element": "C",
+"class": "C_2",
+"desc": "Carbon in C=0 group of benzaldehyde,acetophenone"
+},
+{
+"name": "opls_233",
+"def": "[C;X3]([O;X1])([C;X3;r6])(C)",
+"overrides": [
+"opls_280"
+],
+"element": "C",
+"class": "C_2",
+"desc": "Carbonyl carbon in acetophenone"
+},
+{
+"name": "opls_235",
+"def": "[C;X3]([O;X1])[N;X3]",
+"overrides": [
+"opls_277"
+],
+"element": "C",
+"class": "C",
+"desc": "C=O in amide, dmf, peptide bond"
+},
+{
+"name": "opls_236",
+"def": "O[C;%opls_235]",
+"overrides": [
+"opls_278"
+],
+"element": "O",
+"class": "O",
+"desc": "O: C=O in amide.   Acyl R on C in amide is neutral -"
+},
+{
+"name": "opls_237",
+"def": "[N;X3](H)(H)[C;%opls_235]",
+"overrides": [
+"opls_900"
+],
+"element": "N",
+"class": "N",
+"desc": "primary amide N, ex. carboxamide"
+},
+{
+"name": "opls_238",
+"def": "[N;X3](H)(C)[C;%opls_235]",
+"overrides": [],
+"element": "N",
+"class": "N",
+"desc": "secondary amide N, ex. N-methyl acetamide"
+},
+{
+"name": "opls_239",
+"def": "[N;X3](C)(C)[C;%opls_235]",
+"overrides": [],
+"element": "N",
+"class": "N",
+"desc": "tertiary amide N, ex. acetamide"
+},
+{
+"name": "opls_240",
+"def": "[H;X1][N;%opls_237]",
+"overrides": [
+"opls_909"
+],
+"element": "H",
+"class": "H",
+"desc": "H on a primary nitrogen in amide"
+},
+{
+"name": "opls_241",
+"def": "[H;X1][N;%opls_238]",
+"overrides": [],
+"element": "H",
+"class": "H",
+"desc": "H on a secondary nitrogen in amide"
+},
+{
+"name": "opls_242",
+"def": "[C;X4](H)(H)(H)[N;%opls_238]",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "methyl C attached to secondary N in amide"
+},
+{
+"name": "opls_243",
+"def": "[C;X4](H)(H)(H)[N;%opls_239]",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "methyl C attached to tertiary N in amide"
+},
+{
+"name": "opls_245",
+"def": "[C;X4](C)(H)(H)[N;%opls_239]",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "secondary C attached to tertiary N. ex. NMP."
+},
+{
+"name": "opls_260",
+"def": "[C;X3;r6]([C;X2;%opls_261])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Benzonitrile: Carbon on aromatic ring attached to CN"
+},
+{
+"name": "opls_261",
+"def": "[C;X2]([C;X3;r6])",
+"overrides": [
+"opls_754"
+],
+"element": "C",
+"class": "CZ",
+"desc": "Benzonitrile: carbon in nitrile group (CN) "
+},
+{
+"name": "opls_262",
+"def": "[N;X1][C;%opls_261]",
+"overrides": [
+"opls_753"
+],
+"element": "N",
+"class": "NZ",
+"desc": "Benzonitrile Nitrogen(benzene-C)N"
+},
+{
+"name": "opls_263",
+"def": "[C;X3;r6]1(Cl)[C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6]1",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Chlorobenzene C(Cl)"
+},
+{
+"name": "opls_264",
+"def": "[Cl;X1]([C;%opls_263])",
+"overrides": [
+"opls_401"
+],
+"element": "Cl",
+"class": "Cl",
+"desc": "Chlorobenzene (C)Cl"
+},
+{
+"name": "opls_267",
+"def": "[C;X3]([O;X1])OH",
+"overrides": [
+"opls_277",
+"opls_271",
+"opls_465"
+],
+"element": "C",
+"class": "C",
+"desc": "Co in CCOOH"
+},
+{
+"name": "opls_268",
+"def": "[O;X2]([C;%opls_267])H",
+"overrides": [
+"opls_154"
+],
+"element": "O",
+"class": "OH",
+"desc": "Oh in CCOOH"
+},
+{
+"name": "opls_269",
+"def": "[O;X1]([C;%opls_267](OH))",
+"overrides": [
+"opls_278",
+"opls_272"
+],
+"element": "O",
+"class": "O_3",
+"desc": "Oc in CCOOH"
+},
+{
+"name": "opls_270",
+"def": "H([O;%opls_268])",
+"overrides": [
+"opls_155"
+],
+"element": "H",
+"class": "HO",
+"desc": "H in CCOOH"
+},
+{
+"name": "opls_271",
+"def": "[C;X3]([O;X1])([O;X1])",
+"overrides": [],
+"element": "C",
+"class": "C",
+"desc": "acetate C in COO-"
+},
+{
+"name": "opls_272",
+"def": "[O;X1]([C;%opls_271])",
+"overrides": [],
+"element": "O",
+"class": "O_3",
+"desc": "O- in acetate group COO-"
+},
+{
+"name": "opls_277",
+"def": "[C;X3]([O;X1])H",
+"overrides": [],
+"element": "C",
+"class": "C_2",
+"desc": "C in aldehyde"
+},
+{
+"name": "opls_278",
+"def": "[O;X1][C;%opls_277]",
+"overrides": [],
+"element": "O",
+"class": "O_2",
+"desc": "O in aldehyde"
+},
+{
+"name": "opls_279",
+"def": "H([C;X3]([O;X1])([N,C,O,H]))",
+"overrides": [
+"opls_185",
+"opls_144",
+"opls_485"
+],
+"element": "H",
+"class": "HC",
+"desc": "H bonded to primary C in aldehyde and formamide"
+},
+{
+"name": "opls_280",
+"def": "[C;X3]([O;X1])(C)C",
+"overrides": [],
+"element": "C",
+"class": "C_2",
+"desc": "C in ketone"
+},
+{
+"name": "opls_281",
+"def": "[O;X1]([C;%opls_280])",
+"overrides": [],
+"element": "O",
+"class": "O_2",
+"desc": "O in ketone"
+},
+{
+"name": "opls_282",
+"def": "HC[C;%opls_277,%opls_280,%opls_465;!%opls_267;!%opls_233]",
+"overrides": [
+"opls_140",
+"opls_144"
+],
+"element": "H",
+"class": "HC",
+"desc": "H on C-alpha in ketone and aldehyde"
+},
+{
+"name": "opls_401",
+"def": "[Cl]",
+"overrides": [],
+"element": "Cl",
+"class": "opls_401",
+"desc": "Chloride Ion(Cl-)"
+},
+{
+"name": "opls_406",
+"def": "Li",
+"overrides": [],
+"element": "Li",
+"class": "opls_406",
+"desc": "Li+ cation"
+},
+{
+"name": "opls_440",
+"def": "[P;X4]([O;X1])([O;X2])([O;X2])",
+"overrides": [],
+"element": "P",
+"class": "P",
+"desc": "P in akyl-phosphates"
+},
+{
+"name": "opls_441",
+"def": "[O;X1][P;X4]",
+"overrides": [],
+"element": "O",
+"class": "O2",
+"desc": "Oxygen in O=P phosphates"
+},
+{
+"name": "opls_442",
+"def": "[O;X2]([P;X4]([O;X1])([O;X2])([O;X2]))[#6]",
+"overrides": [],
+"element": "O",
+"class": "OS",
+"desc": "O in akyl-phosphates bonded to akyl group"
+},
+{
+"name": "opls_443",
+"def": "[C;X4][O;X2][P;X4]([O;X2])([O;X2])(O)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "Carbon in dimethyl or trimethyl phosphate"
+},
+{
+"name": "opls_444",
+"def": "[H][C;%opls_443;X4]",
+"overrides": [
+"opls_140",
+"opls_176"
+],
+"element": "H",
+"class": "HC",
+"desc": "H bonded to opls_443 in akyl-phosphate"
+},
+{
+"name": "opls_465",
+"def": "[C;X3]([O;X1])([O;X2])",
+"overrides": [
+"opls_277"
+],
+"element": "C",
+"class": "C_2",
+"desc": "C in C=O in ester"
+},
+{
+"name": "opls_466",
+"def": "[O;X1]([C;%opls_465]([O;%opls_467]))",
+"overrides": [
+"opls_278"
+],
+"element": "O",
+"class": "O_2",
+"desc": "O in C=O in ester"
+},
+{
+"name": "opls_467",
+"def": "[O;X2]([C;%opls_465])([!H])",
+"overrides": [
+"opls_180"
+],
+"element": "O",
+"class": "OS",
+"desc": "O connected to R of O=C-O-R in esters"
+},
+{
+"name": "opls_468",
+"def": "[C;X4]([O;%opls_467])(H)(H)H",
+"overrides": [
+"opls_181"
+],
+"element": "C",
+"class": "CT",
+"desc": "methoxy C in esters"
+},
+{
+"name": "opls_469",
+"def": "H[C;%opls_468,%opls_490]",
+"overrides": [
+"opls_185",
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "methoxy Hs in esters; alpha-alkoxy hydrogen"
+},
+{
+"name": "opls_471",
+"def": "[C;X3]([O;X2]([C;X4](H)(H)(H)))([O;X1])([C;X3;r6])",
+"overrides": [
+"opls_465"
+],
+"element": "C",
+"class": "C",
+"desc": "Co in methyl benzoate, aryl ester"
+},
+{
+"name": "opls_472",
+"def": "[C;X3;r6]([O;%opls_473])",
+"overrides": [
+"opls_145",
+"opls_147"
+],
+"element": "C",
+"class": "CA",
+"desc": "Aromatic C bonded to opls_473"
+},
+{
+"name": "opls_473",
+"def": "[O;X2]([C;X3;r6])([C;X3;r6])",
+"overrides": [
+"opls_180"
+],
+"element": "O",
+"class": "OS",
+"desc": "O linkage in phenyl ether"
+},
+{
+"name": "opls_484",
+"def": "[C;X4]([S;X4](O)(O))(C)(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "C bonded to SO2 in sulfolane"
+},
+{
+"name": "opls_485",
+"def": "H[!%opls_136;%opls_484]",
+"overrides": [
+"opls_140",
+"opls_146"
+],
+"element": "H",
+"class": "HC",
+"desc": ""
+},
+{
+"name": "opls_490",
+"def": "[C;X4]([O;%opls_467])(H)(H)C",
+"overrides": [
+"opls_182"
+],
+"element": "C",
+"class": "CT",
+"desc": "ethoxy carbon; C(H2OS) ethyl ester"
+},
+{
+"name": "opls_493",
+"def": "[S;X4]([#6])([#6])([O;X1])([O;X1])",
+"overrides": [],
+"element": "S",
+"class": "SY2",
+"desc": "Sulfur in sulfone"
+},
+{
+"name": "opls_494",
+"def": "[O;X1][S;X4]([O;X1])([#6])([#6])",
+"overrides": [],
+"element": "O",
+"class": "OY",
+"desc": "Oxygen in sulfone"
+},
+{
+"name": "opls_496",
+"def": "[S;X3]([O;%opls_497])(C)(C)",
+"overrides": [],
+"element": "S",
+"class": "SZ",
+"desc": "sulfoxide - all atom"
+},
+{
+"name": "opls_497",
+"def": "[O;X1][S;X3]",
+"overrides": [],
+"element": "O",
+"class": "OY",
+"desc": "sulfoxide - all atom"
+},
+{
+"name": "opls_498",
+"def": "[C;X4]([S;X3])(H)(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CH3 all-atom C: sulfoxide"
+},
+{
+"name": "opls_518",
+"def": "[C;X3;!r6]([O;X2])([C;X3;!r6])([H])",
+"overrides": [],
+"element": "C",
+"class": "CM",
+"desc": "vinyl ether RCOR"
+},
+{
+"name": "opls_520",
+"def": "[N;X2;r6]1[C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6][C;X3;r6]1",
+"overrides": [],
+"element": "N",
+"class": "NC",
+"desc": "N in pyridine"
+},
+{
+"name": "opls_521",
+"def": "[C;X3;r6][N;%opls_520]",
+"overrides": [],
+"element": "C",
+"class": "CA",
+"desc": "C1 in pyridine"
+},
+{
+"name": "opls_522",
+"def": "[C;X3;r6][C;%opls_521]",
+"overrides": [
+"opls_142"
+],
+"element": "C",
+"class": "CA",
+"desc": "C2 in pyridine"
+},
+{
+"name": "opls_523",
+"def": "[C;X3;r6]([C;%opls_522])[C;%opls_522]",
+"overrides": [
+"opls_142",
+"opls_141"
+],
+"element": "C",
+"class": "CA",
+"desc": "C3 in pyridine"
+},
+{
+"name": "opls_524",
+"def": "H[C;%opls_521]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H1 in pyridine"
+},
+{
+"name": "opls_525",
+"def": "H[C;%opls_522]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H2 in pyridine"
+},
+{
+"name": "opls_526",
+"def": "H[C;%opls_523]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H3 in pyridine"
+},
+{
+"name": "opls_530",
+"def": "[N;X2;r6]1[C;X3;r6][C;X3;r6][C;X3;r6][N;X2;r6][C;X3;r6]1",
+"overrides": [],
+"element": "N",
+"class": "NC",
+"desc": "N in pyrimidine"
+},
+{
+"name": "opls_531",
+"def": "[C;X3;r6]([N;%opls_530])[N;%opls_530]",
+"overrides": [],
+"element": "C",
+"class": "CQ",
+"desc": "C2 in pyrimidine"
+},
+{
+"name": "opls_532",
+"def": "[C;X3;r6]([N;%opls_530])[C;X3;r6]",
+"overrides": [],
+"element": "C",
+"class": "CA",
+"desc": "C4 in pyrimidine"
+},
+{
+"name": "opls_533",
+"def": "[C;X3;r6]([C;%opls_532])[C;%opls_532]",
+"overrides": [
+"opls_142"
+],
+"element": "C",
+"class": "CA",
+"desc": "C5 in pyrimidine"
+},
+{
+"name": "opls_534",
+"def": "H[C;%opls_531]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H2 in pyrimidine"
+},
+{
+"name": "opls_535",
+"def": "H[C;%opls_532]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H4 in pyrimidine"
+},
+{
+"name": "opls_536",
+"def": "H[C;%opls_533]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H5 in pyrimidine"
+},
+{
+"name": "opls_542",
+"def": "[N;X3;r5]1[C;X3;r5][C;X3;r5][C;X3;r5][C;X3;r5]1H",
+"overrides": [],
+"element": "N",
+"class": "NA",
+"desc": "N in pyrrole"
+},
+{
+"name": "opls_543",
+"def": "[C;X3;r5]([N;%opls_542])",
+"overrides": [],
+"element": "C",
+"class": "CW",
+"desc": "C2 in pyrrole"
+},
+{
+"name": "opls_544",
+"def": "[C;X3;r5]([C;%opls_543])",
+"overrides": [
+"opls_142",
+"opls_141"
+],
+"element": "C",
+"class": "CS",
+"desc": "C3 in pyrrole"
+},
+{
+"name": "opls_545",
+"def": "H[N;%opls_542]",
+"overrides": [],
+"element": "H",
+"class": "H",
+"desc": "H1 in pyrrole"
+},
+{
+"name": "opls_546",
+"def": "H[C;%opls_543]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H2 in pyrrole"
+},
+{
+"name": "opls_547",
+"def": "H[C;%opls_544]",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H3 in pyrrole"
+},
+{
+"name": "opls_566",
+"def": "[O;X2;r5]([C;X3;r5])([C;X3;r5])",
+"overrides": [
+"opls_180"
+],
+"element": "O",
+"class": "OS",
+"desc": "O in furan"
+},
+{
+"name": "opls_567",
+"def": "[C;X3;r5]([%opls_633,%opls_566])",
+"overrides": [
+"opls_518"
+],
+"element": "C",
+"class": "CW",
+"desc": "Aromatic C bonded to O in furan or S in thiophene"
+},
+{
+"name": "opls_568",
+"def": "[C;X3;r5]([C;%opls_567])([C;X3;r5])",
+"overrides": [
+"opls_142"
+],
+"element": "C",
+"class": "CS",
+"desc": "Aromatic C not bonded to O in furan or S in thiophene"
+},
+{
+"name": "opls_569",
+"def": "[H]([%opls_567])",
+"overrides": [
+"opls_185",
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H bonded to opls_567 in furan"
+},
+{
+"name": "opls_570",
+"def": "[H]([%opls_568])",
+"overrides": [
+"opls_144"
+],
+"element": "H",
+"class": "HA",
+"desc": "H bonded to opls_568 in furan"
+},
+{
+"name": "opls_633",
+"def": "[S;r5;X2]([C;r5;X3])([C;r5;X3])",
+"overrides": [
+"opls_202"
+],
+"element": "S",
+"class": "S",
+"desc": "Sulfur in thiophene or thiazole"
+},
+{
+"name": "opls_670",
+"def": "[C;X4]([C;%opls_521])(H)(H)(H)",
+"overrides": [
+"opls_135"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3,2-methyl pyridine"
+},
+{
+"name": "opls_672",
+"def": "[C;X4]([C;%opls_522])(H)(H)(H)",
+"overrides": [
+"opls_135"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3, 3-methyl pyridazine"
+},
+{
+"name": "opls_674",
+"def": "[C;X4]([C;X3;r6]([C;X3;r6]([C;X3;r6](N))))(H)(H)(H)",
+"overrides": [
+"opls_135",
+"opls_148"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3, 4-methyl pyrimidine"
+},
+{
+"name": "opls_678",
+"def": "[C;X4](H)(H)(H)[C;%opls_543]",
+"overrides": [
+"opls_679"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3, 2-methyl pyrrole"
+},
+{
+"name": "opls_679",
+"def": "[C;X4](H)(H)[C;%opls_543]",
+"overrides": [
+"opls_136"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH2, 2-ethyl pyrrole"
+},
+{
+"name": "opls_711",
+"def": "[C;X4;r3]1(H)(H)[C;X4;r3][C;X4;r3]1",
+"overrides": [
+"opls_136",
+"opls_712"
+],
+"element": "C",
+"class": "CY",
+"desc": ""
+},
+{
+"name": "opls_712",
+"def": "[C;X4;r3]1(H)[C;X4;r3][C;X4;r3]1",
+"overrides": [
+"opls_137",
+"opls_713"
+],
+"element": "C",
+"class": "CY",
+"desc": ""
+},
+{
+"name": "opls_713",
+"def": "[C;X4;r3]1[C;X4;r3][C;X4;r3]1",
+"overrides": [],
+"element": "C",
+"class": "CY",
+"desc": ""
+},
+{
+"name": "opls_718",
+"def": "[C;X3;r6](F)([C;%opls_145])([C;%opls_145])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Aromatic C in fluorobenzene"
+},
+{
+"name": "opls_719",
+"def": "F[C;%opls_718]",
+"overrides": [
+"opls_965"
+],
+"element": "F",
+"class": "F",
+"desc": "F(C) in fluorobenzene"
+},
+{
+"name": "opls_720",
+"def": "[C;X3;r6]([F])([C;r6](F))([C;r6](F))",
+"overrides": [
+"opls_145",
+"opls_718",
+"opls_727"
+],
+"element": "C",
+"class": "CA",
+"desc": "Central C-ar in c(F)-c(F)-c(F) (tetra, hexafluorobenzene)"
+},
+{
+"name": "opls_721",
+"def": "[F;X1]([C;%opls_720])",
+"overrides": [
+"opls_719",
+"opls_728"
+],
+"element": "F",
+"class": "F",
+"desc": "F(C) in hexafluorobenzene"
+},
+{
+"name": "opls_722",
+"def": "[Br;X1]([C;%opls_152d])",
+"overrides": [],
+"element": "Br",
+"class": "Br",
+"desc": "Br in single-substituted alkyl bromide"
+},
+{
+"name": "opls_722a",
+"def": "[Br;X1]([C;%opls_152e])",
+"overrides": [],
+"element": "Br",
+"class": "Br",
+"desc": "Br in alkyl bromide"
+},
+{
+"name": "opls_724",
+"def": "[C;X3;r6]([C;%opls_725])([C;X3;r6])([C;X3;r6])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Benzene C bonded to -CF3 (opls_725)"
+},
+{
+"name": "opls_725",
+"def": "[C;X4](F)(F)(F)([C;X3;r6])",
+"overrides": [
+"opls_672",
+"opls_961"
+],
+"element": "C",
+"class": "CT",
+"desc": "C in F3-C-benzene (trifluoro benzene)"
+},
+{
+"name": "opls_726",
+"def": "[F;X1]([C;%opls_725])",
+"overrides": [
+"opls_965"
+],
+"element": "F",
+"class": "F",
+"desc": "F in tri-fluoro methyl groups"
+},
+{
+"name": "opls_727",
+"def": "[C;X3;r6](F)([C;X3;r6](F))([%opls_145])",
+"overrides": [
+"opls_145",
+"opls_718"
+],
+"element": "C",
+"class": "CA",
+"desc": "C(F) in C-C(F)-C(F)-C (difluorobenzene)"
+},
+{
+"name": "opls_728",
+"def": "[F;X1]([C;%opls_727])",
+"overrides": [
+"opls_719"
+],
+"element": "F",
+"class": "F",
+"desc": "F in F(C)-F(C) (difluorobenzene)"
+},
+{
+"name": "opls_732",
+"def": "[I;X1][C;X4](C)(C)(H)",
+"overrides": [],
+"element": "I",
+"class": "I",
+"desc": "I in Iodopropane"
+},
+{
+"name": "opls_734",
+"def": "[S;X2]([C;X3;r6])(H)",
+"overrides": [
+"opls_200"
+],
+"element": "S",
+"class": "SH",
+"desc": "Thiol with R group in aromatic ring"
+},
+{
+"name": "opls_735",
+"def": "[C;X3;r6]([S]([H]))([C;X3;r6])([C;X3;r6])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Aromatic C bonded to SH (opls_734)"
+},
+{
+"name": "opls_753",
+"def": "[N;X1]C",
+"overrides": [],
+"element": "N",
+"class": "NZ",
+"desc": "N in RCN nitriles"
+},
+{
+"name": "opls_754",
+"def": "[C;X2][N;%opls_753]",
+"overrides": [],
+"element": "C",
+"class": "CZ",
+"desc": "C in RCN nitriles"
+},
+{
+"name": "opls_755",
+"def": "[C;X4](H)(H)(H)[C;%opls_754]",
+"overrides": [
+"opls_135",
+"opls_756"
+],
+"element": "C",
+"class": "CT",
+"desc": "C of CH3 in CH3CN"
+},
+{
+"name": "opls_756",
+"def": "[C;X4](H)(H)[C;%opls_754]",
+"overrides": [
+"opls_136",
+"opls_757"
+],
+"element": "C",
+"class": "CT",
+"desc": "C of CH2 in RCH2CN"
+},
+{
+"name": "opls_757",
+"def": "[C;X4](H)[C;%opls_754]",
+"overrides": [
+"opls_137",
+"opls_758"
+],
+"element": "C",
+"class": "CT",
+"desc": "C of CH in R2CHCN"
+},
+{
+"name": "opls_758",
+"def": "[C;X4][C;%opls_754]",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "C of C in R3CCN"
+},
+{
+"name": "opls_759",
+"def": "HC[C;%opls_754]",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "HC-CT-CN alpha-H in nitriles"
+},
+{
+"name": "opls_760",
+"def": "[N;X3]([O;X1])([O;X1])",
+"overrides": [
+"opls_239"
+],
+"element": "N",
+"class": "NO",
+"desc": "N in nitro R-NO2"
+},
+{
+"name": "opls_761",
+"def": "[O;X1][N][O;X1]",
+"overrides": [],
+"element": "O",
+"class": "ON",
+"desc": "O in nitro R-NO2"
+},
+{
+"name": "opls_762",
+"def": "[C;X4](H)(H)(H)[N;%opls_760]",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CT-NO2 nitromethane"
+},
+{
+"name": "opls_763",
+"def": "H([C;X4][N;%opls_760])",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "HC-CT-NO2 alpha-H in nitroalkanes"
+},
+{
+"name": "opls_764",
+"def": "[C;X4](C)(H)(H)[N;%opls_760]",
+"overrides": [
+"opls_136"
+],
+"element": "C",
+"class": "CT",
+"desc": "CT-NO2 nitroethane"
+},
+{
+"name": "opls_765",
+"def": "[C;X4]([N;X3](O)(O))([C;X4])([C;X4])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CT-NO2 2-nitropropane"
+},
+{
+"name": "opls_767",
+"def": "[N;X3]([O;X1])([O;X1])[C;X3;r6]",
+"overrides": [
+"opls_760"
+],
+"element": "N",
+"class": "NO",
+"desc": "N in nitro Ar-NO2"
+},
+{
+"name": "opls_768",
+"def": "[C;X3;r6][N;%opls_767]",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "C(NO2) nitrobenzene"
+},
+{
+"name": "opls_771",
+"def": "[O;X1][C;X3;%opls_772]",
+"overrides": [
+"opls_466"
+],
+"element": "O",
+"class": "O",
+"desc": "propylene carbonate O (Luciennes param.)"
+},
+{
+"name": "opls_772",
+"def": "[C;X3;r5]1[O;X2;r5][C;X4;r5][C;X4;r5][O;X2;r5]1",
+"overrides": [
+"opls_465"
+],
+"element": "C",
+"class": "C",
+"desc": "propylene carbonate C=O"
+},
+{
+"name": "opls_773",
+"def": "[O;X2;r5]1[C;X4;r5][C;X4;r5][O;X2;r5][C;X3;r5]1",
+"overrides": [
+"opls_180",
+"opls_467"
+],
+"element": "O",
+"class": "OS",
+"desc": "propylene OS"
+},
+{
+"name": "opls_774",
+"def": "[C;X4;r5]1(H)(H)[C;X4;r5][O;X2;r5][C;X3;r5][O;X2;r5]1",
+"overrides": [
+"opls_182",
+"opls_490"
+],
+"element": "C",
+"class": "CT",
+"desc": "propylene carbonate C in CH2"
+},
+{
+"name": "opls_775",
+"def": "[C;X4;r5]1(H)(C)[C;X4;r5][O;X2;r5][C;X3;r5][O;X2;r5]1",
+"overrides": [
+"opls_182",
+"opls_183"
+],
+"element": "C",
+"class": "CT",
+"desc": "propylene carbonate C in CH"
+},
+{
+"name": "opls_776",
+"def": "[C;X4](H)(H)(H)[C;%opls_775]",
+"overrides": [
+"opls_135"
+],
+"element": "C",
+"class": "CT",
+"desc": "propylene carbonate C in CH3"
+},
+{
+"name": "opls_777",
+"def": "H[C;%opls_774]",
+"overrides": [
+"opls_185",
+"opls_140",
+"opls_469"
+],
+"element": "H",
+"class": "HC",
+"desc": "propylene carbonate H in CH2"
+},
+{
+"name": "opls_778",
+"def": "H[C;%opls_775]",
+"overrides": [
+"opls_185",
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "propylene carbonate H in CH"
+},
+{
+"name": "opls_779",
+"def": "H[C;%opls_776]",
+"overrides": [
+"opls_185",
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "propylene carbonate H in CH3"
+},
+{
+"name": "opls_900",
+"def": "[N;X3](H)(H)C",
+"overrides": [],
+"element": "N",
+"class": "NT",
+"desc": "N primary amines"
+},
+{
+"name": "opls_901",
+"def": "[N;X3](H)([C;!%opls_235;!%opls_543])([C;!%opls_235;!%opls_543])",
+"overrides": [],
+"element": "N",
+"class": "NT",
+"desc": "N for secondary amines"
+},
+{
+"name": "opls_902",
+"def": "[N;X3]([C;X4])([C;X4])([C;X4])",
+"overrides": [],
+"element": "N",
+"class": "NT",
+"desc": "tertiary aliphatic amine nitrogen"
+},
+{
+"name": "opls_903",
+"def": "[C;X4](H)(H)(H)([N;%opls_900])",
+"overrides": [
+"opls_906"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3(N) primary aliphatic amines"
+},
+{
+"name": "opls_904",
+"def": "[C;X4](H)(H)(H)([N;%opls_901])",
+"overrides": [
+"opls_906"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH3(N) secondary aliphatic amines"
+},
+{
+"name": "opls_906",
+"def": "[C;X4]([N;%opls_900])(H)(H)",
+"overrides": [
+"opls_136"
+],
+"element": "C",
+"class": "CT",
+"desc": "CH2(N) primary aliphatic amines"
+},
+{
+"name": "opls_907",
+"def": "[C;X4]([N;%opls_901])(C)(H)(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CH2(N) secondary aliphatic amines, aziridine  C2,C3H"
+},
+{
+"name": "opls_908",
+"def": "[C;X4]([H])([H])([C;X4])([N;X3]([C;X4])([C;X4]))",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CH2(N) tertiary aliphatic amines"
+},
+{
+"name": "opls_909",
+"def": "H[N;%opls_900]",
+"overrides": [],
+"element": "H",
+"class": "H",
+"desc": "H(N) primary amines"
+},
+{
+"name": "opls_910",
+"def": "H[N;%opls_901]",
+"overrides": [],
+"element": "H",
+"class": "H",
+"desc": "H(N) secondary amines"
+},
+{
+"name": "opls_911",
+"def": "H([C;%opls_903,%opls_904,%opls_905,%opls_906,%opls_908,%opls_907,%opls_912,%opls_914])",
+"overrides": [
+"opls_140"
+],
+"element": "H",
+"class": "HC",
+"desc": "H(C) for C bonded to N in amines, diamines (aziridine H2,H3)"
+},
+{
+"name": "opls_912",
+"def": "[C;X4](H)([C;X4])([C;X4])([N;%opls_900])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CH in primary isopropyl amine"
+},
+{
+"name": "opls_913",
+"def": "[C;X4]([N;%opls_900](H)(H))(C)(C)(C)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "Primary carbon in tert-butylamine"
+},
+{
+"name": "opls_914",
+"def": "[C;X4]([N;%opls_901])([C;%opls_135])([C;%opls_135])(H)",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "CH secondary isopropyl amine"
+},
+{
+"name": "opls_916",
+"def": "[C;X3;r6]([N;X3](H)(H))([C;X3;r6]([Cl]))([C;X3;r6](H))",
+"overrides": [
+"opls_145",
+"opls_147"
+],
+"element": "C",
+"class": "CA",
+"desc": "C-NH2 in chloroaniline"
+},
+{
+"name": "opls_917",
+"def": "[C;X3;r6]([N;%opls_901])",
+"overrides": [
+"opls_145"
+],
+"element": "C",
+"class": "CA",
+"desc": "Carbon on benzene ring in N-Methylnitroaniline"
+},
+{
+"name": "opls_925",
+"def": "[C;X2](C)H",
+"overrides": [],
+"element": "C",
+"class": "CZ",
+"desc": "alkyne RC%CH terminal C"
+},
+{
+"name": "opls_926",
+"def": "H[C;%opls_925]",
+"overrides": [],
+"element": "H",
+"class": "HC",
+"desc": "alkyne RC%CH terminal H"
+},
+{
+"name": "opls_927",
+"def": "[C;X2](C(H)H)C",
+"overrides": [
+"opls_928"
+],
+"element": "C",
+"class": "CZ",
+"desc": "alkyne RC%CH C2 R-with 2 or 3 H"
+},
+{
+"name": "opls_930",
+"def": "H([*][C][C;%opls_925])",
+"overrides": [
+"opls_140",
+"opls_144"
+],
+"element": "H",
+"class": "HC",
+"desc": "alkyne RC%CH H on C3 (for C3 use #135-#139)"
+},
+{
+"name": "opls_959",
+"def": "[C;X4](F)(H)([Cl,Br])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "R2CHF in monoalkyl fluorides"
+},
+{
+"name": "opls_960",
+"def": "[C;X4](F)([!H])([Cl,Br])([Cl,Br])",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "R3CF in monoalkyl fluorides"
+},
+{
+"name": "opls_961",
+"def": "[C;X4](F)(F)(F)*",
+"overrides": [
+"opls_962"
+],
+"element": "C",
+"class": "CT",
+"desc": "perfluoroalkane CF3"
+},
+{
+"name": "opls_962",
+"def": "[C;X4](F)(F)(*)*",
+"overrides": [],
+"element": "C",
+"class": "CT",
+"desc": "perfluoroalkane CF2"
+},
+{
+"name": "opls_965",
+"def": "[F;X1]([C;X4])",
+"overrides": [],
+"element": "F",
+"class": "F",
+"desc": "perfluoroalkane F"
+}
+]
+}

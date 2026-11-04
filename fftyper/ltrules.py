@@ -7,7 +7,7 @@ KINDS = ("bond", "angle", "dihedral", "improper")
 NATOMS = {"bond": 2, "angle": 3, "dihedral": 4, "improper": 4}
 KIND_KO = {"bond": "결합", "angle": "결합각", "dihedral": "이면각", "improper": "improper"}
 # improper 대칭 모듈 → 중심 원자 자리 (moltemplate nbody_alt_symmetry). 나머지 셋은 순서 무관.
-IMPROPER_CENTER = {"gaff_imp.py": 2}
+IMPROPER_CENTER = {"gaff_imp.py": 2, "cenIsortJKL.py": 0}
 
 
 class LtRules:
@@ -16,6 +16,8 @@ class LtRules:
     moltemplate 는 맞는 규칙이 없는 각·이면각을 경고 없이 빼므로, 라벨을 붙인 뒤 미리 확인한다.
     규칙이 여럿 맞으면 moltemplate 는 파일에서 나중에 나온 규칙을 쓴다(remove_duplicates_nbody.py).
     규칙의 @atom 패턴은 와일드카드(*, ?)만 지원한다 (gaff2.lt, oplsaa2024.lt 형식).
+    oplsaa2024.lt 처럼 짧은 타입 이름을 replace{} 로 결합 타입이 붙은 긴 이름으로 바꾸는 파일은
+    긴 이름으로 규칙을 맞추고(full), In Charges 의 타입 전하(charges)도 읽는다.
     """
 
     def __init__(self, path):
@@ -24,6 +26,8 @@ class LtRules:
         self.rules = {k: [] for k in KINDS}       # [(계수 타입 이름, [원자 패턴…])] 파일 순서
         self.coeffs = {k: {} for k in KINDS}      # 계수 타입 이름 → "harmonic 232.5 1.5380" 같은 나머지
         self.sections = {}                        # 종류 → By Type 절 이름 (대칭 모듈 이름 포함)
+        self.full = {}                            # 짧은 타입 이름 → replace{} 의 긴 이름
+        self.charges = {}                         # 타입 → In Charges 의 전하
         section = None
         with open(path) as f:
             for line in f:
@@ -34,6 +38,10 @@ class LtRules:
                     continue
                 if s.startswith("}"):
                     section = None
+                    continue
+                m = re.match(r"replace\{\s*@atom:(\S+)\s+@atom:(\S+)\s*\}", s)
+                if m:
+                    self.full[m.group(1)] = m.group(2)
                     continue
                 if not s or section is None:
                     continue
@@ -49,6 +57,8 @@ class LtRules:
                 elif section == "In Settings" and re.match(r"(bond|angle|dihedral|improper)_coeff$", t[0]):
                     kind = t[0][:-6]
                     self.coeffs[kind][t[1].split(":", 1)[1]] = " ".join(t[2:])
+                elif section == "In Charges" and t[:2] == ["set", "type"] and t[3] == "charge":
+                    self.charges[t[2].split(":", 1)[1]] = float(t[4])
         self._exact = {k: {} for k in KINDS}      # 원자 타입 튜플 → 마지막 규칙 번호
         self._wild = {k: [] for k in KINDS}       # [(규칙 번호, 패턴)] 번호 내림차순
         for kind, rules in self.rules.items():
@@ -81,6 +91,7 @@ class LtRules:
         exact/wild 로 와일드카드 없는 규칙·있는 규칙만 볼 수 있다 (parmchk2 의 단계 구분용).
         """
         best = -1
+        names = [self.full.get(x, x) for x in names]
         for t in self.orders(kind, names):
             if exact:
                 best = max(best, self._exact[kind].get(t, -1))

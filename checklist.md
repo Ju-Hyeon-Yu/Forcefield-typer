@@ -22,10 +22,11 @@
 - [x] 재빌드, Node 10개·브라우저 9개 테스트
 
 ## 4단계 — OPLS-AA
-- [ ] foyer SMARTS 문법 엔진 (Python·JS 같은 결과)
-- [ ] foyer 규칙 → oplsaa2024 번호 대응표 (설명 대조)
-- [ ] 타입 전하, 타입 없는 원자 오류
-- [ ] foyer·참조 분자 대조, moltemplate 통합 테스트
+- [x] foyer SMARTS 판정 엔진 (Python) — 실제 foyer 와 검증 분자 182·SMILES 391 모두 같음
+- [ ] JS 이식 (Python 과 같은 결과)
+- [x] foyer 규칙 → oplsaa2024 번호 대응 (설명·매개변수 대조, 뜻이 다른 3 개·없는 12 개는 오류), OPLS/2020 짝 2 개
+- [x] 타입 전하, 타입 없는 원자 오류, 전하 합 경고
+- [x] moltemplate·LAMMPS 통합 테스트
 
 ## 5단계 — 문서·배포
 - [ ] README·README_kor
