@@ -87,7 +87,8 @@ def main(argv=None):
              "label": labels[a.GetIdx()], "q": q[a.GetIdx()], "xyz": xyz[a.GetIdx()]}
             for a in template.GetAtoms()]
     bonds = sorted(tuple(sorted((b.GetBeginAtomIdx(), b.GetEndAtomIdx()))) for b in template.GetBonds())
-    write_lt(args.out, typer, name, args.smiles, rows, bonds, charge_note)
+    extra = typer.ff_extra(template, labels) if hasattr(typer, "ff_extra") else ""
+    write_lt(args.out, typer, name, args.smiles, rows, bonds, charge_note, extra)
 
     width = max(len(r["label"]) for r in rows)
     print(f"{args.out}: {typer.LABEL}, 원자 {n}개, 결합 {len(bonds)}개, 조각 {len(frags)}개")

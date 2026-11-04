@@ -101,11 +101,13 @@ def embed(template, seed, gap=4.0):
     return xyz
 
 
-def write_lt(path, typer, name, smiles, rows, bonds, charge_note):
-    """moltemplate 단일 분자 .lt — import "<역장>.lt" + <name> inherits <역장 객체>."""
+def write_lt(path, typer, name, smiles, rows, bonds, charge_note, extra=""):
+    """moltemplate 단일 분자 .lt — import "<역장>.lt" + (역장 보충 extra) + <name> inherits <역장 객체>."""
     with open(path, "w") as f:
         f.write(f"# fftyper ({typer.LABEL}) 생성 — SMILES: {smiles}\n# 전하: {charge_note}\n\n")
         f.write(f'import "{typer.LT_FILE}"\n\n')
+        if extra:
+            f.write(extra + "\n")
         f.write(f"{name} inherits {typer.LT_OBJECT} {{\n\n")
         f.write('  write("Data Atoms") {\n')
         for r in rows:

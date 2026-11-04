@@ -9,7 +9,7 @@ from rdkit import Chem
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from fftyper import TypingError  # noqa: E402
-from fftyper import gaff2  # noqa: E402
+from fftyper import cli, gaff2  # noqa: E402
 
 REF = json.load(open(os.path.join(ROOT, "tests", "data", "gaff2_reference.json")))
 
@@ -63,8 +63,74 @@ def test_type_missing_from_gaff2_lt_raises(smiles):
 
 
 def test_missing_bonded_parameters_are_reported():
-    _, warns = gaff2.Gaff2Typer().assign(mol("CC(N)=O"))      # nt 는 gaff2.lt(2.11)에 결합 파라미터가 없음
-    assert any(w.startswith("결합 c-nt") for w in warns)
+    _, warns = gaff2.Gaff2Typer().assign(mol("N#C[N-]C#N"))   # 다이사이안아마이드: cg-n2 결합은 대응 타입도 없음
+    assert any(w.startswith("결합 cg-n2") and "오류로 멈춥니다" in w for w in warns)
+    assert any(w.startswith("결합각 n1-cg-n2") for w in warns)
+
+
+EQUA_REF = json.load(open(os.path.join(ROOT, "tests", "data", "gaff2_parmchk2_equa.json")))
+
+
+def _coeff_values(kind, text):
+    """gaff2.lt 계수 줄 → parmchk2 frcmod 와 같은 꼴의 값."""
+    t = text.split()
+    r = lambda x: round(float(x), 4)                        # noqa: E731  (정답지는 소수 4자리)
+    if kind in ("bond", "angle"):
+        return [r(t[1]), r(t[2])]
+    if kind == "dihedral":                                  # fourier n K1 n1 d1 ...
+        return sorted([r(t[2 + 3 * k]), int(t[3 + 3 * k]), r(t[4 + 3 * k])] for k in range(int(t[1])))
+    return [r(t[1]), 180.0 if int(t[2]) == -1 else 0.0, int(t[3])]           # cvff K d n
+
+
+def test_equa_fill_same_as_parmchk2():
+    """tests/parmchk2_ref.py 정답지(parmchk2 -p gaff211.dat 의 대응 타입 항)와 항 목록·값이 같아야 함.
+
+    예외 하나: gaff2.dat 2.11 에는 방향만 반대인 같은 이면각이 값이 다르게 두 번 있는 경우가 있다
+    (c-n-c3-c3 와 c3-c3-n-c). parmchk2 는 파일 앞쪽 것을, moltemplate 는 뒤쪽 규칙을 쓰므로 우리는
+    "대응 타입이었다면 moltemplate 가 쓸 값"(뒤쪽)을 따른다.
+    """
+    typer = gaff2.Gaff2Typer()
+    rules = typer.rules
+    exact = {tuple(p): n for n, p in rules.rules["dihedral"] if "*" not in "".join(p)}
+    n, diffs = 0, []
+    for smi, ref in EQUA_REF.items():
+        m = mol(smi)
+        types, _ = typer.assign(m)
+        ours = {(k, key): src for k, key, src in gaff2.equa_fill(m, types, rules)}
+        want = {(k, tuple(names)): vals for k, names, _, vals in ref}
+        if set(ours) != set(want):
+            diffs.append((smi, sorted(set(ours) ^ set(want))))
+            continue
+        for (kind, key), src in ours.items():
+            n += 1
+            exp = sorted(want[kind, key]) if kind == "dihedral" else want[kind, key]
+            got = _coeff_values(kind, rules.coeffs[kind][src])
+            if got == exp:
+                continue
+            pats = tuple(dict(rules.rules[kind])[src])
+            rev = exact.get(pats[::-1]) if kind == "dihedral" else None
+            if rev and rev != src and _coeff_values(kind, rules.coeffs[kind][rev]) == exp:
+                continue                                    # 방향만 반대인 중복 이면각 (위 설명)
+            diffs.append((smi, kind, key, src, got, exp))
+    assert n > 700
+    assert not diffs, diffs[:5]
+
+
+def test_equa_block_is_written_before_the_molecule(tmp_path):
+    out = tmp_path / "ace.lt"
+    cli.main(["--ff", "gaff2", "--smiles", "CC(N)=O", "-o", str(out)])
+    text = out.read_text()
+    assert text.index('import "gaff2.lt"') < text.index("\nGAFF2 {\n") < text.index("ace inherits GAFF2")
+    assert "bond_coeff @bond:c-nt harmonic 356.2 1.3790   # = c-n" in text
+    assert "@bond:c-nt @atom:c @atom:nt" in text
+    assert 'write_once("Data Impropers By Type (gaff_imp.py)")' in text
+    assert "@improper:c-hn-nt-hn @atom:c @atom:hn @atom:nt @atom:hn" in text
+
+
+def test_no_equa_block_when_nothing_is_missing(tmp_path):
+    out = tmp_path / "bz.lt"
+    cli.main(["--ff", "gaff2", "--smiles", "c1ccccc1", "-o", str(out)])
+    assert "\nGAFF2 {\n" not in out.read_text()
 
 
 def test_def_parser_reads_all_rules():

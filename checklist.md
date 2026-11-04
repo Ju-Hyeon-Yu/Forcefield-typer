@@ -6,11 +6,14 @@
 - [x] 기존 DREIDING 테스트(Python 55개, 웹 7개) 통과
 
 ## 2단계 — GAFF2 (Python)
-- [ ] AmberTools 26 설치(정답지), antechamber 대조 스크립트
-- [ ] bondtype(-j part) 처리, 고리·방향족(AR1~AR5) 판정 이식
-- [ ] ATOMTYPE_GFF2.DEF 해석기(원자 성질·화학 환경), cc/cd 등 공액 타입 조정
-- [ ] 넓은 분자 집합에서 antechamber 와 원자 단위 일치
-- [ ] gaff2.lt 에 없는 타입·결합 파라미터 확인, moltemplate 통합 테스트
+- [x] AmberTools 26 설치(정답지), antechamber 대조 스크립트
+- [x] bondtype(-j part) 처리, 고리·방향족(AR1~AR5) 판정 이식
+- [x] ATOMTYPE_GFF2.DEF 해석기(원자 성질·화학 환경), cc/cd 등 공액 타입 조정
+- [x] 넓은 분자 집합에서 antechamber 와 원자 단위 일치 (391 분자, 5279 원자)
+- [x] gaff2.lt 에 없는 타입 → 오류, c5·c6 → c3 (2.11 판)
+- [x] 결합 파라미터 없는 타입(ns, nt, nx …): parmchk2 EQUA 값 복사 블록을 .lt 에 함께 씀 (사용자 선택 1안)
+- [x] parmchk2 정답지 대조 (378 분자, 737 항), moltemplate·LAMMPS 통합 테스트
+- [x] AMBER(tleap+sander)와 항별 대조 — 차이는 경고된 누락·gaff2.lt 중복 이면각·CORR improper 뿐
 
 ## 3단계 — GAFF2 (JS) + HTML
 - [ ] JS 이식, Python 대조

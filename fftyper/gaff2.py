@@ -12,6 +12,7 @@
 규칙 파일 data/ATOMTYPE_GFF2.DEF 는 AmberTools 26 의 것을 그대로 담았다.
 웹 이식(web/src/gaff2.js)과 결과를 맞추기 위해 반복 순서까지 원본과 같게 둔다.
 """
+import itertools
 import json
 import os
 import re
@@ -640,12 +641,137 @@ def assign_types(z, bonds, rules=None):
 
 
 # --------------------------------------------------------------------------- moltemplate gaff2.lt
+# --------------------------------------------------------------------------- 대응 타입 파라미터 (parmchk2)
+# PARMCHK.DAT(AmberTools 26)의 EQUA 줄 — GAFF2 소문자 타입만, 파일에 적힌 순서 그대로.
+# parmchk2 는 파라미터가 없는 항을 이 "같은 타입"으로 바꿔 찾은 값을 벌점 0 으로 그대로 쓴다.
+EQUA = {
+    "c5": ["c3"], "c6": ["c3"], "cs": ["c"], "hw": ["ho"], "n+": ["n4"],
+    "n5": ["n7", "n3"], "n6": ["n7", "n3"], "n7": ["n3"], "n8": ["n3"], "n9": ["n3"],
+    "ni": ["n"], "nj": ["n"], "nk": ["nx", "n4", "ny"], "nl": ["nx", "n4", "ny"],
+    "nm": ["nh"], "nn": ["nh"], "np": ["n3"], "nq": ["n3"], "ns": ["n"], "nt": ["n"],
+    "nu": ["nh"], "nv": ["nh"], "nx": ["n4"], "ny": ["n4"], "nz": ["n4"],
+    "o2": ["o"], "op": ["os"], "oq": ["os"], "sp": ["ss"], "sq": ["ss"],
+}
+# parmchk2 의 중첩 반복 순서 (바깥 → 안쪽 자리). improper 는 중심 원자를 셋째 자리에 둔다.
+_EQUA_LOOP = {"bond": (0, 1), "angle": (1, 0, 2), "dihedral": (1, 2, 0, 3), "improper": (0, 1, 2, 3)}
+
+
+def _equa_combos(kind, types, places=None):
+    """types 의 일부를 EQUA 타입으로 바꾼 조합 (parmchk2 반복 순서, 원래 조합 제외).
+
+    places 를 주면 그 자리만 바꾼다 (일반 이면각은 가운데 두 원자만).
+    """
+    order = _EQUA_LOOP[kind]
+    lists = [[types[p]] + (EQUA.get(types[p], []) if places is None or p in places else [])
+             for p in order]
+    for combo in itertools.product(*lists):
+        t = [None] * len(types)
+        for p, x in zip(order, combo):
+            t[p] = x
+        if tuple(t) != tuple(types):
+            yield tuple(t)
+
+
+def _equa_decide(rules, kind, types):
+    """한 항의 처리: ("ok", None) 원래 규칙 있음, ("fill", 규칙 번호) 대응 타입 규칙 복사, ("miss", None).
+
+    parmchk2 의 chk_bond·chk_angle·chk_torsion 단계 순서를 따른다. 이면각은 원래 타입의 특정 규칙
+    → 대응 타입의 특정 규칙 → 원래 타입의 일반(X) 규칙 → 가운데 원자만 바꾼 일반 규칙 순이다.
+    improper 는 moltemplate(gaff_imp.py) 방식대로 바깥 세 원자 순서와 상관없이 같은 순서로 찾는다.
+    """
+    if kind in ("bond", "angle"):
+        if rules.match(kind, types) is not None:
+            return "ok", None
+        for t in _equa_combos(kind, types):
+            i = rules.match(kind, t)
+            if i is not None:
+                return "fill", i
+        return "miss", None
+    if rules.match(kind, types, wild=False) is not None:
+        return "ok", None
+    for t in _equa_combos(kind, types):
+        i = rules.match(kind, t, wild=False)
+        if i is not None:
+            return "fill", i
+    if rules.match(kind, types, exact=False) is not None:
+        return "ok", None
+    for t in _equa_combos(kind, types, places=(1, 2) if kind == "dihedral" else None):
+        i = rules.match(kind, t, exact=False)
+        if i is not None:
+            return "fill", i
+    return "miss", None
+
+
+def _canonical(kind, t, center=2):
+    """parmchk2 frcmod 의 이름 순서 (결합·각은 양 끝 알파벳 순, 이면각은 가운데 쌍 기준, improper 는
+    중심 원자를 빼고 알파벳 순)."""
+    t = tuple(t)
+    if kind == "improper":
+        outer = sorted(x for i, x in enumerate(t) if i != center)
+        outer.insert(center, t[center])
+        return tuple(outer)
+    if kind == "dihedral":
+        return t if (t[1], t[2], t[0], t[3]) <= (t[2], t[1], t[3], t[0]) else t[::-1]
+    return min(t, t[::-1])
+
+
+def equa_fill(mol, labels, rules):
+    """gaff2.lt 에 규칙이 없는 항 중 대응 타입(EQUA)으로 값을 그대로 가져올 수 있는 것.
+
+    반환: [(종류, 타입 튜플, 가져온 계수 타입 이름)] — 처음 나온 순서, 같은 타입 튜플은 한 번.
+    """
+    from .ltrules import topology
+    terms = topology(mol, rules.improper_center)
+    out, seen = [], set()
+    for kind in ("bond", "angle", "dihedral", "improper"):
+        if kind == "improper" and rules.improper_center is None:
+            continue
+        for t in terms[kind]:
+            types = tuple(labels[i] for i in t)
+            key = _canonical(kind, types, rules.improper_center)
+            if (kind, key) in seen:
+                continue
+            seen.add((kind, key))
+            what, i = _equa_decide(rules, kind, types)
+            if what == "fill":
+                src = rules.rules[kind][i][0]
+                if src in rules.coeffs[kind]:
+                    out.append((kind, key, src))
+    return out
+
+
+def equa_block(rules, adds, obj="GAFF2"):
+    """equa_fill 결과를 역장 객체에 덧붙이는 moltemplate 문장 (gaff2.lt 파일은 그대로 둠)."""
+    if not adds:
+        return ""
+    names = {}
+    lines = ["# GAFF2 2.11 에 파라미터가 없는 항 — parmchk2 처럼 대응 타입(EQUA)의 gaff2.lt 값을 그대로 복사",
+             f"{obj} {{", '  write_once("In Settings") {']
+    for kind, key, src in adds:
+        name = "-".join(key)
+        if name in rules.coeffs[kind]:            # 역장 파일의 이름과 겹치지 않게
+            name += "_equa"
+        names[(kind, key)] = name
+        lines.append(f"    {kind}_coeff @{kind}:{name} {rules.coeffs[kind][src]}   # = {src}")
+    lines.append("  }")
+    for kind in ("bond", "angle", "dihedral", "improper"):
+        rows = [(key, names[(k, key)]) for k, key, _ in adds if k == kind]
+        if rows:
+            lines.append(f'  write_once("{rules.sections[kind]}") {{')
+            lines += [f"    @{kind}:{name} " + " ".join(f"@atom:{x}" for x in key) for key, name in rows]
+            lines.append("  }")
+    lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
 class Gaff2Typer:
     """moltemplate gaff2.lt 용 타이퍼.
 
     moltemplate 의 gaff2.lt 는 GAFF2 2.11 판(gaff2.dat, 2016)으로 만든 것이라 GAFF2 2.2 에서 생긴
     c5·c6(5·6원 고리 sp3 C)이 없다. 2.11 판 규칙에서는 이 원자들이 c3 이므로, 역장 파일에 c5·c6 이
     없으면 c3 로 둔다(규칙 파일에서 c5·c6 두 줄을 뺀 것과 같은 결과).
+    2.11 판에는 ns, nt, nx 처럼 질량·LJ 만 있고 결합 파라미터가 없는 타입이 있어서, AmberTools 에서
+    parmchk2 가 하는 것처럼 대응 타입(EQUA)의 값을 그대로 복사해 .lt 에 함께 쓴다(ff_extra).
     """
     NAME = "gaff2"
     LABEL = "GAFF2"
@@ -660,7 +786,7 @@ class Gaff2Typer:
             raise TypingError(f"{self.rules.path} 에서 Data Masses 타입을 찾지 못했습니다")
 
     def assign(self, mol):
-        from .ltrules import missing_terms
+        from .ltrules import KIND_KO, missing_terms
         z, bonds = kekule_graph(mol)
         types, warnings = assign_types(z, bonds)
         old = [i for i, t in enumerate(types) if t in ("c5", "c6") and t not in self.rules.masses]
@@ -674,8 +800,20 @@ class Gaff2Typer:
             where = [f"{i + 1}({t})" for i, t in enumerate(types) if t in missing]
             raise TypingError(f"gaff2.lt 에 없는 GAFF2 타입이 나왔습니다: {', '.join(missing)} — "
                               f"원자 {', '.join(where)}")
-        warnings += missing_terms(mol, types, self.rules)
+        adds = equa_fill(mol, types, self.rules)
+        if adds:
+            warnings.append(f"gaff2.lt 에 없는 항 {len(adds)}개는 대응 타입 값을 복사해 .lt 에 함께 씁니다 "
+                            f"(parmchk2 EQUA): " + ", ".join(f"{KIND_KO[k]} {'-'.join(key)}←{src}" for k, key, src in adds[:6])
+                            + (" …" if len(adds) > 6 else ""))
+        covered = {}
+        for kind, key, _ in adds:
+            covered.setdefault(kind, set()).add(key)
+        warnings += missing_terms(mol, types, self.rules, covered)
         return types, warnings
+
+    def ff_extra(self, mol, labels):
+        """분자 정의 앞에 쓸 역장 보충 문장 (없으면 빈 문자열)."""
+        return equa_block(self.rules, equa_fill(mol, labels, self.rules), self.LT_OBJECT)
 
 
 def rules_json():
