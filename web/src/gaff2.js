@@ -555,7 +555,7 @@
 
     describe(label) {
       const m = this.rules.masses[label], d = this.desc[label];
-      return `질량 ${m}${d ? " — " + d : ""}`;
+      return d ? `${d} (질량 ${m})` : `질량 ${m}`;
     }
 
     isMainLabel(label, sym) { return sym !== "H" || ["hn", "ho", "hs", "hw"].includes(label); }

@@ -8,12 +8,15 @@ const T = require("../src/typer.js");
 const IO = require("../src/io.js");
 const P = require("../src/pipeline.js");
 const G2 = require("../src/gaff2.js");
+const FY = require("../src/foyer.js");
 const initRDKit = require("@rdkit/rdkit");
 
 const HERE = __dirname;
 const TABLES = path.join(HERE, "../build/tables.json");
 const GAFF2_TABLES = path.join(HERE, "../build/gaff2_tables.json");
 const GAFF2_SMILES = path.join(HERE, "../../tests/data/gaff2_smiles.txt");
+const OPLSAA_TABLES = path.join(HERE, "../build/oplsaa_tables.json");
+const FOYER_REF = path.join(HERE, "../../tests/data/foyer_oplsaa_reference.json");
 const results = [];
 const test = async (name, fn) => {
   try { await fn(); results.push([true, name]); console.log("ok   ", name); }
@@ -28,9 +31,13 @@ const test = async (name, fn) => {
   if (!fs.existsSync(GAFF2_TABLES)) {
     fs.writeFileSync(GAFF2_TABLES, execFileSync("python3", [path.join(HERE, "../build_tables.py"), "--ff", "gaff2"]));
   }
+  if (!fs.existsSync(OPLSAA_TABLES)) {
+    fs.writeFileSync(OPLSAA_TABLES, execFileSync("python3", [path.join(HERE, "../build_tables.py"), "--ff", "oplsaa"]));
+  }
   const R = await initRDKit();
   const ff = new T.DreidingFF(JSON.parse(fs.readFileSync(TABLES)));
-  const ffs = { dreiding: ff, gaff2: new G2.Gaff2(JSON.parse(fs.readFileSync(GAFF2_TABLES))) };
+  const ffs = { dreiding: ff, gaff2: new G2.Gaff2(JSON.parse(fs.readFileSync(GAFF2_TABLES))),
+    oplsaa: new FY.Opls(JSON.parse(fs.readFileSync(OPLSAA_TABLES))) };
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "dreiding-web-"));
 
   await test("라벨·경고·오류가 Python 타이퍼와 같음 (SMILES 142개)", () => {
@@ -45,6 +52,28 @@ const test = async (name, fn) => {
       { maxBuffer: 1 << 26, stdio: ["ignore", "pipe", "ignore"] }));
     const js = JSON.parse(execFileSync("node", [path.join(HERE, "js_gaff2.js"), GAFF2_SMILES], { maxBuffer: 1 << 26 }));
     assert.ok(Object.keys(py).length > 380);
+    const diff = Object.keys(py).filter(k => JSON.stringify(py[k]) !== JSON.stringify(js[k]));
+    assert.strictEqual(diff.length, 0, "다른 SMILES: " + diff.join(" "));
+  });
+
+  await test("OPLS-AA: foyer 판정이 실제 foyer 와 같음 (검증 분자 182개)", () => {
+    const ref = JSON.parse(fs.readFileSync(FOYER_REF));
+    const diff = [];
+    for (const [name, v] of Object.entries(ref.validation)) {
+      const cands = FY.findAtomtypes(new FY.Graph(v.z, v.bonds), ffs.oplsaa.foyerRules);
+      const bad = cands.findIndex(c => c.length !== 1);
+      const got = bad < 0 ? cands.map(c => c[0]) : { error: cands[bad].length ? "multiple" : "none", atom: bad };
+      if (JSON.stringify(got) !== JSON.stringify(v.foyer)) diff.push(name);
+    }
+    assert.ok(Object.keys(ref.validation).length > 180);
+    assert.strictEqual(diff.length, 0, "다른 분자: " + diff.join(" "));
+  });
+
+  await test("OPLS-AA 타입·경고·전하·오류가 Python 과 같음 (분자 391개)", () => {
+    const py = JSON.parse(execFileSync("python3", [path.join(HERE, "py_oplsaa.py"), GAFF2_SMILES],
+      { maxBuffer: 1 << 26, stdio: ["ignore", "pipe", "ignore"] }));
+    const js = JSON.parse(execFileSync("node", [path.join(HERE, "js_oplsaa.js"), GAFF2_SMILES], { maxBuffer: 1 << 26 }));
+    assert.ok(Object.values(py).filter(v => v.types).length > 150);
     const diff = Object.keys(py).filter(k => JSON.stringify(py[k]) !== JSON.stringify(js[k]));
     assert.strictEqual(diff.length, 0, "다른 SMILES: " + diff.join(" "));
   });
@@ -73,6 +102,21 @@ const test = async (name, fn) => {
       n++;
     }
     assert.ok(n >= cases.length - 2 && cases.some(c => /\nGAFF2 \{\n/.test(fs.readFileSync(c.lt_gaff2 || c.lt, "utf8"))));
+  });
+
+  await test("OPLS-AA: mol2 입력 .lt(타입 전하)가 Python CLI 와 같음", () => {
+    let n = 0;
+    for (const c of cases) {
+      if (!c.lt_oplsaa) {
+        assert.throws(() => P.run(R, ffs, { smiles: c.smiles, name: "MOL", file: read(c.mol2), ff: "oplsaa" }), T.TypingError);
+        continue;
+      }
+      const r = P.run(R, ffs, { smiles: c.smiles, name: "MOL", file: read(c.mol2), ff: "oplsaa" });
+      assert.strictEqual(body(r.lt), body(fs.readFileSync(c.lt_oplsaa, "utf8")), c.smiles);
+      assert.ok(!r.warnings.some(w => w.includes("mol2 전하")), "타입 전하를 쓰면 mol2 전하 경고 없음");
+      n++;
+    }
+    assert.ok(n >= 4, `OPLS-AA 로 만든 계 ${n}개`);
   });
 
   await test("pdb(CONECT 있음/없음)·xyz 입력이 mol2 와 같은 라벨·좌표 (전하 0)", () => {

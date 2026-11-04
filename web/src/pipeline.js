@@ -47,7 +47,9 @@
         xyz = file.atoms.map(a => a.xyz);
         q = file.atoms.map(a => a.q);
         source = file.kind;
-        if (file.kind === "mol2") {
+        if (ff.TYPE_CHARGES) {
+          // 타입 전하를 쓰는 역장은 아래에서 전하를 정함
+        } else if (file.kind === "mol2") {
           if (file.partialCharge) warnings.push("mol2 일부 원자에 전하 열이 없어 0 으로 둡니다");
           chargeNote = `mol2 (${opts.file.name})`;
           const qsum = q.reduce((s, v) => s + v, 0), formal = T.formalCharge(graph);
@@ -61,8 +63,10 @@
       } else {
         source = "smiles";
         q = new Array(n).fill(0.0);
-        chargeNote = "없음 — 모두 0 (RESP 는 mol2 로 넣으세요)";
-        warnings.push("좌표 파일이 없어 전하를 모두 0 으로 썼습니다");
+        if (!ff.TYPE_CHARGES) {
+          chargeNote = "없음 — 모두 0 (RESP 는 mol2 로 넣으세요)";
+          warnings.push("좌표 파일이 없어 전하를 모두 0 으로 썼습니다");
+        }
       }
       if (source === "smiles") xy = G.coords2D(mol);
     } finally {
@@ -71,6 +75,14 @@
 
     const typed = typeWith(ff, dreiding, graph);
     warnings.push(...typed.warnings);
+    if (ff.TYPE_CHARGES) {                       // OPLS-AA: 좌표 파일의 전하 대신 타입 전하 (Python CLI 와 같음)
+      q = ff.charges(typed.labels);
+      chargeNote = `${ff.LABEL} 원자 타입 전하 (${ff.LT_FILE})`;
+      const qsum = q.reduce((s, v) => s + v, 0), formal = T.formalCharge(graph);
+      if (Math.abs(qsum - formal) > 1e-3) {
+        warnings.push(`타입 전하 합 ${qsum.toFixed(4)} 이 SMILES 형식 전하 ${formal} 와 다릅니다`);
+      }
+    }
     if (source === "smiles") {
       // 3D 시작 구조는 역장과 상관없이 DREIDING 결합 길이·각 표로 만든다
       const geo = ff === dreiding ? typed.labels : T.geometryLabels(graph, dreiding);

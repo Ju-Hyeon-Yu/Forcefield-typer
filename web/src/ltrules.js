@@ -56,7 +56,8 @@
   }
 
   /**
-   * table: {masses, rules: {종류: [[이름, [패턴…]], …]}, coeffs: {종류: {이름: 계수}}, sections, improperCenter}
+   * table: {masses, rules: {종류: [[이름, [패턴…]], …]}, coeffs: {종류: {이름: 계수}}, sections, improperCenter,
+   *         full: {짧은 이름: replace{} 긴 이름}, charges: {타입: In Charges 전하}}
    * (web/build_tables.py 가 Python LtRules 에서 그대로 만든다.)
    */
   class LtRulesTable {
@@ -66,6 +67,8 @@
       this.coeffs = table.coeffs;
       this.sections = table.sections;
       this.improperCenter = table.improperCenter === undefined ? null : table.improperCenter;
+      this.full = table.full || {};
+      this.charges = table.charges || {};
       this._exact = {};
       this._wild = {};
       for (const kind of KINDS) {
@@ -90,6 +93,7 @@
     /** moltemplate 가 줄 규칙 번호(맞는 것 중 마지막) 또는 null. */
     match(kind, names, exact = true, wild = true) {
       let best = -1;
+      names = names.map(x => (Object.prototype.hasOwnProperty.call(this.full, x) ? this.full[x] : x));
       for (const t of this.orders(kind, names)) {
         if (exact) {
           const i = this._exact[kind].get(t.join("\u0000"));

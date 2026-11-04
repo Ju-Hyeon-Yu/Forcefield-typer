@@ -7,17 +7,20 @@
   const ffs = {
     dreiding: new T.DreidingFF(tables),
     gaff2: new window.Gaff2Typer.Gaff2(JSON.parse($("gaff2-tables").textContent)),
+    oplsaa: new window.FoyerTyper.Opls(JSON.parse($("oplsaa-tables").textContent)),
   };
   const HINT = {
     dreiding: "moltemplate dreiding.lt 의 라벨 규칙(결합 차수·이면각 플래그)에 맞춥니다. 전하는 mol2 의 값을 씁니다.",
     gaff2: "AmberTools antechamber(-at gaff2) 와 같은 타입을 붙입니다. gaff2.lt 에 없는 결합 파라미터는 " +
       "parmchk2 대응 타입 값으로 .lt 에 함께 씁니다. 전하는 mol2 의 값을 씁니다.",
+    oplsaa: "foyer 의 OPLS-AA 규칙으로 판정해 moltemplate oplsaa2024.lt 번호를 붙입니다. 전하는 좌표 파일과 상관없이 " +
+      "oplsaa2024.lt 의 타입 전하를 씁니다. 규칙이 없는 원자(이온성 액체 이온 등)는 오류로 알립니다.",
   };
   const viewer = new window.MolViewer($("view"), $("tip"));
   let R = null, file = null, result = null;
 
   $("srcInfo").textContent = `moltemplate ${tables.moltemplate || ""} — dreiding.lt ${Object.keys(tables.labels).length}개 라벨, ` +
-    `gaff2.lt ${Object.keys(ffs.gaff2.rules.masses).length}개 타입`;
+    `gaff2.lt ${Object.keys(ffs.gaff2.rules.masses).length}개 타입, oplsaa2024.lt ${Object.keys(ffs.oplsaa.rules.masses).length}개 타입`;
 
   // ------------------------------------------------------------ 역장 선택 (브라우저에 기억)
   const ffRadios = [...document.querySelectorAll("input[name=ff]")];
@@ -169,7 +172,10 @@
       const at = document.createElement("span");
       at.className = "atoms";
       at.textContent = `원자 ${ranges(idx)}`;
-      b.append(sw, nm, ct, at);
+      const ds = document.createElement("span");
+      ds.className = "desc";
+      ds.textContent = r.ff.describe(t);
+      b.append(sw, nm, ct, at, ds);
       b.title = `${r.ff.describe(t)} — 눌러서 이 타입만 강조`;
       b.addEventListener("click", () => toggleType(t, b));
       grid.append(b);

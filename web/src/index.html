@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- 오프라인 단일 파일 역장(DREIDING·GAFF2) 원자 타입 할당 도구 (web/build.py 가 스크립트·규칙표·RDKit.js 를 끼워 넣음) -->
+<!-- 오프라인 단일 파일 역장(DREIDING·GAFF2·OPLS-AA) 원자 타입 할당 도구 (web/build.py 가 스크립트·규칙표·RDKit.js 를 끼워 넣음) -->
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -112,6 +112,8 @@ input[type=text] { border: 1px solid var(--line); background: var(--bg); border-
 .tcard .name { font-family: var(--mono); font-weight: 700; font-size: 13.5px; }
 .tcard .count { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
 .tcard .atoms { grid-column: 2 / -1; color: var(--muted); font-size: 12px; font-family: var(--mono); overflow-wrap: anywhere; }
+.tcard .desc { grid-column: 2 / -1; color: var(--muted); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; }
 details.atom-list { margin-top: 12px; }
 details.atom-list summary { cursor: pointer; color: var(--muted); font-size: 13px; }
 .tablewrap { max-height: 320px; overflow: auto; margin-top: 8px; border: 1px solid var(--line); border-radius: 4px; }
@@ -154,6 +156,7 @@ footer p { margin: 2px 0; }
       <div class="ffsel" role="radiogroup" aria-label="역장">
         <label><input type="radio" name="ff" value="dreiding" checked><b>DREIDING</b><small>dreiding.lt</small></label>
         <label><input type="radio" name="ff" value="gaff2"><b>GAFF2</b><small>gaff2.lt (2.11)</small></label>
+        <label><input type="radio" name="ff" value="oplsaa"><b>OPLS-AA</b><small>oplsaa2024.lt</small></label>
       </div>
       <p class="hint" id="ffHint" style="margin-top:6px"></p>
     </div>
@@ -169,7 +172,7 @@ footer p { margin: 2px 0; }
       <input id="file" type="file" accept=".mol2,.pdb,.ent,.xyz" class="sr">
       <div id="fileChip" class="file-chip" hidden><span id="fileName"></span>
         <button class="btn small" id="clearFile" type="button">빼기</button></div>
-      <p class="hint" style="margin-top:6px">mol2는 좌표와 RESP 전하를, pdb·xyz는 좌표만 씁니다. 원자 순서는 자동으로 맞춥니다. 파일이 없으면 3D 구조를 새로 만듭니다.</p>
+      <p class="hint" style="margin-top:6px">mol2는 좌표와 RESP 전하를, pdb·xyz는 좌표만 씁니다(OPLS-AA는 전하 대신 타입 전하). 원자 순서는 자동으로 맞춥니다. 파일이 없으면 3D 구조를 새로 만듭니다.</p>
     </div>
     <div class="row2">
       <label class="field">분자 이름<input id="molName" type="text" value="MOL" spellcheck="false"></label>
@@ -219,17 +222,19 @@ footer p { margin: 2px 0; }
 
   <footer>
     <p>system.lt에서는 <code>import "single_molecule.lt"</code> 다음에 <code>m = new MOL</code>로 불러옵니다. 규칙표는 moltemplate 역장 파일(<span id="srcInfo"></span>)에서 미리 만들어 넣었고, 인터넷 연결 없이 동작합니다.</p>
-    <p>GAFF2 판정은 AmberTools antechamber(GPL-2.0-or-later)의 규칙과 처리를 옮겼습니다. 화학 처리는 RDKit.js (BSD-3-Clause, © RDKit 기여자)를 씁니다. 원본: github.com/Ju-Hyeon-Yu/Forcefield-typer (GPL-3.0)</p>
+    <p>GAFF2 판정은 AmberTools antechamber(GPL-2.0-or-later)의 규칙과 처리를, OPLS-AA 판정은 foyer(MIT, © 2015 Vanderbilt University)의 규칙과 처리를 옮겼습니다. 화학 처리는 RDKit.js (BSD-3-Clause, © RDKit 기여자)를 씁니다. 원본: github.com/Ju-Hyeon-Yu/Forcefield-typer (GPL-3.0)</p>
   </footer>
 </div>
 
 <script type="application/json" id="dreiding-tables">/*TABLES*/</script>
 <script type="application/json" id="gaff2-tables">/*GAFF2_TABLES*/</script>
+<script type="application/json" id="oplsaa-tables">/*OPLSAA_TABLES*/</script>
 <script type="application/octet-stream" id="rdkit-wasm">/*RDKIT_WASM_GZ_B64*/</script>
 <script>/*RDKIT_JS*/</script>
 <script>/*TYPER_JS*/</script>
 <script>/*LTRULES_JS*/</script>
 <script>/*GAFF2_JS*/</script>
+<script>/*FOYER_JS*/</script>
 <script>/*IO_JS*/</script>
 <script>/*GEOM_JS*/</script>
 <script>/*PIPELINE_JS*/</script>

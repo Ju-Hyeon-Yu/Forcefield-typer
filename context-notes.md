@@ -88,3 +88,6 @@
   모르므로 이런 분자는 합이 형식 전하와 다르고, CLI·웹이 경고한다(391 분자 중 타이핑되는 177 개에서 59 개).
 - 결합 파라미터: oplsaa2024.lt 는 짧은 이름을 replace{} 로 결합 타입이 붙은 긴 이름으로 바꾸고 By Type 규칙은 긴 이름의
   와일드카드라, LtRules 가 replace 를 읽어 긴 이름으로 맞춤. improper 대칭은 cenIsortJKL.py(중심이 첫 원자).
+- 웹 OPLS-AA: 패턴은 build_tables.py 가 Python 해석기(foyer_smarts.parse)로 미리 해석한 JSON 을 넣어 JS 는
+  짝맞춤·반복만 한다(해석기를 두 번 짜지 않으려는 것). oplsaa2024.lt 의 By Type 규칙·긴 이름·타입 전하·설명(약 0.4 MB).
+  좌표 파일을 넣어도 전하는 타입 전하를 쓰고 mol2 전하 경고는 내지 않는다(Python CLI 와 같음).

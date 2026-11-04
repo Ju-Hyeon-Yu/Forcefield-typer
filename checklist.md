@@ -23,7 +23,8 @@
 
 ## 4단계 — OPLS-AA
 - [x] foyer SMARTS 판정 엔진 (Python) — 실제 foyer 와 검증 분자 182·SMILES 391 모두 같음
-- [ ] JS 이식 (Python 과 같은 결과)
+- [x] JS 이식(web/src/foyer.js) — 검증 분자 182 개 foyer 와 같음, 391 분자 타입·경고·전하가 Python 과 같음
+- [x] 웹: 역장 선택에 OPLS-AA, 타입 전하, 타입 카드에 설명 표시, Node 13개·브라우저 10개 테스트
 - [x] foyer 규칙 → oplsaa2024 번호 대응 (설명·매개변수 대조, 뜻이 다른 3 개·없는 12 개는 오류), OPLS/2020 짝 2 개
 - [x] 타입 전하, 타입 없는 원자 오류, 전하 합 경고
 - [x] moltemplate·LAMMPS 통합 테스트

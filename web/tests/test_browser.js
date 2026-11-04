@@ -70,7 +70,7 @@ const body = s => s.split("\n").slice(1).join("\n").replace(/^# 전하: .*$/m, "
     await page.click("#run");
     const lt = await page.inputValue("#lt");
     assert.ok(lt.includes('import "gaff2.lt"') && lt.includes("\nGAFF2 {\n") && lt.includes("MOL inherits GAFF2 {"));
-    assert.ok((await page.locator(".tcard", { hasText: "nt" }).getAttribute("title")).includes("질량 14.01"));
+    assert.ok((await page.locator(".tcard", { hasText: "nt" }).getAttribute("title")).includes("(질량 14.01)"));
     await page.reload();
     await page.waitForFunction(() => document.getElementById("status").classList.contains("ready"), null, { timeout: 60000 });
     assert.ok(await page.isChecked("input[name=ff][value=gaff2]"), "새로 열어도 GAFF2");
@@ -81,6 +81,27 @@ const body = s => s.split("\n").slice(1).join("\n").replace(/^# 전하: .*$/m, "
     await page.fill("#smiles", "CC(=O)Nc1ccccc1");
     await page.click("#run");
     assert.ok((await page.inputValue("#lt")).includes('import "dreiding.lt"'));
+  });
+
+  await test("OPLS-AA 선택: mol2 입력 .lt 가 Python CLI 와 같고 타입 전하를 씀, 규칙 없는 이온은 오류", async () => {
+    await page.locator(".ffsel label", { hasText: "OPLS-AA" }).click();
+    for (const c of cases.filter(x => x.lt_oplsaa)) {
+      await page.fill("#smiles", c.smiles);
+      await load(c.mol2);
+      await page.click("#run");
+      assert.strictEqual(body(await page.inputValue("#lt")), body(fs.readFileSync(c.lt_oplsaa, "utf8")), c.smiles);
+      await page.click("#clearFile");
+    }
+    await page.fill("#smiles", "CC(C)(C)O");
+    await page.click("#run");
+    const lt = await page.inputValue("#lt");
+    assert.ok(lt.includes('import "oplsaa2024.lt"') && lt.includes("MOL inherits OPLSAA {"));
+    assert.ok(/@atom:160\s+-0\.650000/.test(lt), "3차 알코올 O 는 OPLS/2020 짝 160");
+    assert.ok(!(await page.locator(".msg.warn").allTextContents()).some(t => t.includes("전하를 모두 0")));
+    await page.fill("#smiles", "Cn1cc[n+](C)c1");
+    await page.click("#run");
+    assert.ok((await page.locator(".msg.err").textContent()).includes("타입이 없는 원자"));
+    await page.locator(".ffsel label", { hasText: "DREIDING" }).click();
   });
 
   await test("pdb·xyz 입력과 전하 경고", async () => {

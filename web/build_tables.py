@@ -1,10 +1,12 @@
 # 역장 .lt 에서 브라우저용 규칙표를 JSON 으로 추출 (DREIDING 라벨표, GAFF2 판정 규칙·gaff2.lt 규칙표)
-"""사용: python3 web/build_tables.py [--ff dreiding|gaff2] [역장 .lt 경로] > web/build/<역장>_tables.json
+"""사용: python3 web/build_tables.py [--ff dreiding|gaff2|oplsaa] [역장 .lt 경로] > web/build/<역장>_tables.json
 
 DREIDING: 라벨 쌍별 결합 차수와 이면각 규칙 존재 여부는 fftyper.dreiding.DreidingFF 로 계산하므로
 Python 타이퍼와 판정이 같다. r0 와 평형각은 3D 좌표 생성(최소화)에만 쓴다.
 GAFF2: ATOMTYPE_GFF2.DEF 해석 결과, gaff2.lt 의 질량·By Type 규칙·계수 줄, 대응 타입(EQUA) 표,
 타입 설명을 fftyper 의 것 그대로 담는다.
+OPLS-AA: foyer 규칙을 Python 으로 해석한 패턴, 2024 번호 대응 예외·OPLS/2020 짝, oplsaa2024.lt 의
+질량·By Type 규칙·긴 이름·타입 전하·설명을 담는다.
 """
 import fnmatch
 import json
@@ -66,6 +68,33 @@ def gaff2_tables(path):
     }
 
 
+def oplsaa_tables(path):
+    from fftyper import moltemplate_ff_path, oplsaa
+    from fftyper.foyer_smarts import parse
+    from fftyper.ltrules import LtRules
+    path = path or moltemplate_ff_path("oplsaa2024.lt")
+    rules = LtRules(path)
+    desc = {}
+    for line in open(path):
+        m = re.match(r"\s*set type @atom:(\S+)\s+charge\s+\S+\s*#\s*(.*\S)", line)
+        if m:
+            desc[m.group(1)] = re.sub(r"\s+", " ", m.group(2))
+    data = oplsaa.default_rules()
+    return {
+        "source": os.path.basename(path),
+        "moltemplate": _mt_version(),
+        "foyer": data["meta"],
+        "rules": [{"name": r["name"], "overrides": r["overrides"], "pat": parse(r["def"]), "desc": r.get("desc", "")}
+                  for r in data["rules"]],
+        "no2024": oplsaa.NO_2024,
+        "pairs": oplsaa.OPLS2020_PAIRS,
+        "lt": {"masses": rules.masses, "rules": rules.rules, "coeffs": {k: {} for k in rules.coeffs},
+               "sections": rules.sections, "improperCenter": rules.improper_center,
+               "full": rules.full, "charges": rules.charges},
+        "desc": desc,
+    }
+
+
 def _mt_version():
     try:
         from importlib.metadata import version
@@ -80,8 +109,9 @@ def main():
     if args[:1] == ["--ff"]:
         ffname, args = args[1], args[2:]
     path = args[0] if args else None
-    if ffname == "gaff2":
-        json.dump(gaff2_tables(path), sys.stdout, separators=(",", ":"), ensure_ascii=False)
+    if ffname in ("gaff2", "oplsaa"):
+        out = gaff2_tables(path) if ffname == "gaff2" else oplsaa_tables(path)
+        json.dump(out, sys.stdout, separators=(",", ":"), ensure_ascii=False)
         return
     ff = DreidingFF(path)
     secs = read_sections(ff.path)
