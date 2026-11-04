@@ -1,0 +1,6845 @@
+{
+"C": {
+"types": [
+"c3",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC": {
+"types": [
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CCC": {
+"types": [
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(C)C": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(C)(C)C": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CC1": {
+"types": [
+"cx",
+"cx",
+"cx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CCC1": {
+"types": [
+"cy",
+"cy",
+"cy",
+"cy",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CCCC1": {
+"types": [
+"c5",
+"c5",
+"c5",
+"c5",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CCCCC1": {
+"types": [
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CCCCCC1": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CCCCCCC1": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CC2CCC1C2": {
+"types": [
+"c5",
+"c5",
+"c5",
+"c5",
+"c5",
+"c5",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CC2CC1C2": {
+"types": [
+"c5",
+"c5",
+"cy",
+"cy",
+"cy",
+"cy",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C12CC3CC(C1)CC(C2)C3": {
+"types": [
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C=C": {
+"types": [
+"c2",
+"c2",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC=C": {
+"types": [
+"c3",
+"c2",
+"c2",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=CC=C": {
+"types": [
+"c2",
+"ce",
+"ce",
+"c2",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=CC=CC=C": {
+"types": [
+"c2",
+"ce",
+"ce",
+"cf",
+"cf",
+"c2",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC=CC=CC=CC": {
+"types": [
+"c3",
+"c2",
+"ce",
+"ce",
+"cf",
+"cf",
+"c2",
+"c3",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc"
+]
+},
+"C=C=C": {
+"types": [
+"c2",
+"c1",
+"c2",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC=C=CC": {
+"types": [
+"c3",
+"c2",
+"c1",
+"c2",
+"c3",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc"
+]
+},
+"C#C": {
+"types": [
+"c1",
+"c1",
+"ha",
+"ha"
+]
+},
+"CC#C": {
+"types": [
+"c3",
+"c1",
+"c1",
+"hc",
+"hc",
+"hc",
+"ha"
+]
+},
+"C#CC#C": {
+"types": [
+"c1",
+"cg",
+"cg",
+"c1",
+"ha",
+"ha"
+]
+},
+"C=CC#C": {
+"types": [
+"c2",
+"ce",
+"cg",
+"c1",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C1=CC1": {
+"types": [
+"cu",
+"cu",
+"cx",
+"ha",
+"ha",
+"hc",
+"hc"
+]
+},
+"C1=CCC1": {
+"types": [
+"cv",
+"cv",
+"cy",
+"cy",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1=CCCC1": {
+"types": [
+"c2",
+"c2",
+"c5",
+"c5",
+"c5",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1=CCCCC1": {
+"types": [
+"c2",
+"c2",
+"c6",
+"c6",
+"c6",
+"c6",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1=CC=CC1": {
+"types": [
+"c2",
+"ce",
+"ce",
+"c2",
+"c5",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc"
+]
+},
+"C1=CC=CCC1": {
+"types": [
+"c2",
+"ce",
+"ce",
+"c2",
+"c6",
+"c6",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1=CC=CC=CC1": {
+"types": [
+"c2",
+"ce",
+"ce",
+"cf",
+"cf",
+"c2",
+"c3",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc"
+]
+},
+"C1=CC=CC=CC=C1": {
+"types": [
+"cc",
+"cd",
+"cd",
+"cc",
+"cc",
+"cd",
+"cd",
+"cc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Cc1ccccc1": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CCc1ccccc1": {
+"types": [
+"c3",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=Cc1ccccc1": {
+"types": [
+"c2",
+"ce",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C#Cc1ccccc1": {
+"types": [
+"c1",
+"cg",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)-c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)-c1ccc(cc1)-c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2ccccc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2cc3ccccc3cc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2c(c1)ccc1ccccc12": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1cc2ccc3cccc4ccc(c1)c2c34": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2c(c1)-c1ccccc1C2": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"cp",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c5",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc"
+]
+},
+"c1ccc-2c(c1)-c1ccccc-21": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"cq",
+"ca",
+"cq",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1cc2cccc2c1": {
+"types": [
+"cc",
+"cd",
+"cd",
+"cc",
+"cc",
+"cd",
+"cd",
+"cc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccncc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"ha",
+"ha",
+"h4",
+"h4",
+"ha"
+]
+},
+"c1ccc[nH+]c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"na",
+"ca",
+"ha",
+"ha",
+"ha",
+"h4",
+"hn",
+"h4"
+]
+},
+"C[n+]1ccccc1": {
+"types": [
+"c3",
+"na",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"h4",
+"ha",
+"ha",
+"ha",
+"h4"
+]
+},
+"c1cnccn1": {
+"types": [
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"nb",
+"h4",
+"h4",
+"h4",
+"h4"
+]
+},
+"c1cncnc1": {
+"types": [
+"ca",
+"ca",
+"nb",
+"ca",
+"nb",
+"ca",
+"ha",
+"h4",
+"h5",
+"h4"
+]
+},
+"c1ccnnc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"nb",
+"nb",
+"ca",
+"ha",
+"ha",
+"h4",
+"h4"
+]
+},
+"c1ncncn1": {
+"types": [
+"ca",
+"nb",
+"ca",
+"nb",
+"ca",
+"nb",
+"h5",
+"h5",
+"h5"
+]
+},
+"c1cc[nH]c1": {
+"types": [
+"cc",
+"cc",
+"cd",
+"na",
+"cd",
+"ha",
+"ha",
+"h4",
+"hn",
+"h4"
+]
+},
+"c1ccoc1": {
+"types": [
+"cc",
+"cc",
+"cd",
+"os",
+"cd",
+"ha",
+"ha",
+"h4",
+"h4"
+]
+},
+"c1ccsc1": {
+"types": [
+"cc",
+"cc",
+"cd",
+"ss",
+"cd",
+"ha",
+"ha",
+"h4",
+"h4"
+]
+},
+"c1cnc[nH]1": {
+"types": [
+"cc",
+"cd",
+"nd",
+"cc",
+"na",
+"h4",
+"h4",
+"h5",
+"hn"
+]
+},
+"c1cocn1": {
+"types": [
+"cc",
+"cd",
+"os",
+"cd",
+"nc",
+"h4",
+"h4",
+"h5"
+]
+},
+"c1cscn1": {
+"types": [
+"cc",
+"cd",
+"ss",
+"cd",
+"nc",
+"h4",
+"h4",
+"h5"
+]
+},
+"c1cn[nH]c1": {
+"types": [
+"cc",
+"cc",
+"nd",
+"na",
+"cd",
+"ha",
+"h4",
+"hn",
+"h4"
+]
+},
+"c1cnoc1": {
+"types": [
+"cc",
+"cc",
+"nd",
+"os",
+"cd",
+"ha",
+"h4",
+"h4"
+]
+},
+"c1nn[nH]n1": {
+"types": [
+"cc",
+"nc",
+"nd",
+"na",
+"nd",
+"h5",
+"hn"
+]
+},
+"c1nc[nH]n1": {
+"types": [
+"cc",
+"nc",
+"cd",
+"na",
+"nd",
+"h5",
+"h5",
+"hn"
+]
+},
+"c1nnc[nH]1": {
+"types": [
+"cc",
+"nd",
+"nd",
+"cc",
+"na",
+"h5",
+"h5",
+"hn"
+]
+},
+"Cn1ccnc1": {
+"types": [
+"c3",
+"na",
+"cc",
+"cd",
+"nd",
+"cc",
+"h1",
+"h1",
+"h1",
+"h4",
+"h4",
+"h5"
+]
+},
+"Cn1cc[n+](C)c1": {
+"types": [
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"cc",
+"h1",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"h1",
+"h5"
+]
+},
+"CCCCn1cc[n+](C)c1": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"cc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"h1",
+"h5"
+]
+},
+"CCn1cc[n+](C)c1": {
+"types": [
+"c3",
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"cc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"h1",
+"h5"
+]
+},
+"Cn1cc[n+](Cc2ccc(I)cc2)c1": {
+"types": [
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"cc",
+"h1",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"h5"
+]
+},
+"CCCC[n+]1ccccc1": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"na",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h4",
+"ha",
+"ha",
+"ha",
+"h4"
+]
+},
+"C[N+]1(C)CCCC1": {
+"types": [
+"c3",
+"n4",
+"c3",
+"c5",
+"c5",
+"c5",
+"c5",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx"
+]
+},
+"CCCC[N+]1(C)CCCC1": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"n4",
+"c3",
+"c5",
+"c5",
+"c5",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx"
+]
+},
+"c1ccc2[nH]ccc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"na",
+"cc",
+"cd",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"hn",
+"h4",
+"ha",
+"ha"
+]
+},
+"c1ccc2occc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"os",
+"cc",
+"cd",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"h4",
+"ha",
+"ha"
+]
+},
+"c1ccc2sccc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ss",
+"cc",
+"cd",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"h4",
+"ha",
+"ha"
+]
+},
+"c1ccc2ncccc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"h4",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2cnccc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"h4",
+"h4",
+"ha",
+"ha"
+]
+},
+"c1ccc2[nH]cnc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"na",
+"cc",
+"nd",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"hn",
+"h5",
+"ha"
+]
+},
+"c1ncc2nc[nH]c2n1": {
+"types": [
+"ca",
+"nb",
+"ca",
+"ca",
+"nc",
+"cd",
+"na",
+"ca",
+"nb",
+"h5",
+"h4",
+"h5",
+"hn"
+]
+},
+"Nc1ncnc2[nH]cnc12": {
+"types": [
+"nv",
+"ca",
+"nb",
+"ca",
+"nb",
+"ca",
+"na",
+"cc",
+"nd",
+"ca",
+"hn",
+"hn",
+"h5",
+"hn",
+"h5"
+]
+},
+"O=c1cc[nH]c(=O)[nH]1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"ns",
+"c",
+"o",
+"ns",
+"ha",
+"h4",
+"hn",
+"hn"
+]
+},
+"Cc1c[nH]c(=O)[nH]c1=O": {
+"types": [
+"c3",
+"cc",
+"cd",
+"ns",
+"c",
+"o",
+"ns",
+"c",
+"o",
+"hc",
+"hc",
+"hc",
+"h4",
+"hn",
+"hn"
+]
+},
+"Nc1cc[nH]c(=O)n1": {
+"types": [
+"nv",
+"cc",
+"cc",
+"cd",
+"ns",
+"c",
+"o",
+"nd",
+"hn",
+"hn",
+"ha",
+"h4",
+"hn"
+]
+},
+"O=c1cccc[nH]1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"cd",
+"cc",
+"ns",
+"ha",
+"ha",
+"ha",
+"h4",
+"hn"
+]
+},
+"O=c1cc[nH]cc1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"na",
+"cc",
+"cd",
+"ha",
+"h4",
+"hn",
+"h4",
+"ha"
+]
+},
+"O=c1ccc2ccccc2o1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"os",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=c1ccc2ccccc2[nH]1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ns",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hn"
+]
+},
+"Cn1cnc2c1c(=O)n(C)c(=O)n2C": {
+"types": [
+"c3",
+"na",
+"cc",
+"nd",
+"cd",
+"cc",
+"c",
+"o",
+"n",
+"c3",
+"c",
+"o",
+"n",
+"c3",
+"h1",
+"h1",
+"h1",
+"h5",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"c1ccc2c(c1)[nH]c1ccccc12": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"na",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ha",
+"ha",
+"ha",
+"ha",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2c(c1)oc1ccccc12": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"os",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2c(c1)sc1ccccc12": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"ss",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)C(c1ccccc1)c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C(c1ccccc1)c1ccccc1": {
+"types": [
+"o",
+"c",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C(=Cc1ccccc1)c1ccccc1": {
+"types": [
+"ce",
+"cf",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)N=Nc1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ne",
+"nf",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)Nc1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"nu",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)Oc1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"os",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)Sc1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ss",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)[S+](c1ccccc1)c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"s4",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)[I+]c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)P(c1ccccc1)c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"p3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=P(c1ccccc1)(c1ccccc1)c1ccccc1": {
+"types": [
+"o",
+"py",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc(cc1)[P+](c1ccccc1)(c1ccccc1)c1ccccc1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"p5",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CO": {
+"types": [
+"c3",
+"oh",
+"h1",
+"h1",
+"h1",
+"ho"
+]
+},
+"CCO": {
+"types": [
+"c3",
+"c3",
+"oh",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"ho"
+]
+},
+"CC(C)O": {
+"types": [
+"c3",
+"c3",
+"c3",
+"oh",
+"hc",
+"hc",
+"hc",
+"h1",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"CC(C)(C)O": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"oh",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"OCCO": {
+"types": [
+"oh",
+"c3",
+"c3",
+"oh",
+"ho",
+"h1",
+"h1",
+"h1",
+"h1",
+"ho"
+]
+},
+"OCC(O)CO": {
+"types": [
+"oh",
+"c3",
+"c3",
+"oh",
+"c3",
+"oh",
+"ho",
+"h1",
+"h1",
+"h1",
+"ho",
+"h1",
+"h1",
+"ho"
+]
+},
+"COC": {
+"types": [
+"c3",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CCOCC": {
+"types": [
+"c3",
+"c3",
+"os",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1",
+"h1",
+"hc",
+"hc",
+"hc"
+]
+},
+"C1CO1": {
+"types": [
+"cx",
+"cx",
+"op",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1COC1": {
+"types": [
+"cy",
+"cy",
+"oq",
+"cy",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1CCOC1": {
+"types": [
+"c5",
+"c5",
+"c5",
+"os",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1CCOCC1": {
+"types": [
+"c6",
+"c6",
+"c6",
+"os",
+"c6",
+"c6",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1",
+"h1",
+"hc",
+"hc"
+]
+},
+"C1COCCO1": {
+"types": [
+"c6",
+"c6",
+"os",
+"c6",
+"c6",
+"os",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1COCOC1": {
+"types": [
+"c6",
+"c6",
+"os",
+"c6",
+"os",
+"c6",
+"hc",
+"hc",
+"h1",
+"h1",
+"h2",
+"h2",
+"h1",
+"h1"
+]
+},
+"OC1CCCCC1": {
+"types": [
+"oh",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"ho",
+"h1",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"Oc1ccccc1": {
+"types": [
+"oh",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ho",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Oc1ccc(O)cc1": {
+"types": [
+"oh",
+"ca",
+"ca",
+"ca",
+"ca",
+"oh",
+"ca",
+"ca",
+"ho",
+"ha",
+"ha",
+"ho",
+"ha",
+"ha"
+]
+},
+"COc1ccccc1": {
+"types": [
+"c3",
+"os",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=O": {
+"types": [
+"c",
+"o",
+"h4",
+"h4"
+]
+},
+"CC=O": {
+"types": [
+"c3",
+"c",
+"o",
+"hc",
+"hc",
+"hc",
+"h4"
+]
+},
+"CC(C)=O": {
+"types": [
+"c3",
+"c",
+"c3",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(=O)CC(C)=O": {
+"types": [
+"c3",
+"c",
+"o",
+"c3",
+"c",
+"c3",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1CCCCC1": {
+"types": [
+"o",
+"c",
+"c6",
+"c6",
+"c6",
+"c6",
+"c6",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1CCCC1": {
+"types": [
+"o",
+"c",
+"c5",
+"c5",
+"c5",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1CCC1": {
+"types": [
+"o",
+"c",
+"cy",
+"cy",
+"cy",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1C=CC(=O)C=C1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"c",
+"o",
+"cc",
+"cd",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C1C=CC=C1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"cd",
+"cc",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC1=CC(=O)C=CC1=O": {
+"types": [
+"c3",
+"cc",
+"cd",
+"c",
+"o",
+"cc",
+"cd",
+"c",
+"o",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=CC=O": {
+"types": [
+"c2",
+"ce",
+"c",
+"o",
+"ha",
+"ha",
+"ha",
+"h4"
+]
+},
+"C=CC(C)=O": {
+"types": [
+"c2",
+"ce",
+"c",
+"c3",
+"o",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=Cc1ccccc1": {
+"types": [
+"o",
+"c",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h4",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC(=O)c1ccccc1": {
+"types": [
+"c3",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"OC=O": {
+"types": [
+"oh",
+"c",
+"o",
+"ho",
+"h5"
+]
+},
+"CC(=O)O": {
+"types": [
+"c3",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"CC(=O)[O-]": {
+"types": [
+"c3",
+"c",
+"o",
+"o",
+"hc",
+"hc",
+"hc"
+]
+},
+"OC(=O)C(=O)O": {
+"types": [
+"oh",
+"c",
+"o",
+"c",
+"o",
+"oh",
+"ho",
+"ho"
+]
+},
+"[O-]C(=O)C(=O)[O-]": {
+"types": [
+"o",
+"c",
+"o",
+"c",
+"o",
+"o"
+]
+},
+"OC(=O)c1ccccc1": {
+"types": [
+"oh",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ho",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"[O-]C(=O)c1ccccc1": {
+"types": [
+"o",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C(O)c1ccccc1C(=O)O": {
+"types": [
+"o",
+"c",
+"oh",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c",
+"o",
+"oh",
+"ho",
+"ha",
+"ha",
+"ha",
+"ha",
+"ho"
+]
+},
+"C=CC(=O)O": {
+"types": [
+"c2",
+"ce",
+"c",
+"o",
+"oh",
+"ha",
+"ha",
+"ha",
+"ho"
+]
+},
+"CC(=O)OC": {
+"types": [
+"c3",
+"c",
+"o",
+"os",
+"c3",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1"
+]
+},
+"COC(=O)C=C": {
+"types": [
+"c3",
+"os",
+"c",
+"o",
+"ce",
+"c2",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha"
+]
+},
+"CCOC(=O)C=C": {
+"types": [
+"c3",
+"c3",
+"os",
+"c",
+"o",
+"ce",
+"c2",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C1CCCO1": {
+"types": [
+"o",
+"c",
+"c5",
+"c5",
+"c5",
+"os",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"O=C1OCCO1": {
+"types": [
+"o",
+"c",
+"os",
+"c5",
+"c5",
+"os",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CC(=O)OC(C)=O": {
+"types": [
+"c3",
+"c",
+"o",
+"os",
+"c",
+"c3",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1OC(=O)c2ccccc12": {
+"types": [
+"o",
+"c",
+"os",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC(=O)Cl": {
+"types": [
+"c3",
+"c",
+"o",
+"cl",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(N)=O": {
+"types": [
+"c3",
+"c",
+"nt",
+"o",
+"hc",
+"hc",
+"hc",
+"hn",
+"hn"
+]
+},
+"CNC(C)=O": {
+"types": [
+"c3",
+"ns",
+"c",
+"c3",
+"o",
+"h1",
+"h1",
+"h1",
+"hn",
+"hc",
+"hc",
+"hc"
+]
+},
+"CN(C)C=O": {
+"types": [
+"c3",
+"n",
+"c3",
+"c",
+"o",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h5"
+]
+},
+"CN(C)C(C)=O": {
+"types": [
+"c3",
+"n",
+"c3",
+"c",
+"c3",
+"o",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C1CCCN1": {
+"types": [
+"o",
+"c",
+"c5",
+"c5",
+"c5",
+"ns",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn"
+]
+},
+"O=C1CCCCCN1": {
+"types": [
+"o",
+"c",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"ns",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn"
+]
+},
+"O=C1NC(=O)c2ccccc12": {
+"types": [
+"o",
+"c",
+"ns",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C1CCC(=O)N1": {
+"types": [
+"o",
+"c",
+"c5",
+"c5",
+"c",
+"o",
+"ns",
+"hc",
+"hc",
+"hc",
+"hc",
+"hn"
+]
+},
+"CC(=O)Nc1ccccc1": {
+"types": [
+"c3",
+"c",
+"o",
+"ns",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C(Nc1ccccc1)c1ccccc1": {
+"types": [
+"o",
+"c",
+"ns",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"NC(N)=O": {
+"types": [
+"nt",
+"c",
+"nt",
+"o",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"CNC(=O)NC": {
+"types": [
+"c3",
+"ns",
+"c",
+"o",
+"ns",
+"c3",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn",
+"h1",
+"h1",
+"h1"
+]
+},
+"COC(N)=O": {
+"types": [
+"c3",
+"os",
+"c",
+"nt",
+"o",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"CC(C)(C)OC(=O)N": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"os",
+"c",
+"o",
+"nt",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hn",
+"hn"
+]
+},
+"NC(=O)C(N)=O": {
+"types": [
+"nt",
+"c",
+"o",
+"c",
+"nt",
+"o",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"NC(N)=[NH2+]": {
+"types": [
+"nv",
+"cz",
+"nv",
+"nv",
+"hn",
+"hn",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"CN(C)C(=[NH2+])N(C)C": {
+"types": [
+"c3",
+"nh",
+"c3",
+"cz",
+"nv",
+"nh",
+"c3",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"NC(=[NH2+])c1ccccc1": {
+"types": [
+"nv",
+"ce",
+"nv",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hn",
+"hn",
+"hn",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC(=N)N": {
+"types": [
+"c3",
+"c2",
+"n2",
+"nv",
+"hc",
+"hc",
+"hc",
+"hn",
+"hn",
+"hn"
+]
+},
+"NC(=N)N": {
+"types": [
+"nv",
+"c2",
+"n2",
+"nv",
+"hn",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"N": {
+"types": [
+"n9",
+"hn",
+"hn",
+"hn"
+]
+},
+"CN": {
+"types": [
+"c3",
+"n8",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"CCN": {
+"types": [
+"c3",
+"c3",
+"n8",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"CNC": {
+"types": [
+"c3",
+"n7",
+"c3",
+"h1",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1",
+"h1"
+]
+},
+"CN(C)C": {
+"types": [
+"c3",
+"n3",
+"c3",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C[NH3+]": {
+"types": [
+"c3",
+"nz",
+"hx",
+"hx",
+"hx",
+"hn",
+"hn",
+"hn"
+]
+},
+"C[NH2+]C": {
+"types": [
+"c3",
+"ny",
+"c3",
+"hx",
+"hx",
+"hx",
+"hn",
+"hn",
+"hx",
+"hx",
+"hx"
+]
+},
+"C[NH+](C)C": {
+"types": [
+"c3",
+"nx",
+"c3",
+"c3",
+"hx",
+"hx",
+"hx",
+"hn",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"C[N+](C)(C)C": {
+"types": [
+"c3",
+"n4",
+"c3",
+"c3",
+"c3",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"CC[NH+](CC)CC": {
+"types": [
+"c3",
+"c3",
+"nx",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hn",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc"
+]
+},
+"CCCC[N+](CCCC)(CCCC)CCCC": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"n4",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hx",
+"hx",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"[NH4+]": {
+"types": [
+"n+",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"NN": {
+"types": [
+"n8",
+"n8",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"CNN": {
+"types": [
+"c3",
+"n7",
+"n8",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn",
+"hn"
+]
+},
+"NO": {
+"types": [
+"n8",
+"oh",
+"hn",
+"hn",
+"ho"
+]
+},
+"CON": {
+"types": [
+"c3",
+"os",
+"n8",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"Nc1ccccc1": {
+"types": [
+"nv",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hn",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CNc1ccccc1": {
+"types": [
+"c3",
+"nu",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CN(C)c1ccccc1": {
+"types": [
+"c3",
+"nh",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C[NH2+]c1ccccc1": {
+"types": [
+"c3",
+"ny",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hx",
+"hx",
+"hx",
+"hn",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C[N+](C)(C)c1ccccc1": {
+"types": [
+"c3",
+"n4",
+"c3",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"NCCN": {
+"types": [
+"n8",
+"c3",
+"c3",
+"n8",
+"hn",
+"hn",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"NCCO": {
+"types": [
+"n8",
+"c3",
+"c3",
+"oh",
+"hn",
+"hn",
+"h1",
+"h1",
+"h1",
+"h1",
+"ho"
+]
+},
+"NCC(=O)O": {
+"types": [
+"n8",
+"c3",
+"c",
+"o",
+"oh",
+"hn",
+"hn",
+"h1",
+"h1",
+"ho"
+]
+},
+"[NH3+]CC(=O)[O-]": {
+"types": [
+"nz",
+"c3",
+"c",
+"o",
+"o",
+"hn",
+"hn",
+"hn",
+"hx",
+"hx"
+]
+},
+"CC(N)C(=O)O": {
+"types": [
+"c3",
+"c3",
+"n8",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"h1",
+"hn",
+"hn",
+"ho"
+]
+},
+"C1CCNC1": {
+"types": [
+"c5",
+"c5",
+"c5",
+"n7",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1"
+]
+},
+"C1CCNCC1": {
+"types": [
+"c6",
+"c6",
+"c6",
+"n7",
+"c6",
+"c6",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1",
+"hc",
+"hc"
+]
+},
+"C1CNCCN1": {
+"types": [
+"c6",
+"c6",
+"n7",
+"c6",
+"c6",
+"n7",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn"
+]
+},
+"C1COCCN1": {
+"types": [
+"c6",
+"c6",
+"os",
+"c6",
+"c6",
+"n7",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn"
+]
+},
+"C1CN1": {
+"types": [
+"cx",
+"cx",
+"n5",
+"h1",
+"h1",
+"h1",
+"h1",
+"hn"
+]
+},
+"C1CNC1": {
+"types": [
+"cy",
+"cy",
+"n6",
+"cy",
+"hc",
+"hc",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1"
+]
+},
+"CC#N": {
+"types": [
+"c3",
+"c1",
+"n1",
+"hc",
+"hc",
+"hc"
+]
+},
+"N#CC#N": {
+"types": [
+"n1",
+"cg",
+"cg",
+"n1"
+]
+},
+"C(#N)c1ccccc1": {
+"types": [
+"cg",
+"n1",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"N#CC(C#N)=C(C#N)C#N": {
+"types": [
+"n1",
+"cg",
+"ce",
+"cg",
+"n1",
+"cf",
+"ch",
+"n1",
+"ch",
+"n1"
+]
+},
+"N#C[N-]C#N": {
+"types": [
+"n1",
+"cg",
+"n2",
+"cg",
+"n1"
+]
+},
+"[C-](C#N)(C#N)C#N": {
+"types": [
+"c2",
+"cg",
+"n1",
+"cg",
+"n1",
+"cg",
+"n1"
+]
+},
+"N#C[B-](C#N)(C#N)C#N": {
+"types": [
+"n1",
+"c1",
+"B",
+"c1",
+"n1",
+"c1",
+"n1",
+"c1",
+"n1"
+]
+},
+"CN=C=O": {
+"types": [
+"c3",
+"n2",
+"c1",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"CN=C=S": {
+"types": [
+"c3",
+"n2",
+"c1",
+"s",
+"h1",
+"h1",
+"h1"
+]
+},
+"CN=C=NC": {
+"types": [
+"c3",
+"n2",
+"c1",
+"n2",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C=C=O": {
+"types": [
+"c2",
+"c1",
+"o",
+"ha",
+"ha"
+]
+},
+"CC(=O)C=[N+]=[N-]": {
+"types": [
+"c3",
+"c",
+"o",
+"ce",
+"n1",
+"n1",
+"hc",
+"hc",
+"hc",
+"h4"
+]
+},
+"CN=[N+]=[N-]": {
+"types": [
+"c3",
+"n2",
+"n1",
+"n1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CC=NO": {
+"types": [
+"c3",
+"c2",
+"n2",
+"oh",
+"hc",
+"hc",
+"hc",
+"h4",
+"ho"
+]
+},
+"CC(C)=NO": {
+"types": [
+"c3",
+"c2",
+"c3",
+"n2",
+"oh",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"CC=NN": {
+"types": [
+"c3",
+"c2",
+"n2",
+"nv",
+"hc",
+"hc",
+"hc",
+"h4",
+"hn",
+"hn"
+]
+},
+"CC=NC": {
+"types": [
+"c3",
+"c2",
+"n2",
+"c3",
+"hc",
+"hc",
+"hc",
+"h4",
+"h1",
+"h1",
+"h1"
+]
+},
+"CN=NC": {
+"types": [
+"c3",
+"n2",
+"n2",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C(=N)c1ccccc1": {
+"types": [
+"ce",
+"n2",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h4",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=[N+]([O-])c1ccccc1": {
+"types": [
+"o",
+"no",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C[N+](=O)[O-]": {
+"types": [
+"c3",
+"no",
+"o",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"CO[N+](=O)[O-]": {
+"types": [
+"c3",
+"os",
+"no",
+"o",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"[O-][N+](=O)[O-]": {
+"types": [
+"o",
+"no",
+"o",
+"o"
+]
+},
+"O=NC": {
+"types": [
+"o",
+"n2",
+"c3",
+"h1",
+"h1",
+"h1"
+]
+},
+"O=Nc1ccccc1": {
+"types": [
+"o",
+"n2",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"[O-][n+]1ccccc1": {
+"types": [
+"o",
+"na",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h4",
+"ha",
+"ha",
+"ha",
+"h4"
+]
+},
+"C[N+](C)(C)[O-]": {
+"types": [
+"c3",
+"n4",
+"c3",
+"c3",
+"o",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"CC(=O)NO": {
+"types": [
+"c3",
+"c",
+"o",
+"ns",
+"oh",
+"hc",
+"hc",
+"hc",
+"hn",
+"ho"
+]
+},
+"O=C1C=CC(=O)N1": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"c",
+"o",
+"ns",
+"ha",
+"ha",
+"hn"
+]
+},
+"S": {
+"types": [
+"sh",
+"hs",
+"hs"
+]
+},
+"CS": {
+"types": [
+"c3",
+"sh",
+"h1",
+"h1",
+"h1",
+"hs"
+]
+},
+"CCS": {
+"types": [
+"c3",
+"c3",
+"sh",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"hs"
+]
+},
+"CSC": {
+"types": [
+"c3",
+"ss",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CSSC": {
+"types": [
+"c3",
+"ss",
+"ss",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1CS1": {
+"types": [
+"cx",
+"cx",
+"sp",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C1CCSC1": {
+"types": [
+"c5",
+"c5",
+"c5",
+"ss",
+"c5",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"Sc1ccccc1": {
+"types": [
+"sh",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hs",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CSc1ccccc1": {
+"types": [
+"c3",
+"ss",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CS(C)=O": {
+"types": [
+"c3",
+"s4",
+"c3",
+"o",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CS(C)(=O)=O": {
+"types": [
+"c3",
+"s6",
+"c3",
+"o",
+"o",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"O=S1CCCC1": {
+"types": [
+"o",
+"s4",
+"c5",
+"c5",
+"c5",
+"c5",
+"h1",
+"h1",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"O=S1(=O)CCCC1": {
+"types": [
+"o",
+"s6",
+"o",
+"c5",
+"c5",
+"c5",
+"c5",
+"h1",
+"h1",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"O=S(=O)(c1ccccc1)c1ccccc1": {
+"types": [
+"o",
+"sy",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"NS(=O)(=O)c1ccccc1": {
+"types": [
+"n8",
+"sy",
+"o",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hn",
+"hn",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CS(N)(=O)=O": {
+"types": [
+"c3",
+"s6",
+"n8",
+"o",
+"o",
+"h1",
+"h1",
+"h1",
+"hn",
+"hn"
+]
+},
+"CNS(C)(=O)=O": {
+"types": [
+"c3",
+"n7",
+"s6",
+"c3",
+"o",
+"o",
+"h1",
+"h1",
+"h1",
+"hn",
+"h1",
+"h1",
+"h1"
+]
+},
+"CS(=O)(=O)O": {
+"types": [
+"c3",
+"s6",
+"o",
+"o",
+"oh",
+"h1",
+"h1",
+"h1",
+"ho"
+]
+},
+"CS(=O)(=O)[O-]": {
+"types": [
+"c3",
+"s6",
+"o",
+"o",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"[O-]S(=O)(=O)C(F)(F)F": {
+"types": [
+"o",
+"s6",
+"o",
+"o",
+"c3",
+"f",
+"f",
+"f"
+]
+},
+"Cc1ccc(cc1)S(=O)(=O)[O-]": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"s6",
+"o",
+"o",
+"o",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Cc1ccc(cc1)S(=O)(=O)O": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"sy",
+"o",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ho"
+]
+},
+"OS(=O)(=O)O": {
+"types": [
+"oh",
+"s6",
+"o",
+"o",
+"oh",
+"ho",
+"ho"
+]
+},
+"COS(=O)(=O)[O-]": {
+"types": [
+"c3",
+"os",
+"s6",
+"o",
+"o",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"COS(=O)(=O)OC": {
+"types": [
+"c3",
+"os",
+"s6",
+"o",
+"o",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"[O-]S(=O)(=O)[O-]": {
+"types": [
+"o",
+"s6",
+"o",
+"o",
+"o"
+]
+},
+"FC(F)(F)S(=O)(=O)[N-]S(=O)(=O)C(F)(F)F": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"sy",
+"o",
+"o",
+"n2",
+"sy",
+"o",
+"o",
+"c3",
+"f",
+"f",
+"f"
+]
+},
+"FC(F)(F)C(F)(F)C(F)(F)C(F)(F)S(=O)(=O)[O-]": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"c3",
+"f",
+"f",
+"c3",
+"f",
+"f",
+"c3",
+"f",
+"f",
+"s6",
+"o",
+"o",
+"o"
+]
+},
+"O=S(=O)([N-]S(=O)(=O)F)F": {
+"types": [
+"o",
+"sy",
+"o",
+"n2",
+"sy",
+"o",
+"o",
+"f",
+"f"
+]
+},
+"CC(=S)C": {
+"types": [
+"c3",
+"cs",
+"s",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"NC(N)=S": {
+"types": [
+"nt",
+"cs",
+"nt",
+"s",
+"hn",
+"hn",
+"hn",
+"hn"
+]
+},
+"CC(N)=S": {
+"types": [
+"c3",
+"cs",
+"nt",
+"s",
+"hc",
+"hc",
+"hc",
+"hn",
+"hn"
+]
+},
+"S=C=S": {
+"types": [
+"s",
+"c1",
+"s"
+]
+},
+"O=C=S": {
+"types": [
+"o",
+"c1",
+"s"
+]
+},
+"CSC#N": {
+"types": [
+"c3",
+"ss",
+"c1",
+"n1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CS[O-]": {
+"types": [
+"c3",
+"ss",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"CS(=O)[O-]": {
+"types": [
+"c3",
+"s4",
+"o",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"C[S+](C)C": {
+"types": [
+"c3",
+"s4",
+"c3",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C[S+](C)c1ccccc1": {
+"types": [
+"c3",
+"s4",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=S(Cl)Cl": {
+"types": [
+"o",
+"s4",
+"cl",
+"cl"
+]
+},
+"CP": {
+"types": [
+"c3",
+"p3",
+"hc",
+"hc",
+"hc",
+"hp",
+"hp"
+]
+},
+"CP(C)C": {
+"types": [
+"c3",
+"p3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C[P+](C)(C)C": {
+"types": [
+"c3",
+"p5",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CCCC[P+](CCCC)(CCCC)CCCC": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"p5",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"COP(=O)(OC)OC": {
+"types": [
+"c3",
+"os",
+"p5",
+"o",
+"os",
+"c3",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"CP(=O)(O)O": {
+"types": [
+"c3",
+"p5",
+"o",
+"oh",
+"oh",
+"hc",
+"hc",
+"hc",
+"ho",
+"ho"
+]
+},
+"CP(=O)([O-])[O-]": {
+"types": [
+"c3",
+"p5",
+"o",
+"o",
+"o",
+"hc",
+"hc",
+"hc"
+]
+},
+"COP(=O)([O-])OC": {
+"types": [
+"c3",
+"os",
+"p5",
+"o",
+"o",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"OP(=O)(O)O": {
+"types": [
+"oh",
+"p5",
+"o",
+"oh",
+"oh",
+"ho",
+"ho",
+"ho"
+]
+},
+"[O-]P(=O)([O-])[O-]": {
+"types": [
+"o",
+"p5",
+"o",
+"o",
+"o"
+]
+},
+"O=P(Cl)(Cl)Cl": {
+"types": [
+"o",
+"p5",
+"cl",
+"cl",
+"cl"
+]
+},
+"CP(C)(C)=O": {
+"types": [
+"c3",
+"p5",
+"c3",
+"c3",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CP(C)(C)=S": {
+"types": [
+"c3",
+"p5",
+"c3",
+"c3",
+"s",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"COP(OC)OC": {
+"types": [
+"c3",
+"os",
+"p3",
+"os",
+"c3",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"F[P-](F)(F)(F)(F)F": {
+"types": [
+"f",
+"p5",
+"f",
+"f",
+"f",
+"f",
+"f"
+]
+},
+"c1ccc2c(c1)P(=O)c1ccccc1-2": {
+"types": [
+"ca",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"py",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"ha",
+"ha",
+"ha",
+"ha",
+"hp",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CF": {
+"types": [
+"c3",
+"f",
+"h1",
+"h1",
+"h1"
+]
+},
+"CCl": {
+"types": [
+"c3",
+"cl",
+"h1",
+"h1",
+"h1"
+]
+},
+"CBr": {
+"types": [
+"c3",
+"br",
+"h1",
+"h1",
+"h1"
+]
+},
+"CI": {
+"types": [
+"c3",
+"i",
+"h1",
+"h1",
+"h1"
+]
+},
+"FC(F)F": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"h3"
+]
+},
+"FC(F)(F)F": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"f"
+]
+},
+"ClC(Cl)Cl": {
+"types": [
+"cl",
+"c3",
+"cl",
+"cl",
+"h3"
+]
+},
+"ClC(Cl)(Cl)Cl": {
+"types": [
+"cl",
+"c3",
+"cl",
+"cl",
+"cl"
+]
+},
+"BrC(Br)Br": {
+"types": [
+"br",
+"c3",
+"br",
+"br",
+"h3"
+]
+},
+"FC(F)(F)C(F)(F)F": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"c3",
+"f",
+"f",
+"f"
+]
+},
+"FC(F)(F)c1ccccc1": {
+"types": [
+"f",
+"c3",
+"f",
+"f",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Fc1ccccc1": {
+"types": [
+"f",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Clc1ccccc1": {
+"types": [
+"cl",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Brc1ccccc1": {
+"types": [
+"br",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Ic1ccccc1": {
+"types": [
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Ic1ccc(I)cc1": {
+"types": [
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC(=O)c1ccc(I)cc1": {
+"types": [
+"c3",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Ic1ccc(cc1)[N+](C)(C)C": {
+"types": [
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"n4",
+"c3",
+"c3",
+"c3",
+"ha",
+"ha",
+"ha",
+"ha",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"ICC(=O)[O-]": {
+"types": [
+"i",
+"c3",
+"c",
+"o",
+"o",
+"h1",
+"h1"
+]
+},
+"ICCI": {
+"types": [
+"i",
+"c3",
+"c3",
+"i",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"C=CCl": {
+"types": [
+"c2",
+"c2",
+"cl",
+"ha",
+"ha",
+"h4"
+]
+},
+"C=CI": {
+"types": [
+"c2",
+"c2",
+"i",
+"ha",
+"ha",
+"h4"
+]
+},
+"ClC=CCl": {
+"types": [
+"cl",
+"c2",
+"c2",
+"cl",
+"h4",
+"h4"
+]
+},
+"FC(F)=C(F)F": {
+"types": [
+"f",
+"c2",
+"f",
+"c2",
+"f",
+"f"
+]
+},
+"OC(=O)C(F)(F)F": {
+"types": [
+"oh",
+"c",
+"o",
+"c3",
+"f",
+"f",
+"f",
+"ho"
+]
+},
+"[O-]C(=O)C(F)(F)F": {
+"types": [
+"o",
+"c",
+"o",
+"c3",
+"f",
+"f",
+"f"
+]
+},
+"[F-]": {
+"types": [
+"f"
+]
+},
+"[Cl-]": {
+"types": [
+"cl"
+]
+},
+"[Br-]": {
+"types": [
+"br"
+]
+},
+"[I-]": {
+"types": [
+"i"
+]
+},
+"[O-]Cl(=O)(=O)=O": {
+"types": [
+"o",
+"cl",
+"o",
+"o",
+"o"
+]
+},
+"F[B-](F)(F)F": {
+"types": [
+"f",
+"B",
+"f",
+"f",
+"f"
+]
+},
+"OB(O)c1ccccc1": {
+"types": [
+"oh",
+"B",
+"oh",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ho",
+"ho",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"B(c1ccccc1)(c1ccccc1)c1ccccc1": {
+"types": [
+"B",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CB(C)C": {
+"types": [
+"c3",
+"B",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C[Si](C)(C)C": {
+"types": [
+"c3",
+"Si",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC[Si](C)(C)C": {
+"types": [
+"c3",
+"c3",
+"Si",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C[Si](C)(C)O[Si](C)(C)C": {
+"types": [
+"c3",
+"Si",
+"c3",
+"c3",
+"os",
+"Si",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CO[Si](OC)(OC)OC": {
+"types": [
+"c3",
+"os",
+"Si",
+"os",
+"c3",
+"os",
+"c3",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"[Na+]": {
+"types": [
+"Na"
+]
+},
+"[K+]": {
+"types": [
+"K"
+]
+},
+"[Li+]": {
+"types": [
+"Li"
+]
+},
+"O": {
+"types": [
+"oh",
+"ho",
+"ho"
+]
+},
+"OO": {
+"types": [
+"oh",
+"oh",
+"ho",
+"ho"
+]
+},
+"CC(=O)OO": {
+"types": [
+"c3",
+"c",
+"o",
+"os",
+"oh",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"COOC": {
+"types": [
+"c3",
+"os",
+"os",
+"c3",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1"
+]
+},
+"[OH-]": {
+"types": [
+"o",
+"ho"
+]
+},
+"[O-]c1ccccc1": {
+"types": [
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C[O-]": {
+"types": [
+"c3",
+"o",
+"h1",
+"h1",
+"h1"
+]
+},
+"O=C([O-])[O-]": {
+"types": [
+"o",
+"c",
+"o",
+"o"
+]
+},
+"O=C(O)O": {
+"types": [
+"o",
+"c",
+"oh",
+"oh",
+"ho",
+"ho"
+]
+},
+"NC(=O)O": {
+"types": [
+"nt",
+"c",
+"o",
+"oh",
+"hn",
+"hn",
+"ho"
+]
+},
+"CCCCCCCCCCCC": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CCCCCCCCCCCC(=O)O": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"CCCCCCCCCCCCOS(=O)(=O)[O-]": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"c3",
+"os",
+"s6",
+"o",
+"o",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"CC(C)Cc1ccc(cc1)C(C)C(=O)O": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"c3",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc",
+"ho"
+]
+},
+"CC(=O)Oc1ccccc1C(=O)O": {
+"types": [
+"c3",
+"c",
+"o",
+"os",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ho"
+]
+},
+"CC(=O)NC1=CC=C(O)C=C1": {
+"types": [
+"c3",
+"c",
+"o",
+"ns",
+"ca",
+"ca",
+"ca",
+"ca",
+"oh",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"hn",
+"ha",
+"ha",
+"ho",
+"ha",
+"ha"
+]
+},
+"OC1OC(CO)C(O)C(O)C1O": {
+"types": [
+"oh",
+"c6",
+"os",
+"c6",
+"c3",
+"oh",
+"c6",
+"oh",
+"c6",
+"oh",
+"c6",
+"oh",
+"ho",
+"h2",
+"h1",
+"h1",
+"h1",
+"ho",
+"h1",
+"ho",
+"h1",
+"ho",
+"h1",
+"ho"
+]
+},
+"c1ccc2c(c1)C(=O)c1ccccc1C2=O": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c",
+"o",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c",
+"o",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C1c2ccccc2C(=O)N1c1ccccc1": {
+"types": [
+"o",
+"c",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c",
+"o",
+"n",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"O=C1c2ccccc2-c2ccccc12": {
+"types": [
+"o",
+"c",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cp",
+"cp",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"Cc1ccccc1C": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(C)=CC=O": {
+"types": [
+"c3",
+"c2",
+"c3",
+"ce",
+"c",
+"o",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ha",
+"h4"
+]
+},
+"O=CC=Cc1ccccc1": {
+"types": [
+"o",
+"c",
+"ce",
+"cf",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"h4",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CCOC(=O)C=Cc1ccccc1": {
+"types": [
+"c3",
+"c3",
+"os",
+"c",
+"o",
+"ce",
+"cf",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"N#Cc1ccc(cc1)C#N": {
+"types": [
+"n1",
+"cg",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"cg",
+"n1",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"CC#CC#CC": {
+"types": [
+"c3",
+"c1",
+"cg",
+"cg",
+"c1",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C=CC=CC=O": {
+"types": [
+"c2",
+"ce",
+"ce",
+"cf",
+"c",
+"o",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"h4"
+]
+},
+"O=C1C=CC=CC1=O": {
+"types": [
+"o",
+"c",
+"cc",
+"cd",
+"cd",
+"cc",
+"c",
+"o",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1ccc2nc3ccccc3cc2c1": {
+"types": [
+"ca",
+"ca",
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"c1cc[n+](cc1)-c1cc[n+](cc1)": {
+"types": [
+"ca",
+"ca",
+"ca",
+"na",
+"ca",
+"ca",
+"cp",
+"ca",
+"ca",
+"nb",
+"ca",
+"ca",
+"ha",
+"ha",
+"h4",
+"h4",
+"ha",
+"ha",
+"h4",
+"h4",
+"ha"
+]
+},
+"CC[n+]1ccn(C)c1C": {
+"types": [
+"c3",
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"cc",
+"c3",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"h1",
+"hc",
+"hc",
+"hc"
+]
+},
+"Cc1ccc(cc1)[S+](c1ccc(C)cc1)c1ccc(C)cc1": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"s4",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha"
+]
+},
+"Cc1ccc(cc1)[I+]c1ccc(C)cc1": {
+"types": [
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"ca",
+"ca",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha"
+]
+},
+"COc1ccc(cc1)[I+]c1ccc(OC)cc1": {
+"types": [
+"c3",
+"os",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"os",
+"c3",
+"ca",
+"ca",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"h1",
+"h1",
+"h1",
+"ha",
+"ha"
+]
+},
+"CC(C)(C)c1ccc(cc1)[I+]c1ccc(cc1)C(C)(C)C": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"i",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"O=C(O)C[n+]1ccn(C)c1": {
+"types": [
+"o",
+"c",
+"oh",
+"c3",
+"na",
+"cc",
+"cd",
+"na",
+"c3",
+"cc",
+"ho",
+"h1",
+"h1",
+"h4",
+"h4",
+"h1",
+"h1",
+"h1",
+"h5"
+]
+},
+"OCC[N+](C)(C)C": {
+"types": [
+"oh",
+"c3",
+"c3",
+"n4",
+"c3",
+"c3",
+"c3",
+"ho",
+"h1",
+"h1",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"CC(O)C(=O)[O-]": {
+"types": [
+"c3",
+"c3",
+"oh",
+"c",
+"o",
+"o",
+"hc",
+"hc",
+"hc",
+"h1",
+"ho"
+]
+},
+"C[N+](C)(C)CC(=O)[O-]": {
+"types": [
+"c3",
+"n4",
+"c3",
+"c3",
+"c3",
+"c",
+"o",
+"o",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx",
+"hx"
+]
+},
+"CCCC": {
+"types": [
+"c3",
+"c3",
+"c3",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC=CC": {
+"types": [
+"c3",
+"c2",
+"c2",
+"c3",
+"hc",
+"hc",
+"hc",
+"ha",
+"ha",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC#CC": {
+"types": [
+"c3",
+"c1",
+"c1",
+"c3",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc"
+]
+},
+"C#N": {
+"types": [
+"c1",
+"n1",
+"ha"
+]
+},
+"[C-]#[O+]": {
+"types": [
+"c1",
+"o"
+]
+},
+"O=c1[nH]cnc2[nH]cnc12": {
+"types": [
+"o",
+"c",
+"ns",
+"cc",
+"nd",
+"cd",
+"na",
+"cc",
+"nd",
+"cc",
+"hn",
+"h5",
+"hn",
+"h5"
+]
+},
+"CC(C)=N": {
+"types": [
+"c3",
+"c2",
+"c3",
+"n2",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hc",
+"hn"
+]
+},
+"CCF": {
+"types": [
+"c3",
+"c3",
+"f",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"CCCl": {
+"types": [
+"c3",
+"c3",
+"cl",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"CCBr": {
+"types": [
+"c3",
+"c3",
+"br",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"CCI": {
+"types": [
+"c3",
+"c3",
+"i",
+"hc",
+"hc",
+"hc",
+"h1",
+"h1"
+]
+},
+"CC(Cl)CC(Cl)C": {
+"types": [
+"c3",
+"c3",
+"cl",
+"c3",
+"c3",
+"cl",
+"c3",
+"hc",
+"hc",
+"hc",
+"h1",
+"hc",
+"hc",
+"h1",
+"hc",
+"hc",
+"hc"
+]
+},
+"CC(=O)NCC(=O)O": {
+"types": [
+"c3",
+"c",
+"o",
+"ns",
+"c3",
+"c",
+"o",
+"oh",
+"hc",
+"hc",
+"hc",
+"hn",
+"h1",
+"h1",
+"ho"
+]
+},
+"Oc1ccc(cc1)S(=O)(=O)O": {
+"types": [
+"oh",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"sy",
+"o",
+"o",
+"oh",
+"ho",
+"ha",
+"ha",
+"ha",
+"ha",
+"ho"
+]
+},
+"O=C=O": {
+"types": [
+"o",
+"c1",
+"o"
+]
+},
+"[Se]=C=[Se]": {
+"types": [
+"Se",
+"c1",
+"Se"
+]
+},
+"S=c1cccc[nH]1": {
+"types": [
+"s",
+"cs",
+"cc",
+"cd",
+"cd",
+"cc",
+"ns",
+"ha",
+"ha",
+"ha",
+"h4",
+"hn"
+]
+},
+"CN(C)C=C": {
+"types": [
+"c3",
+"nh",
+"c3",
+"c2",
+"c2",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h1",
+"h4",
+"ha",
+"ha"
+]
+},
+"c1ccn(c1)-c1ccccc1": {
+"types": [
+"cc",
+"cc",
+"cd",
+"na",
+"cd",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ca",
+"ha",
+"ha",
+"h4",
+"h4",
+"ha",
+"ha",
+"ha",
+"ha",
+"ha"
+]
+},
+"C=Cn1ccnc1": {
+"types": [
+"c2",
+"c2",
+"na",
+"cc",
+"cd",
+"nd",
+"cc",
+"ha",
+"ha",
+"h4",
+"h4",
+"h4",
+"h5"
+]
+}
+}
