@@ -1,0 +1,119 @@
+# mol2 읽기, SMILES↔mol2 원자 대응, 3D 구조 생성, moltemplate .lt 쓰기 (역장 공통)
+import re
+
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
+ELEMENTS = {Chem.GetPeriodicTable().GetElementSymbol(z) for z in range(1, 119)}
+GAFF_PREFIX = [("cl", "Cl"), ("br", "Br"), ("i", "I"), ("f", "F"), ("c", "C"), ("n", "N"),
+               ("o", "O"), ("s", "S"), ("p", "P"), ("h", "H")]
+
+
+def _element(name, atype):
+    """mol2 원자 타입(SYBYL 또는 GAFF) → 원소, 안 되면 원자 이름의 앞 글자."""
+    base = atype.split(".")[0]
+    if base in ELEMENTS:
+        return base
+    if atype.islower() or (atype[:1].islower()):
+        for pre, el in GAFF_PREFIX:
+            if atype.startswith(pre):
+                return el
+    letters = re.match(r"[A-Za-z]+", name).group(0)
+    for cand in (letters[:2].capitalize(), letters[:1].upper()):
+        if cand in ELEMENTS:
+            return cand
+    raise ValueError(f"mol2 원자 '{name} {atype}' 의 원소를 알 수 없습니다")
+
+
+def read_mol2(path):
+    atoms, bonds, sec = [], [], None
+    with open(path) as f:
+        for line in f:
+            s = line.strip()
+            if s.startswith("@<TRIPOS>"):
+                sec = s[9:]
+                continue
+            if not s or s.startswith("#"):
+                continue
+            t = s.split()
+            if sec == "ATOM":
+                charge = float(t[8]) if len(t) > 8 else 0.0
+                atoms.append({"id": int(t[0]), "name": t[1], "xyz": tuple(map(float, t[2:5])),
+                              "el": _element(t[1], t[5]), "q": charge, "has_q": len(t) > 8})
+            elif sec == "BOND":
+                bonds.append((int(t[1]), int(t[2])))
+    if not atoms:
+        raise ValueError(f"{path}: ATOM 섹션이 비어 있습니다")
+    return atoms, bonds
+
+
+def _graph_mol(elements, bonds):
+    """원소와 단일결합만 가진 비교용 분자 (결합 차수·전하 무시)."""
+    m = Chem.RWMol()
+    for el in elements:
+        a = Chem.Atom(el)
+        a.SetNoImplicit(True)
+        m.AddAtom(a)
+    for i, j in bonds:
+        m.AddBond(i, j, Chem.BondType.SINGLE)
+    m = m.GetMol()
+    m.UpdatePropertyCache(strict=False)
+    Chem.FastFindRings(m)
+    return m
+
+
+def match_mol2(template, atoms, bonds):
+    """SMILES 템플릿 원자 인덱스 → mol2 원자 순번(0부터) 대응."""
+    idx = {a["id"]: k for k, a in enumerate(atoms)}
+    tgt = _graph_mol([a["el"] for a in atoms], [(idx[i], idx[j]) for i, j in bonds])
+    qry = _graph_mol([a.GetSymbol() for a in template.GetAtoms()],
+                     [(b.GetBeginAtomIdx(), b.GetEndAtomIdx()) for b in template.GetBonds()])
+    if tgt.GetNumAtoms() != qry.GetNumAtoms() or tgt.GetNumBonds() != qry.GetNumBonds():
+        raise ValueError(f"원자/결합 수가 다릅니다: SMILES {qry.GetNumAtoms()}/{qry.GetNumBonds()}, "
+                         f"mol2 {tgt.GetNumAtoms()}/{tgt.GetNumBonds()}")
+    match = tgt.GetSubstructMatch(qry)
+    if not match:
+        raise ValueError("SMILES 와 mol2 의 연결 구조가 일치하지 않습니다 (원소 판정이나 결합 확인 필요)")
+    return list(match)
+
+
+def embed(template, seed, gap=4.0):
+    """조각(이온)마다 따로 3D 구조를 만들고 x 축으로 gap Å 씩 떨어뜨려 놓는다."""
+    xyz = [None] * template.GetNumAtoms()
+    x_end = None
+    frag_ids = Chem.GetMolFrags(template)
+    for frag, idx in zip(Chem.GetMolFrags(template, asMols=True), frag_ids):
+        m = Chem.Mol(frag)
+        if m.GetNumAtoms() == 1:
+            pts = [(0.0, 0.0, 0.0)]
+        else:
+            if AllChem.EmbedMolecule(m, randomSeed=seed) != 0:
+                raise ValueError("RDKit 3D 구조 생성에 실패했습니다")
+            if AllChem.MMFFHasAllMoleculeParams(m):
+                AllChem.MMFFOptimizeMolecule(m)
+            else:
+                AllChem.UFFOptimizeMolecule(m)
+            pts = [tuple(m.GetConformer().GetAtomPosition(i)) for i in range(m.GetNumAtoms())]
+        shift = 0.0 if x_end is None else x_end + gap - min(p[0] for p in pts)
+        for i, p in zip(idx, pts):
+            xyz[i] = (p[0] + shift, p[1], p[2])
+        x_end = max(p[0] + shift for p in pts)
+    return xyz
+
+
+def write_lt(path, typer, name, smiles, rows, bonds, charge_note):
+    """moltemplate 단일 분자 .lt — import "<역장>.lt" + <name> inherits <역장 객체>."""
+    with open(path, "w") as f:
+        f.write(f"# fftyper ({typer.LABEL}) 생성 — SMILES: {smiles}\n# 전하: {charge_note}\n\n")
+        f.write(f'import "{typer.LT_FILE}"\n\n')
+        f.write(f"{name} inherits {typer.LT_OBJECT} {{\n\n")
+        f.write('  write("Data Atoms") {\n')
+        for r in rows:
+            x, y, z = r["xyz"]
+            f.write(f"    $atom:{r['name']:<6} $mol:f{r['frag']} @atom:{r['label']:<14} "
+                    f"{r['q']:>10.6f} {x:>11.5f} {y:>11.5f} {z:>11.5f}\n")
+        f.write("  }\n\n")
+        f.write('  write("Data Bond List") {\n')
+        for k, (i, j) in enumerate(bonds, 1):
+            f.write(f"    $bond:b{k:<4} $atom:{rows[i]['name']:<6} $atom:{rows[j]['name']}\n")
+        f.write("  }\n\n}\n")
